@@ -1,7 +1,8 @@
-from __future__ import division
+from __future__ import absolute_import, division, print_function
 from cctbx import crystal
 from cctbx import sgtbx
 from cctbx.array_family import flex
+from six.moves import range
 
 simple = crystal.coordination_sequences_simple
 simple_sym = crystal.coordination_sequences_simple_sym
@@ -36,7 +37,7 @@ def simple_and_slow(pair_asu_table, max_shell=10):
       i_seq=i_seq_pivot,
       rt_mx=sgtbx.rt_mx())]
     terms = [1]
-    for i_shell_minus_1 in xrange(max_shell):
+    for i_shell_minus_1 in range(max_shell):
       nodes_prev = nodes_middle
       nodes_middle = nodes_next
       nodes_next = []
@@ -71,7 +72,7 @@ def get_kriber_coseq_file(file_name):
 def show_terms(structure, term_table, coseq_dict=None):
   assert len(term_table) == structure.scatterers().size()
   for scatterer,terms in zip(structure.scatterers(), term_table):
-    print scatterer.label, list(terms),
+    print(scatterer.label, list(terms), end=' ')
     if (coseq_dict is not None):
       terms_to_match = list(terms[1:])
       have_match = False
@@ -81,15 +82,15 @@ def show_terms(structure, term_table, coseq_dict=None):
         for coseq_terms in coseq_dict[tag]:
           n = min(len(coseq_terms), len(terms_to_match))
           if (coseq_terms[:n] == terms_to_match[:n]):
-            print tag,
+            print(tag, end=' ')
             have_match = True
       if (not have_match):
-        print "Unknown",
-    print
+        print("Unknown", end=' ')
+    print()
   sums_terms = flex.double()
   multiplicities = flex.double()
   for scatterer,terms in zip(structure.scatterers(), term_table):
     sums_terms.append(flex.sum(flex.size_t(list(terms))))
     multiplicities.append(scatterer.multiplicity())
-  print "TD%d: %.2f" % (
-    len(terms)-1, flex.mean_weighted(sums_terms, multiplicities))
+  print("TD%d: %.2f" % (
+    len(terms)-1, flex.mean_weighted(sums_terms, multiplicities)))

@@ -1,4 +1,4 @@
-from __future__ import division
+from __future__ import absolute_import, division, print_function
 from libtbx.containers import OrderedDict, OrderedSet
 from libtbx.utils import Sorry
 import sys
@@ -8,6 +8,7 @@ from cStringIO import StringIO
 from UserDict import DictMixin
 
 from cctbx.array_family import flex
+from six.moves import range
 
 
 class cif(DictMixin):
@@ -66,7 +67,7 @@ class cif(DictMixin):
     if out is None:
       out = sys.stdout
     for name, block in self.items():
-      print >> out, "data_%s" %name
+      print("data_%s" %name, file=out)
       block.show(
         out=out, indent=indent, indent_row=indent_row,
         data_name_field_width=data_name_field_width,
@@ -365,11 +366,11 @@ class save(block_base):
     for k in self._set:
       v = self._items.get(k)
       if v is not None:
-        print >> out, indent + format_str %k, format_value(v)
+        print(indent + format_str %k, format_value(v), file=out)
       else:
-        print >> out, indent,
+        print(indent, end=' ', file=out)
         self.loops[k].show(out=out, indent=(indent+indent),align_columns=align_columns)
-        print >> out
+        print(file=out)
 
 
 class block(block_base):
@@ -423,14 +424,14 @@ class block(block_base):
     for k in self._set:
       v = self._items.get(k)
       if v is not None:
-        print >> out, format_str %k, format_value(v)
+        print(format_str %k, format_value(v), file=out)
       elif k in self.saves:
-        print >> out
-        print >> out, "save_%s" %k
+        print(file=out)
+        print("save_%s" %k, file=out)
         self.saves[k].show(out=out, indent=indent,
                            data_name_field_width=data_name_field_width)
-        print >> out, indent + "save_"
-        print >> out
+        print(indent + "save_", file=out)
+        print(file=out)
       else:
         lp = self.loops[k]
         if lp.n_rows() == 0:
@@ -443,7 +444,7 @@ class block(block_base):
         else:
           lp.show(out=out, indent=indent, indent_row=indent_row,
             align_columns=align_columns)
-        print >> out
+        print(file=out)
 
   def sort(self, recursive=False, key=None, reverse=False):
     block_base.sort(self, recursive=recursive, key=key, reverse=reverse)
@@ -599,11 +600,11 @@ class loop(DictMixin):
       indent_row = indent
     assert indent.strip() == ""
     assert indent_row.strip() == ""
-    print >> out, "loop_"
+    print("loop_", file=out)
     for k in self.keys():
-      print >> out, indent + k
+      print(indent + k, file=out)
     values = self._columns.values()
-    range_len_values = range(len(values))
+    range_len_values = list(range(len(values)))
     if fmt_str is not None:
       # Pretty printing:
       #   The user is responsible for providing a valid format string.
@@ -623,7 +624,7 @@ class loop(DictMixin):
       if fmt_str is None:
         fmt_str = indent_row + ' '.join(["%s"]*len(values))
       for i in range(self.size()):
-        print >> out, fmt_str % tuple([values[j][i] for j in range_len_values])
+        print(fmt_str % tuple([values[j][i] for j in range_len_values]), file=out)
     elif align_columns:
       fmt_str = []
       for i, (k, v) in enumerate(self.iteritems()):
@@ -642,13 +643,13 @@ class loop(DictMixin):
         fmt_str.append("%%%is" %width)
       fmt_str = indent_row + "  ".join(fmt_str)
       for i in range(self.size()):
-        print >> out, (fmt_str %
+        print((fmt_str %
                        tuple([values[j][i]
-                              for j in range_len_values])).rstrip()
+                              for j in range_len_values])).rstrip(), file=out)
     else:
       for i in range(self.size()):
         values_to_print = [format_value(values[j][i]) for j in range_len_values]
-        print >> out, ' '.join([indent] + values_to_print)
+        print(' '.join([indent] + values_to_print), file=out)
 
   def __str__(self):
     s = StringIO()
@@ -659,7 +660,7 @@ class loop(DictMixin):
     """ Warning! Still super-slow! """
     keys = self.keys()
     s_values = self.values()
-    range_len_self = range(len(self))
+    range_len_self = list(range(len(self)))
     # range is 1% faster than xrange in this particular place.
     # tuple (s_values...) is slightly faster than list
     for j in range(self.size()):
@@ -671,7 +672,7 @@ class loop(DictMixin):
       assert k in self_keys
     result = []
     s_values = self.values()
-    range_len_self = range(len(self))
+    range_len_self = list(range(len(self)))
     for i in range(self.size()):
       goodrow = True
       for k, v in kv_dict.iteritems():
@@ -734,11 +735,11 @@ def LCSubstr_set(S, T):
   http://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Longest_common_substring#Python"""
 
   m = len(S); n = len(T)
-  L = [[0] * (n+1) for i in xrange(m+1)]
+  L = [[0] * (n+1) for i in range(m+1)]
   LCS = set()
   longest = 0
-  for i in xrange(m):
-    for j in xrange(n):
+  for i in range(m):
+    for j in range(n):
       if S[i] == T[j]:
         v = L[i][j] + 1
         L[i+1][j+1] = v

@@ -1,8 +1,8 @@
-from __future__ import division
+from __future__ import absolute_import, division, print_function
 from scitbx.math import ext
-from ext import normal_distribution
+from .ext import normal_distribution
 if (hasattr(ext, "students_t_distribution")):
-  from ext import students_t_distribution
+  from .ext import students_t_distribution
 else:
   class students_t_distribution(object):
     def __init__(self, *args, **keyword_args):

@@ -1,4 +1,4 @@
-from __future__ import division, print_function, absolute_import
+from __future__ import absolute_import, division, print_function
 from past.builtins import range
 
 '''
@@ -536,7 +536,7 @@ class Processor(object):
         horizons_phil = load_cxi_phil(self.target, ' '.join(arguments))
         info = run_one_index_core(horizons_phil)
         int_final = info.last_saved_best
-      except Exception, e:
+      except Exception as e:
         int_final = None
         if hasattr(e, "classname"):
           print (e.classname, "for {}: ".format(self.img),)

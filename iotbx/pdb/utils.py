@@ -1,6 +1,7 @@
-from __future__ import division
+from __future__ import absolute_import, division, print_function
 import string
 from itertools import product
+from six.moves import range
 
 def all_chain_ids():
   """

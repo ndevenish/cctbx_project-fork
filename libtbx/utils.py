@@ -1,6 +1,5 @@
 from __future__ import absolute_import, division, print_function
 
-from builtins import range
 
 import atexit
 import glob
@@ -19,6 +18,7 @@ from six.moves import cStringIO as StringIO
 from libtbx.queuing_system_utils import pbs_utils, sge_utils
 from libtbx.math_utils import round2
 from libtbx.str_utils import show_string
+from six.moves import range
 
 try: import gzip
 except ImportError: gzip = None

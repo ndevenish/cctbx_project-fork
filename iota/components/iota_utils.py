@@ -1,4 +1,4 @@
-from __future__ import division, print_function, absolute_import
+from __future__ import absolute_import, division, print_function
 from past.builtins import range
 
 '''
@@ -728,7 +728,7 @@ class ObjectFinder(object):
           pickle = ep.load(pickle_path)
           object.final['observations'] = pickle['observations'][0]
       return object
-    except Exception, e:
+    except Exception as e:
       print ('OBJECT_IMPORT_ERROR for {}: {}'.format(filepath, e))
       return None
 

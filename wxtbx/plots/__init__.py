@@ -1,5 +1,5 @@
 
-from __future__ import division
+from __future__ import absolute_import, division, print_function
 from wxtbx import bitmaps
 import wxtbx
 import wx
@@ -8,6 +8,7 @@ from libtbx.math_utils import ifloor
 from libtbx import adopt_init_args
 import math
 import sys
+from six.moves import range
 if (sys.version_info[2] >= 6):
   import warnings
   warnings.simplefilter('ignore', DeprecationWarning)
@@ -44,11 +45,11 @@ class plot_container(wx.BoxSizer, wxtbx.MouseWheelTransparencyMixin):
       import matplotlib.cm
       import matplotlib.figure
       import matplotlib.font_manager
-    except ImportError, e :
-      print ""
-      print "Error loading matplotlib module:"
-      print e
-      print ""
+    except ImportError as e :
+      print("")
+      print("Error loading matplotlib module:")
+      print(e)
+      print("")
       self.disabled = True
       self.canvas = oop.null()
       self.figure = oop.null()

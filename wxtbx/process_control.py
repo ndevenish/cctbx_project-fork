@@ -1,8 +1,7 @@
 
 # TODO more comprehensive tests
 
-from __future__ import division
-from __future__ import absolute_import # XXX is this necessary?
+from __future__ import absolute_import, division, print_function
 from wx.lib.agw import pyprogress
 import wx
 from libtbx import thread_utils
@@ -15,6 +14,7 @@ import random
 import locale
 import math
 import os
+from six.moves import range
 
 JOB_START_ID = wx.NewId()
 LOG_UPDATE_ID = wx.NewId()
@@ -251,7 +251,7 @@ class download_file_basic(object):
   def run(self):
     try :
       result = self.dl_func(self.args)
-    except Exception, e :
+    except Exception as e :
       result = (None, str(e))
     finally :
       wx.PostEvent(self.window, DownloadCompleteEvent(result))
@@ -540,7 +540,7 @@ def test_function_1(*args, **kwds):
   n = 0
   for i in range(25000):
     x = math.sqrt(i)
-    print x
+    print(x)
     n += x
   return n
 def test_function_2(*args, **kwds):

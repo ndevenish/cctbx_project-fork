@@ -1,4 +1,4 @@
-from __future__ import division
+from __future__ import absolute_import, division, print_function
 
 from scitbx.array_family import flex
 from scitbx import matrix
@@ -6,6 +6,8 @@ from scitbx.linalg import eigensystem
 
 import operator
 import math
+from functools import reduce
+from six.moves import range
 
 # Exceptions
 class MultipleSuperpositionError(Exception):
@@ -140,7 +142,7 @@ def iterate(superposition, convergence, tolerance=1.0E-8, iterations = 100):
     diff = new_residual - residual
 
     if tolerance < diff:
-      raise NoConvergence, ( "Divergence in refinement", count, new_residual )
+      raise NoConvergence( "Divergence in refinement", count, new_residual)
 
     if abs( diff ) < convergence:
       break
@@ -149,7 +151,7 @@ def iterate(superposition, convergence, tolerance=1.0E-8, iterations = 100):
     count += 1
 
     if iterations < count:
-      raise NoConvergence, ( "Iteration limit exceeded", count, new_residual )
+      raise NoConvergence( "Iteration limit exceeded", count, new_residual)
 
   return ( count, new_residual )
 
@@ -300,12 +302,12 @@ class PairwiseSuperposition(object):
   def set_new_weights(self, weights):
 
     if self.nsites != len( weights ):
-      raise BadWeights, "Weights not equal to number of sites"
+      raise BadWeights("Weights not equal to number of sites")
 
     norm = flex.sum( weights )
 
     if norm <= 0:
-      raise BadWeights, "Zero weights"
+      raise BadWeights("Zero weights")
 
     refmean = self.reference_sites.mean_weighted( weights )
     movmean = self.moving_sites.mean_weighted( weights )
@@ -446,7 +448,7 @@ class DiamondAlgorithm(MultipleSuperposition):
     assert len( weights ) == self.site_count
 
     if flex.sum( weights ) <= 0:
-      raise BadWeights, "Zero weights"
+      raise BadWeights("Zero weights")
 
     self.new_weight_data = weights
 
@@ -601,7 +603,7 @@ class WangSnoeyinkAlgorithm(MultipleSuperposition):
       )
 
     if not all( 2 <= v for v in self.norms ):
-      raise BadSiteSets, "Single positions in supplied site sets"
+      raise BadSiteSets("Single positions in supplied site sets")
 
     self.qs = [ matrix.col( [ 0, 0, 0, 1 ] ) ] * self.set_count
     self.origins = [ ( 0, 0, 0 ) ] * self.set_count
@@ -630,7 +632,7 @@ class WangSnoeyinkAlgorithm(MultipleSuperposition):
     sums = [ flex.sum( w ) for w in atomic_weights ]
 
     if not all( 0 < s for s in sums ):
-      raise BadWeights, "Zero weights"
+      raise BadWeights("Zero weights")
 
     self.next_weight_data = ( atomic_weights, sums )
 

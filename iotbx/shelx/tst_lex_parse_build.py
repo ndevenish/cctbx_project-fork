@@ -1,4 +1,4 @@
-from __future__ import division
+from __future__ import absolute_import, division, print_function
 from cctbx import crystal
 from cctbx import uctbx
 from cctbx import sgtbx
@@ -11,83 +11,84 @@ import iotbx.builders
 from libtbx.test_utils import approx_equal, Exception_expected
 from libtbx.math_utils import are_equivalent
 import cStringIO
+from six.moves import range
 
 def exercise_lexing():
   stream = shelx.command_stream(file=cStringIO.StringIO(ins_mundane_tiny))
   i = iter(stream)
   try:
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('TITL', ('in Pbca',))
-    cmd, line =  i.next()
+    cmd, line =  next(i)
     assert cmd == ('CELL', (0.71073, 7.35, 9.541, 12.842, 90, 90, 90))
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('ZERR', (4, 0.002, 0.002, 0.003, 0, 0, 0))
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('LATT', (1,))
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('SYMM', ('0.5-X, -Y, 0.5+Z',))
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('SYMM', ('-X, 0.5+Y, 0.5-Z',))
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('SYMM', ('1/2+X, 0.5-Y, -Z',))
-    cmd, line =  i.next()
+    cmd, line =  next(i)
     assert cmd == ('SFAC', ('C', 'H', 'O', 'N',))
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('UNIT', (32, 40, 16, 8))
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('TEMP', (-153,))
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('L.S.', (4,))
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('BOND', (tokens.element_token(element='H'),))
-    cmd, line = i.next() # FMAP
-    cmd, line = i.next() # PLAN
-    cmd, line = i.next() # WGHT
-    cmd, line = i.next() # EXTI
-    cmd, line = i.next() # FVAR
-    cmd, line = i.next()
+    cmd, line = next(i) # FMAP
+    cmd, line = next(i) # PLAN
+    cmd, line = next(i) # WGHT
+    cmd, line = next(i) # EXTI
+    cmd, line = next(i) # FVAR
+    cmd, line = next(i)
     assert cmd == ('REM', ())
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('+', '/path/to/filename.ins')
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('REM', ('Protracted example of residues on command',))
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('HFIX', (tokens.residue_number_tok, 1), (23,))
-    cmd, line =  i.next()
+    cmd, line =  next(i)
     assert cmd == ('HFIX', (tokens.residue_class_tok, 'N'), (43,))
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('EQIV', (1, '1-X, -Y, -Z'))
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('CONF', (tokens.atomname_token(name='C4'),
                             tokens.atomname_token(name='N'),
                             tokens.atomname_token(name='H'),
                             tokens.atomname_token(name='O2', symmetry=1) ) )
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('DFIX', (tokens.residue_number_tok, 1),
                    (1.5, tokens.atomname_token(name='C2'),
                     tokens.atomname_token(name='C3')))
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('__ATOM__',
                    ('O2', 3, 0.362893, 0.160589, -0.035913, 11,
                           0.03926, 0.02517, 0.02140,
                           -0.00415, -0.00810, 0.01009))
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('__ATOM__',
                    ('O3', 3, 0.696722, 0.119176, 0.260657, 11,
                           0.02838, 0.02133, 0.02918,
                           0.00011, -0.01030, -0.00048))
-    cmd, line = i.next() # C1
-    cmd, line = i.next() # C4
-    cmd, line =  i.next()
+    cmd, line = next(i) # C1
+    cmd, line = next(i) # C4
+    cmd, line =  next(i)
     assert cmd == ('RESI', (1,))
-    cmd, line = i.next() # C2
-    cmd, line = i.next() # C3
-    cmd, line =  i.next()
+    cmd, line = next(i) # C2
+    cmd, line = next(i) # C3
+    cmd, line =  next(i)
     assert cmd == ('RESI', ('N',))
-    cmd, line = i.next() # N
-    cmd, line = i.next() # HKLF
+    cmd, line = next(i) # N
+    cmd, line = next(i) # HKLF
     try:
-      cmd, line = i.next()
+      cmd, line = next(i)
       raise AssertionError
     except StopIteration:
       pass
@@ -98,12 +99,12 @@ def exercise_lexing_bis():
   stream = shelx.command_stream(file=cStringIO.StringIO(ins_equal_sign_in_rem))
   i = iter(stream)
   try:
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('REM',
                    ('Solution 1  R1  0.100,  Alpha = 0.0015  in P2(1)',))
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('REM', ('C13 O10',))
-    cmd, line = i.next()
+    cmd, line = next(i)
     assert cmd == ('TITL', ('SUCROSE IN P2(1)',))
   except StopIteration:
     raise AssertionError
@@ -367,7 +368,7 @@ def exercise_invalid():
         file=cStringIO.StringIO(ins_invalid_scatt),
         set_grad_flags=set_grad_flags)
       raise Exception_expected
-    except RuntimeError, e:
+    except RuntimeError as e:
       assert str(e) == "ShelX: illegal argument '0.3.' at line 3"
 
     try:
@@ -375,7 +376,7 @@ def exercise_invalid():
         file=cStringIO.StringIO(ins_invalid_scatt_1),
         set_grad_flags=set_grad_flags)
       raise Exception_expected
-    except RuntimeError, e:
+    except RuntimeError as e:
       assert str(e) == ("ShelX: wrong number of parameters "
                         "for scatterer at line 3")
 
@@ -384,7 +385,7 @@ def exercise_invalid():
         file=cStringIO.StringIO(ins_missing_sfac),
         set_grad_flags=set_grad_flags)
       raise Exception_expected
-    except RuntimeError, e:
+    except RuntimeError as e:
       assert e.args[0].startswith('ShelX:')
 
   structure = xray.structure.from_shelx(
@@ -516,11 +517,11 @@ def exercise_restraint_parsing():
   # invalid DFIX instructions
   try:
     proxies = parse_restraints(ins_invalid_dfix)
-  except RuntimeError, e:
+  except RuntimeError as e:
     assert str(e) == "ShelX: Invalid DFIX instruction at line 3"
   try:
     proxies = parse_restraints(ins_invalid_dfix_2)
-  except RuntimeError, e:
+  except RuntimeError as e:
     assert str(e) == "ShelX: Invalid DFIX instruction at line 3"
   # exercise FLAT
   proxies = parse_restraints(ins_flat)
@@ -539,7 +540,7 @@ def exercise_restraint_parsing():
   # invalid FLAT
   try:
     proxies = parse_restraints(ins_invalid_flat)
-  except RuntimeError, e:
+  except RuntimeError as e:
     assert str(e) == "ShelX: Invalid FLAT instruction at line 3"
   # SADI simple
   proxies = parse_restraints(ins_sadi)
@@ -906,7 +907,7 @@ def run():
   exercise_instruction_parsing()
   import libtbx.load_env
   if (not libtbx.env.has_module(name="smtbx")):
-    print "Skipping some tests: smtbx module is not available."
+    print("Skipping some tests: smtbx module is not available.")
   else:
     exercise_restraint_parsing()
     exercise_constrained_occupancies()
@@ -915,7 +916,7 @@ def run():
     exercise_residues()
   exercise_xray_structure_parsing()
   exercise_crystal_symmetry_parsing()
-  print 'OK'
+  print('OK')
 
 ins_mundane_tiny = (
 "TITL in Pbca\n"

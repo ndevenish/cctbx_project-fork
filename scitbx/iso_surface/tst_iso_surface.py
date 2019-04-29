@@ -1,4 +1,4 @@
-from __future__ import division
+from __future__ import absolute_import, division, print_function
 from scitbx.array_family import flex
 from scitbx import iso_surface
 from libtbx.test_utils import approx_equal
@@ -7,6 +7,7 @@ from math import sin
 from scitbx import matrix
 import sys
 import time
+from six.moves import range
 
 
 class triangulation_test_case(object):
@@ -40,7 +41,7 @@ class triangulation_test_case(object):
     f = self.func
 
     if verbose:
-      print "Testing %s" % f.__class__.__name__
+      print("Testing %s" % f.__class__.__name__)
 
     # triangulation of the iso-surface of the map
     t0 = time.time()
@@ -54,7 +55,7 @@ class triangulation_test_case(object):
     self.triangulation = s
     t1 = time.time()
     if verbose:
-      print "iso-surface triangulation per se: %f s" % (t1-t0)
+      print("iso-surface triangulation per se: %f s" % (t1-t0))
 
     # make sure there is something to test!!
     assert s.vertices.size() > 0
@@ -78,8 +79,8 @@ class triangulation_test_case(object):
         if s.vertices[a] == s.vertices[b]: degenerates.append((a,b))
     if verbose:
       if degenerates:
-        print "Degenerate edges for the isosurface of %s:" % f
-        print degenerates
+        print("Degenerate edges for the isosurface of %s:" % f)
+        print(degenerates)
     self.degenerate_edges = degenerates
 
     # triangle edges and vertices
@@ -92,7 +93,7 @@ class triangulation_test_case(object):
         else: e = (b,a)
         edges[e] = edges.setdefault(e,0) + 1
     assert len(vertices) == len(s.vertices)
-    missing = [ i for i in xrange(len(s.vertices)) if i not in vertices ]
+    missing = [ i for i in range(len(s.vertices)) if i not in vertices ]
     assert not missing, missing
     d = abs(matrix.col(self.grid_cell))
     bad_edge_multiplicities = []
@@ -111,14 +112,14 @@ class triangulation_test_case(object):
 
     # consistency check on the normals
     assert len(s.normals) == len(s.vertices)
-    for i,v,n in zip(xrange(len(s.vertices)), s.vertices, s.normals):
+    for i,v,n in zip(range(len(s.vertices)), s.vertices, s.normals):
       v, n = matrix.col(v), matrix.col(n)
       abs_n = abs(n)
       if abs_n == 0:
         for edge in degenerates:
           if i in edge: break
         else:
-          raise "zero normal not on a vertex at the end of a degenerate edge"
+          raise RuntimeError("zero normal not on a vertex at the end of a degenerate edge")
       else:
         assert abs(abs(n) - 1) < 1e-12
         outward = v + 0.05*n
@@ -213,7 +214,7 @@ def run(args):
   test.run(iso_level=0.8, from_here=None, to_there=None, verbose=verbose)
   assert test.degenerate_edges == []
 
-  print format_cpu_times()
+  print(format_cpu_times())
 
 if __name__ == '__main__':
   run(sys.argv[1:])

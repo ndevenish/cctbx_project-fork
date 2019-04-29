@@ -1,4 +1,4 @@
-from __future__ import division
+from __future__ import absolute_import, division, print_function
 from mmtbx import monomer_library
 import mmtbx.monomer_library.server
 import mmtbx.monomer_library.pdb_interpretation
@@ -10,6 +10,7 @@ from cctbx import geometry_restraints
 from libtbx.test_utils import show_diff
 from libtbx.utils import null_out
 import iotbx
+from six.moves import range
 
 raw_records1 = """\
 CRYST1   60.800   60.800   97.000  90.00  90.00 120.00 P 32 2 1      6
@@ -467,7 +468,7 @@ def exercise():
     mon_lib_srv = monomer_library.server.server()
     ener_lib = monomer_library.server.ener_lib()
   except: # intentional
-    print "Can not initialize monomer_library, skipping test."
+    print("Can not initialize monomer_library, skipping test.")
   if mon_lib_srv is not None and ener_lib is not None:
     exercise_add_new_bond_restraint_in_place(mon_lib_srv, ener_lib)
     exercise_single_atom(mon_lib_srv, ener_lib)

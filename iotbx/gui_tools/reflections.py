@@ -1,9 +1,10 @@
-from __future__ import division
+from __future__ import absolute_import, division, print_function
 
 import iotbx.gui_tools
 from iotbx import file_reader
 from libtbx.utils import Sorry
 import os
+from six.moves import range
 
 def space_group_as_str(space_group):
   from cctbx import sgtbx
@@ -511,7 +512,7 @@ def get_fp_fpp_from_sasaki(guess_ha,wavelength):
     return None, None
   try:
     table = sasaki.table(guess_ha)
-  except Exception, e :
+  except Exception as e :
     return None, None
   fp_fdp = table.at_angstrom(wavelength)
   f_prime=fp_fdp.fp()

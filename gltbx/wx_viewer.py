@@ -1,5 +1,4 @@
-from __future__ import division
-from __future__ import print_function
+from __future__ import absolute_import, division, print_function
 
 # This code is based on:
 #   http://lists.wxwidgets.org/archive/wxPython-users/msg11078.html
@@ -13,6 +12,7 @@ import gltbx.images
 from scitbx.array_family import flex
 import scitbx.math
 from scitbx import matrix
+from six.moves import range
 try:
   import wx
 except ImportError:
@@ -794,7 +794,7 @@ class show_points_and_lines_mixin(wxGLWindow):
       gray = 0.3
       glColor3f(gray,gray,gray)
       glBegin(GL_POLYGON)
-      for i in xrange(360):
+      for i in range(360):
         a = i * math.pi / 180
         rs = r * math.sin(a)
         rc = r * math.cos(a)

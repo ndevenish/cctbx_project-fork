@@ -1,4 +1,4 @@
-from __future__ import division
+from __future__ import absolute_import, division, print_function
 from scitbx.math import tensor_rank_2_gradient_transform_matrix
 from scitbx import matrix
 from scitbx.array_family import flex
@@ -383,7 +383,7 @@ class structure_factor:
                 + dbb * di.imag * dj.imag \
                 + dab * (di.real * dj.imag + di.imag * dj.real)
             if (di0 is dj0):
-              d2ij = d2ij_iter.next()
+              d2ij = next(d2ij_iter)
               sum += da * d2ij.real + db * d2ij.imag
             row.append(sum)
         result.append(row)

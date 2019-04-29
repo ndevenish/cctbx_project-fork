@@ -7,11 +7,12 @@ methods (phenix.refine, phenix.model_vs_data, phenix.merging_statistics, etc.)
 to extract statistics for display.
 """
 
-from __future__ import division
+from __future__ import absolute_import, division, print_function
 from libtbx import slots_getstate_setstate
 from libtbx.utils import Sorry
 from libtbx import str_utils
 import re
+from six.moves import range
 
 angstrom = u"\u00C5".encode("utf-8", "strict").strip()
 
@@ -253,7 +254,7 @@ class table(slots_getstate_setstate):
 def format_value(fs, value):
   try :
     val_str = str_utils.format_value(fs, value, replace_none_with="").strip()
-  except Exception, e :
+  except Exception as e :
     raise RuntimeError("Formatting error: %s, %s" % (fs, value))
   else :
     return val_str
