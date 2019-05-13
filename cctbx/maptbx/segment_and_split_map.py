@@ -8314,7 +8314,7 @@ def get_overall_mask(
     threshold=mask_threshold
   else:  # guess based on solvent_fraction
     if solvent_fraction is None:
-       print >>out,"Guessing solvent fraction of 0.9"
+       print("Guessing solvent fraction of 0.9", file=out)
        solvent_fraction=0.9 # just guess
     threshold=find_threshold_in_map(target_points=int(
       (1.-solvent_fraction)*sd_map.size()),

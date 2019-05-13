@@ -555,7 +555,7 @@ class info(object):
       out_list.append(out_str.format(*rec_list))
     out_string = '\n'.join(out_list)
     print(out_string, file=log)
-    # print(argmented_counts)
+    #print(argmented_counts)
     return out_string
 
 def get_macro_mol_sel(pdb_processed_file,selection='protein or dna or rna'):
