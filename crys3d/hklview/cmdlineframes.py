@@ -523,7 +523,7 @@ class HKLViewFrame () :
       self.viewer.mapcoef_fom_dict = {}
       try :
         hkl_file = any_reflection_file(file_name)
-      except Exception as e:
+      except Exception as e :
         self.NewFileLoaded=False
         self.msprint(to_str(e))
       arrays = hkl_file.as_miller_arrays(merge_equivalents=False,
