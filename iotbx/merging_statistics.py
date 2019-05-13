@@ -10,8 +10,9 @@ from libtbx.str_utils import make_sub_header, format_value
 from libtbx.utils import Sorry, null_out
 from libtbx import group_args, Auto
 from math import sqrt
-import cStringIO
+from six.moves import cStringIO as StringIO
 import sys
+import six
 
 citations_str = """\
   Diederichs K & Karplus PA (1997) Nature Structural Biology 4:269-275
@@ -676,7 +677,7 @@ class dataset_statistics(object):
   def as_dict(self):
     d = {}
     for bin_stats in self.bins:
-      for k, v in bin_stats.as_dict().iteritems():
+      for k, v in six.iteritems(bin_stats.as_dict()):
         d.setdefault(k, [])
         d[k].append(v)
     d['overall'] = self.overall.as_dict()
@@ -729,7 +730,7 @@ class dataset_statistics(object):
       ('percent_possible_obs', 'completeness'),
     ])
 
-    for k, v in mmcif_to_name.iteritems():
+    for k, v in six.iteritems(mmcif_to_name):
       value = self.overall.__getattribute__(v)
       if 'percent' in v:
         value *= 100
@@ -743,7 +744,7 @@ class dataset_statistics(object):
       stats_d = bin_stats.as_dict()
       values = [bin_stats.__getattribute__(v) * 100
                 if 'percent' in k else bin_stats.__getattribute__(v)
-                for k, v in mmcif_to_name.iteritems()]
+                for k, v in six.iteritems(mmcif_to_name)]
       reflns_shell_loop.add_row([i+1] + values)
     cif_block.add_loop(reflns_shell_loop)
 
@@ -753,7 +754,7 @@ class dataset_statistics(object):
     from libtbx.test_utils import approx_equal
     synchrotron = wl = "NULL"
     if (wavelength is not None):
-      out = cStringIO.StringIO()
+      out = StringIO()
       # XXX somewhat risky...
       if (not approx_equal(wavelength, 1.5418, eps=0.01, out=out) and
           not approx_equal(wavelength, 0.7107, eps=0.01, out=out)):

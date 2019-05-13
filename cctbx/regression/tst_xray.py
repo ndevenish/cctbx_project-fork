@@ -14,10 +14,10 @@ from libtbx.test_utils import Exception_expected, approx_equal, \
 from libtbx.test_utils import not_approx_equal
 import random
 try:
-  import cPickle as pickle
+  from six.moves import cPickle as pickle
 except ImportError:
   import pickle
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 import sys, random, math
 from itertools import count
 
@@ -1125,9 +1125,9 @@ Number of scattering types: 4
   assert str(e) == "Cannot concatenate: conflicting scatterers"
   sys.stdout = out
   #
-  assert [(r.scattering_type, r.count, "%.1f" % r.occupancy_sum)
-    for r in xs.scattering_types_counts_and_occupancy_sums()] \
-      == [('C', 1, "1.0"), ('X1', 1, "0.5"), ('Z1', 1, "1.5"), ('O', 1, "1.0")]
+  assert set([(r.scattering_type, r.count, "%.1f" % r.occupancy_sum)
+    for r in xs.scattering_types_counts_and_occupancy_sums()])\
+      == set([('C', 1, "1.0"), ('X1', 1, "0.5"), ('Z1', 1, "1.5"), ('O', 1, "1.0")])
 
 def exercise_min_u_cart_eigenvalue():
   cs = crystal.symmetry((1, 1, 1, 90, 90, 90), "P 1")
@@ -1301,7 +1301,6 @@ def exercise_parameter_map():
 
 
 def exercise_xray_structure_as_py_code():
-  import itertools
   xs = xray.structure(
     crystal_symmetry=crystal.symmetry((2, 2, 3, 90, 90, 80), "hall: P 2z"),
     scatterers=flex.xray_scatterer((
@@ -1338,7 +1337,7 @@ V      u=0.200000)]))""")
     xs1.crystal_symmetry(),
     relative_length_tolerance=0,
     absolute_angle_tolerance=0)
-  for sc, sc1 in itertools.izip(xs.scatterers(), xs1.scatterers()):
+  for sc, sc1 in zip(xs.scatterers(), xs1.scatterers()):
     assert sc.flags.bits == sc1.flags.bits
     assert sc.site  == sc1.site
     if sc.flags.use_u_iso():

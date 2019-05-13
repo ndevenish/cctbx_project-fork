@@ -22,16 +22,18 @@ Examples
 >>> mtz_in = any_file("data.mtz", force_type="hkl")
 >>> miller_arrays = mtz_in.file_server.miller_arrays
 """
+from __future__ import absolute_import, division, print_function
 
 # MTZ file handling is kludgy, but unfortunately there are circumstances
 # where only an MTZ file will do, so it requires some extra code to work
 # around the automatic behavior
 
 from libtbx.utils import Sorry, to_str
-import cPickle
+from six.moves import cPickle as pickle
 import os
 import re
 import sys
+import six
 
 standard_file_types = ["hkl", "ccp4_map", "xplor_map", "pdb", "cif", "phil",
   "hhr", "ncs", "aln", "seq", "xml", "pkl", "txt",]
@@ -131,7 +133,7 @@ def guess_file_type(file_name, extensions=standard_file_extensions):
     return None
   if (ext == ".mtz") : # XXX gross
     return "hkl"
-  for known_type, known_extensions in extensions.iteritems():
+  for known_type, known_extensions in six.iteritems(extensions):
     if ext[1:] in known_extensions :
       return known_type
   return None
@@ -156,7 +158,8 @@ def sort_by_file_type(file_names, sort_order=None):
       return 1
     else :
       return 0
-  file_names.sort(_sort)
+  from functools import cmp_to_key
+  file_names.sort(key = cmp_to_key(_sort))
   return file_names
 
 def any_file(file_name,
@@ -443,7 +446,7 @@ class any_file_input(object):
     self._file_object = map_object
 
   def _try_as_pkl(self):
-    pkl_object = cPickle.load(open(self.file_name, "rb"))
+    pkl_object = pickle.load(open(self.file_name, "rb"))
     self._file_type = "pkl"
     self._file_object = pkl_object
 

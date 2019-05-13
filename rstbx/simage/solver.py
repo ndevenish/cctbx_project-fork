@@ -1,6 +1,7 @@
 from __future__ import division, print_function
 from six.moves import range
 import os
+from six.moves import zip
 op = os.path
 import sys
 import time

@@ -8,10 +8,10 @@ import hashlib
 from libtbx.utils import Sorry, format_cpu_times
 import libtbx.load_env
 from libtbx import Auto
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 import math
 try:
-  import cPickle as pickle
+  from six.moves import cPickle as pickle
 except ImportError:
   import pickle
 import random
@@ -4645,7 +4645,7 @@ HETATM    7 CA   ION B   2      30.822  10.665  17.190  1.00 36.87
   h = pdb_inp.construct_hierarchy(set_atom_i_seq=False, sort_atoms=False)
   for i in range(2):
     s = h.as_pdb_string()
-    d = hashlib.md5(s).hexdigest()
+    d = hashlib.md5(s.encode()).hexdigest()
     if (pdb.hierarchy.atom.has_siguij()):
       assert d == "c4089359af431bb2962d6a8e457dd86f", d
     else:
@@ -4998,7 +4998,7 @@ TER
   assert h1.is_similar_hierarchy(other=h2)
   assert h2.is_similar_hierarchy(other=h1)
   #
-  open("tmp_tst_hierarchy.pdb", "wb").write("""\
+  open("tmp_tst_hierarchy.pdb", "w").write("""\
 CRYST1    2.000    3.000    4.000  90.00  80.00  90.00 P 2           5
 ATOM      0  S   SO4     0       3.302   8.419   8.560  1.00 10.00           S
 ATOM      1  O1  SO4     0       3.497   8.295   7.118  1.00 10.00           O

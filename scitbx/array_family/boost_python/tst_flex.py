@@ -19,6 +19,7 @@ import sys, os
 # Boost 1.56 changes normal distribution, but keep old tests for testing
 # older versions of Boost
 import libtbx.load_env
+from six.moves import zip
 boost_version = libtbx.env.boost_version
 
 def exercise_flex_grid():
@@ -237,7 +238,8 @@ def exercise_flex_constructors():
           except TypeError as e:
             assert str(e) in [
               "bad argument type for built-in operation",
-              "a float is required"]
+              "a float is required",
+              "must be real number, not str"]
           else: raise Exception_expected
   for arg in [[[0],""], ([0],"",)]:
     try: flex.double(arg)
@@ -383,12 +385,12 @@ def exercise_std_string():
   assert list(a.strip().lower()) == ["abc","def","ghi","jkl", "1 23"]
   #
   a = fss()
-  assert a.i_seqs_by_value().keys() == []
+  assert len(a.i_seqs_by_value()) == 0
   ibv = fss([""]).i_seqs_by_value()
-  assert ibv.keys() == [""]
+  assert list(ibv.keys()) == [""]
   assert list(ibv[""]) == [0]
   ibv = fss(["", ""]).i_seqs_by_value()
-  assert ibv.keys() == [""]
+  assert list(ibv.keys()) == [""]
   assert list(ibv[""]) == [0,1]
   ibv = fss(["", "a"]).i_seqs_by_value()
   assert sorted(ibv.keys()) == ["", "a"]
@@ -551,13 +553,17 @@ def exercise_misc():
     rgb_scales_low=(1,1,1),
     rgb_scales_high=(0,0,0),
     saturation=2)
-  assert [ord(c) for c in s] \
+  if six.PY3:
+    ord_ = lambda x: x
+  else:
+    ord_ = ord
+  assert [ord_(c) for c in s] \
       == [128, 128, 128, 0, 0, 0, 255, 255, 255, 0, 0, 0, 255, 255, 255]
   s = a.as_rgb_scale_string(
     rgb_scales_low=(1,1,1),
     rgb_scales_high=(1,0,0),
     saturation=2)
-  assert [ord(c) for c in s] \
+  assert [ord_(c) for c in s] \
       == [255, 128, 128, 255, 0, 0, 255, 255, 255, 255, 0, 0, 255, 255, 255]
   #
   a = flex.double([1,2,3,-4,5,6])
@@ -757,13 +763,13 @@ def exercise_numpy_slicing_compatibility():
         start = random.randint(0,dim[i]-1)
         stop = random.randint(start+1,dim[i])
         slices.append(slice(start,stop))
-      assert approx_equal(flex.double(a_numpy[slices].flatten()), a[slices])
+      assert approx_equal(flex.double(a_numpy[tuple(slices)].flatten()), a[slices])
       slices = []
       for i in range(n_dim):
         start = random.randint(-dim[i],-2)
         stop = random.randint(start+1,-1)
         slices.append(slice(start,stop))
-      assert approx_equal(flex.double(a_numpy[slices].flatten()), a[slices])
+      assert approx_equal(flex.double(a_numpy[tuple(slices)].flatten()), a[slices])
 
 def exercise_push_back_etc():
   a = flex.double(3)

@@ -6,6 +6,7 @@ import scitbx.math.gaussian
 from cctbx.array_family import flex
 from libtbx.option_parser import OptionParser
 from libtbx import easy_pickle
+from six.moves import zip
 
 def pick_nicest_fit(fit_0, fit_1):
   if (fit_0.max_error < fit_1.max_error): return fit_0
@@ -76,7 +77,7 @@ def main():
         n_terms_dict[fit.n_terms()] = fit
       n_terms_dicts.append(n_terms_dict)
       all_n_terms.update(n_terms_dicts[-1])
-    all_n_terms = all_n_terms.keys()
+    all_n_terms = list(all_n_terms.keys())
     all_n_terms.sort()
     for n_terms in all_n_terms:
       fit_0 = n_terms_dicts[0].get(n_terms, None)

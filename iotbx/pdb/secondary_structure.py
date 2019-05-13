@@ -926,7 +926,7 @@ class annotation(structure_base):
       if n_copy == 0 and old_chain_id in chain_ids_dict:
         return old_chain_id
       return chain_ids_dict[old_chain_id][n_copy-1]
-    n_copies = len(chain_ids_dict.values()[0]) + 1
+    n_copies = len(list(chain_ids_dict.values())[0]) + 1
     new_helices = []
     new_sheets = []
     new_h_serial = 0
@@ -1909,7 +1909,7 @@ class pdb_helix(structure_base):
     if prefix_scope != "" and not prefix_scope.endswith("."):
       prefix_scope += "."
     serial_and_id = ""
-    if self.serial is not None and self.serial > 0:
+    if self.serial is not None and int(self.serial) > 0:
       serial_and_id += "\n  serial_number = %s" % self.serial
     if self.helix_id is not None:
       serial_and_id += "\n  helix_identifier = %s" % self.helix_id
@@ -2070,7 +2070,9 @@ class pdb_strand(structure_base):
       end_icode,
       sense):
     adopt_init_args(self, locals())
-    assert (sheet_id > 0) and (strand_id > 0)
+    # Python 3 prevents comparisons between str and int
+    # assert (sheet_id > 0) and (strand_id > 0)
+    assert (sheet_id is not None) and (strand_id is not None)
     if sense not in [-1, 0, 1]:
       raise Sorry("Bad sense in SHEET record: '%s'" % sense)
     self.start_chain_id = self.parse_chain_id(start_chain_id)

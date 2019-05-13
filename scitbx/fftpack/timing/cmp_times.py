@@ -1,5 +1,6 @@
 from __future__ import division, print_function
 import sys, os
+from six.moves import zip
 
 def run():
   results = []

@@ -6,12 +6,15 @@ Desc        : Read pickle files (hopefully fine-sliced, and named after the
               order of the slices. Grab selected reflections and plot the
               intensity.
 """
+from __future__ import absolute_import, division, print_function
 import sys
 from six.moves import cPickle as pickle
 from dials.array_family import flex
 import matplotlib.pyplot as plt
 import numpy as np
 from prime.postrefine.mod_input import read_frame, read_pickles
+from six.moves import range
+from six.moves import zip
 
 def read_input(args):
   data = []

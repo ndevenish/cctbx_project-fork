@@ -2,7 +2,7 @@ from __future__ import division, print_function
 from six.moves import range
 from libtbx.utils import Abort
 from libtbx import group_args
-import cStringIO
+from six.moves import cStringIO as StringIO
 import re
 import operator
 import os.path
@@ -560,7 +560,7 @@ class clustal_alignment(alignment):
         for line in wrap( middle_line, aln_width ) ]
       )
 
-    def fmt_num():
+    def fmt_num(num):
       if num: return " " + str( num ).rjust( number_width )
       return ""
     return (
@@ -568,7 +568,7 @@ class clustal_alignment(alignment):
       + "\n\n".join(
         [
           "\n".join(
-            [ "%s %s%s" % ( cap, ali, fmt_num() )
+            [ "%s %s%s" % ( cap, ali, fmt_num(num) )
               for ( cap, ali, num ) in zipped_infos ]
             )
           for zipped_infos in zip( *aln_infos )
@@ -636,7 +636,7 @@ class generic_sequence_parser(object):
           non_compliant.append( unknown )
 
         objects.append(
-          self.type( **dict( kwargs.items() + match.groupdict().items() ) )
+          self.type( **dict( list(kwargs.items()) + list(match.groupdict().items()) ) )
           )
 
       else:
@@ -857,7 +857,7 @@ def sequence_parser_for_extension(extension):
 
 def known_sequence_formats():
 
-  return _implemented_sequence_parsers.keys()
+  return list(_implemented_sequence_parsers.keys())
 
 
 def parse_sequence(data):
@@ -939,7 +939,7 @@ def merge_sequence_files(file_names, output_file, sequences=(),
   assert (len(file_names) > 0) or (len(sequences) > 0)
   if (len(file_names)==1) and (len(sequences)==0) and (not force_new_file):
     return file_names[0]
-  seq_out = cStringIO.StringIO()
+  seq_out = StringIO()
   for seq_file in file_names :
     objects, non_compliant = any_sequence_format(seq_file)
     if (objects is None):
@@ -1235,7 +1235,7 @@ def alignment_parser_for_extension(extension):
 
 def known_alignment_formats():
 
-  return _implemented_alignment_parsers.keys()
+  return list(_implemented_alignment_parsers.keys())
 
 def any_alignment_file(file_name):
   base, ext = os.path.splitext(file_name)
@@ -1548,7 +1548,7 @@ class hhsearch_parser(hhpred_parser):
 
   def merge_and_process_block_hits(self, matches):
 
-    data = zip( *matches )
+    data = list(zip( *matches ))
     assert len( data ) == 8
 
     sequences = [ data[1], data[5] ]
@@ -1584,13 +1584,13 @@ class hhsearch_parser(hhpred_parser):
 
   def hits(self):
 
-    data = zip(
+    data = list(zip(
       self.pdbs,
       self.chains,
       self.annotations,
       self.query_alignments,
       self.hit_alignments,
-      )
+      ))
 
     for ( pdb, chain, annotation, query, hit ) in data:
       alignment = clustal_alignment(
@@ -1692,7 +1692,7 @@ class hhalign_parser(hhpred_parser):
 
   def merge_and_process_block_hits(self, matches):
 
-    data = zip( *matches )
+    data = list(zip( *matches ))
     assert len( data ) == 21
 
     sequences = [
@@ -2069,4 +2069,3 @@ def random_sequence(n_residues=None,residue_basket=None):
     id=random.randint(0,nn)
     s+=residue_basket[id]
   return s
-

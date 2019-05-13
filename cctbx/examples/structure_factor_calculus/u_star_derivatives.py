@@ -5,7 +5,7 @@ from scitbx.array_family import flex
 from scitbx.math import tensor_rank_2_gradient_transform_matrix
 from libtbx.test_utils import approx_equal
 import math
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 import sys
 
 flex.set_random_seed(0)

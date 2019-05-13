@@ -1,5 +1,6 @@
 from __future__ import division, print_function
 from six.moves import range
+from six.moves import zip
 class InfeasibleError(RuntimeError): pass
 
 class refinery(object):

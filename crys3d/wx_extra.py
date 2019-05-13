@@ -2,6 +2,8 @@ from __future__ import division, print_function
 import wx
 
 import libtbx.object_oriented_patterns as oop
+from six.moves import range
+from six.moves import zip
 
 class copy_init_args(object):
   def __init__(self, args, exclude=()):
@@ -34,8 +36,8 @@ class _extended_wxDC(oop.injector, wx.DC):
     slopes = [ x*step/d for x in step_adjustements ]
     red_green_slopes = [ x*58 for x in slopes ]
     blue_slopes      = [ x*44 for x in slopes ]
-    ranges = [ xrange(slope_breaks[i], slope_breaks[i+1])
-               for i in xrange(len(slope_breaks)-1) ]
+    ranges = [ range(slope_breaks[i], slope_breaks[i+1])
+               for i in range(len(slope_breaks)-1) ]
     for range, red_green_slope, blue_slope in zip(
       ranges, red_green_slopes, blue_slopes):
       for i in range:

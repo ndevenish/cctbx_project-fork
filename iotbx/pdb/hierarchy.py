@@ -3,12 +3,12 @@ from six.moves import range
 import boost.python
 ext = boost.python.import_ext("iotbx_pdb_hierarchy_ext")
 from iotbx_pdb_hierarchy_ext import *
-
+import six
 from cctbx.array_family import flex
 from libtbx.str_utils import show_sorted_by_counts
 from libtbx.utils import Sorry, plural_s, null_out
 from libtbx import Auto, dict_with_default_0
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 from iotbx.pdb import hy36encode, hy36decode
 import iotbx.cif.model
 from cctbx import crystal
@@ -343,7 +343,10 @@ class __hash_eq_mixin(object):
   def __ne__(self, other):
     return not ( self == other )
 
-class _(boost.python.injector, ext.root, __hash_eq_mixin):
+boost.python.inject(ext.root, __hash_eq_mixin)
+@boost.python.inject_into(ext.root)
+class _():
+
   __doc__ = """
   Root node of the PDB hierarchy object.  This is returned by the method
   construct_hierarchy() of the PDB/mmCIF input objects, but it may also be
@@ -361,7 +364,7 @@ class _(boost.python.injector, ext.root, __hash_eq_mixin):
   def __getstate__(self):
     version = 2
     pdb_string = StringIO()
-    self._as_pdb_string_cstringio(
+    py3out = self._as_pdb_string_cstringio(  # NOTE py3out will be None in py2
       cstringio=pdb_string,
       append_end=True,
       interleaved_conf=0,
@@ -370,6 +373,8 @@ class _(boost.python.injector, ext.root, __hash_eq_mixin):
       sigatm=True,
       anisou=True,
       siguij=True)
+    if six.PY3:
+      pdb_string.write(py3out)
     return (version, pickle_import_trigger(), self.info, pdb_string.getvalue())
 
   def __setstate__(self, state):
@@ -641,6 +646,8 @@ class _(boost.python.injector, ext.root, __hash_eq_mixin):
       anisou=anisou,
       siguij=siguij,
       output_break_records=output_break_records)
+    if six.PY3:
+      cstringio.write(py3out)
     if (return_cstringio):
       return cstringio
     return cstringio.getvalue()
@@ -1168,7 +1175,8 @@ class _(boost.python.injector, ext.root, __hash_eq_mixin):
                 continue
               mean_occ = flex.mean(atom_group.atoms().extract_occ())
               atom_groups_and_occupancies.append((atom_group, mean_occ))
-            atom_groups_and_occupancies.sort(lambda a,b: cmp(b[1], a[1]))
+            cmp_fn = lambda a,b: cmp(b[1], a[1])
+            atom_groups_and_occupancies.sort(key=cmp_to_key(cmp_fn))
             for atom_group, occ in atom_groups_and_occupancies[1:] :
               residue_group.remove_atom_group(atom_group=atom_group)
             single_conf, occ = atom_groups_and_occupancies[0]
@@ -1444,7 +1452,7 @@ class _(boost.python.injector, ext.root, __hash_eq_mixin):
             atom1 = ag.get_atom(pair[0])
             atom2 = ag.get_atom(pair[1])
             if atom1 is None and atom2 is None: continue
-            if len(filter(None, [atom1, atom2])) == 1:
+            if len(list(filter(None, [atom1, atom2]))) == 1:
               flips_stored=[]
               info += ' not complete - not flipped'
               break
@@ -1577,7 +1585,10 @@ class _(boost.python.injector, ext.root, __hash_eq_mixin):
       result = result and model.is_ca_only()
     return result
 
-class _(boost.python.injector, ext.model, __hash_eq_mixin):
+boost.python.inject(ext.model, __hash_eq_mixin)
+@boost.python.inject_into(ext.model)
+class _():
+
   """
   Class representing MODEL blocks in a PDB file (or equivalent mmCIF).  There
   will always be at least one of these in a hierarchy root extracted from a
@@ -1635,7 +1646,10 @@ class _(boost.python.injector, ext.model, __hash_eq_mixin):
       result = result and chain.is_ca_only()
     return result
 
-class _(boost.python.injector, ext.chain, __hash_eq_mixin):
+boost.python.inject(ext.chain, __hash_eq_mixin)
+@boost.python.inject_into(ext.chain)
+class _():
+
   """
   Class representing a continuous chain of atoms, as defined by the combination
   of chain ID field and TER records (or the chain index in mmCIF format).  Note
@@ -1697,11 +1711,11 @@ class _(boost.python.injector, ext.chain, __hash_eq_mixin):
               group.append(atom.tmp)
             if (len(group) != 0):
               groups.setdefault(altloc, []).extend(group)
-      groups = groups.values()
+      groups = list(groups.values())
       if (len(groups) != 0):
         for group in groups: group.sort()
         def group_cmp(a, b): return cmp(a[0], b[0])
-        groups.sort(group_cmp)
+        groups.sort(key=cmp_to_key(group_cmp))
         result.append(groups)
       for i in isolated_var_occ:
         result.append([[i]])
@@ -1728,7 +1742,7 @@ class _(boost.python.injector, ext.chain, __hash_eq_mixin):
       process_range(i_rg, i_rg+1)
     def groups_cmp(a, b):
       return cmp(a[0][0], b[0][0])
-    result.sort(groups_cmp)
+    result.sort(key=cmp_to_key(groups_cmp))
     return result
 
   def get_residue_names_and_classes(self):
@@ -1903,7 +1917,9 @@ class _(boost.python.injector, ext.chain, __hash_eq_mixin):
     atom_names = self.atoms().extract_name()
     return atom_names.all_eq(" CA ")
 
-class _(boost.python.injector, ext.residue_group, __hash_eq_mixin):
+boost.python.inject(ext.residue_group, __hash_eq_mixin)
+@boost.python.inject_into(ext.residue_group)
+class _():
 
   def only_atom_group(self):
     assert self.atom_groups_size() == 1
@@ -1919,7 +1935,9 @@ class _(boost.python.injector, ext.residue_group, __hash_eq_mixin):
       chain_id = chain.id
     return "%2s%4s%1s" % (chain_id, self.resseq, self.icode)
 
-class _(boost.python.injector, ext.atom_group, __hash_eq_mixin):
+boost.python.inject(ext.atom_group, __hash_eq_mixin)
+@boost.python.inject_into(ext.atom_group)
+class _():
 
   def only_atom(self):
     assert self.atoms_size() == 1
@@ -1952,7 +1970,9 @@ class _(boost.python.injector, ext.atom_group, __hash_eq_mixin):
           min_max_mean.max))
     return min_max_mean.mean
 
-class _(boost.python.injector, ext.atom, __hash_eq_mixin):
+boost.python.inject(ext.atom, __hash_eq_mixin)
+@boost.python.inject_into(ext.atom)
+class _():
   __doc__ = """
   The basic unit of the PDB hierarchy (or the PDB input object in general),
   representing a single point scatterer corresponding to an ATOM or HETATM
@@ -2033,7 +2053,9 @@ class _(boost.python.injector, ext.atom, __hash_eq_mixin):
     else:
       return 0
 
-class _(boost.python.injector, ext.conformer):
+@boost.python.inject_into(ext.conformer)
+class _():
+
   __doc__ = """
   Alternate view into a chain object, grouping sequential residues with
   equivalent altlocs.  As a general rule it is preferrable to iterate over
@@ -2225,8 +2247,8 @@ class _(boost.python.injector, ext.conformer):
     return resnames
 
 
-
-class _(boost.python.injector, ext.residue):
+@boost.python.inject_into(ext.residue)
+class _():
 
   def __getinitargs__(self):
     result_root = self.root()
@@ -2269,7 +2291,10 @@ class _(boost.python.injector, ext.residue):
       translate_cns_dna_rna_residue_names=translate_cns_dna_rna_residue_names,
       return_mon_lib_dna_name=return_mon_lib_dna_name)
 
-class _(boost.python.injector, ext.atom_with_labels):
+
+@boost.python.inject_into(ext.atom_with_labels)
+class _():
+
   __doc__ = """
   Stand-in for atom object, which explicitly records the attributes normally
   reserved for parent classes such as residue name, chain ID, etc.

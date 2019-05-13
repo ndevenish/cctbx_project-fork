@@ -3,6 +3,7 @@ import iotbx.cif
 import iotbx.cif.validation
 import libtbx.load_env
 import sys, os
+import six
 op = os.path
 
 def run(args):

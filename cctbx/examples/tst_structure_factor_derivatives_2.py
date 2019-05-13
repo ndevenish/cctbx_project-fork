@@ -9,7 +9,7 @@ from cctbx.examples.exp_i_alpha_derivatives import least_squares
 from cctbx.array_family import flex
 from libtbx.test_utils import approx_equal
 import random
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 import sys
 
 random.seed(0)

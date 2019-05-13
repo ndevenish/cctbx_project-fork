@@ -12,10 +12,10 @@ import libtbx.load_env
 import math
 import weakref
 try:
-  import cPickle as pickle
+  from six.moves import cPickle as pickle
 except ImportError:
   import pickle
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 import os
 
 ad_hoc_1992_pairs = """\

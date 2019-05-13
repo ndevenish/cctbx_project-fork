@@ -206,7 +206,7 @@ class pdb_hierarchy_builder(crystal_symmetry_builder):
     data = cif_block.get(name)
     if data is None:
       return data
-    if isinstance(data, basestring):
+    if isinstance(data, string_types):
       data = flex.std_string([data])
     return data
 
@@ -250,7 +250,7 @@ class extract_tls_from_cif_block(object):
              for i, j in ('11', '12', '13', '21', '22', '23', '31', '32', '33')]
     origin_xyzs = [cif_block.get('_pdbx_refine_tls.origin_%s' %x) for x in 'xyz']
 
-    if isinstance(tls_ids, basestring):
+    if isinstance(tls_ids, string_types):
       # in case the TLS items are not in a loop
       tls_ids = [tls_ids]
       T_ijs = [[T_ij] for T_ij in T_ijs]
@@ -276,7 +276,7 @@ class extract_tls_from_cif_block(object):
 
     assert tls_group_ids is not None
 
-    if isinstance(tls_group_ids, basestring):
+    if isinstance(tls_group_ids, string_types):
       # in case the TLS group items are not in a loop
       refine_tls_ids = flex.std_string([refine_tls_ids])
       beg_chain_ids = [beg_chain_ids]
@@ -404,7 +404,7 @@ class cif_input(iotbx.pdb.pdb_input_mixin):
       self.cif_model = cif_object
     if len(self.cif_model) == 0:
       raise Sorry("mmCIF file must contain at least one data block")
-    self.cif_block = self.cif_model.values()[0]
+    self.cif_block = list(self.cif_model.values())[0]
     self._source_info = "file %s" %file_name
     self.hierarchy = None
     self.builder = None
@@ -498,12 +498,12 @@ class cif_input(iotbx.pdb.pdb_input_mixin):
 
   def deposition_date(self):
     # date format: yyyy-mm-dd
-    cif_block = self.cif_model.values()[0]
+    cif_block = list(self.cif_model.values())[0]
     return cif_block.get("_pdbx_database_status.recvd_initial_deposition_date")
     #rev_num = cif_block.get('_database_PDB_rev.num')
     #if rev_num is not None:
     #  date_original = cif_block.get('_database_PDB_rev.date_original')
-    #  if isinstance(rev_num, basestring):
+    #  if isinstance(rev_num, string_types):
     #    return date_original
     #  else:
     #    i = flex.first_index(rev_num, '1')
@@ -526,7 +526,7 @@ class cif_input(iotbx.pdb.pdb_input_mixin):
   def get_program_name(self):
     software_name = self.cif_block.get('_software.name')
     software_classification = self.cif_block.get('_software.classification')
-    if (isinstance(software_classification, basestring) and
+    if (isinstance(software_classification, string_types) and
         software_classification == 'refinement'):
       return software_name
     if software_classification is not None:
@@ -608,10 +608,10 @@ class cif_input(iotbx.pdb.pdb_input_mixin):
 
         r = [(self.cif_block.get('_pdbx_struct_oper_list.matrix[%s][%s]' %(x,y))[i])
           for x,y in ('11', '12', '13', '21', '22', '23', '31','32', '33')]
-        t_rots.append(matrix.sqr(map(float,r)))
+        t_rots.append(matrix.sqr([float(r_elem) for r_elem in r] ))
         t = [(self.cif_block.get('_pdbx_struct_oper_list.vector[%s]' %x)[i])
           for x in '123']
-        t_trans.append(matrix.col(map(float,t)))
+        t_trans.append(matrix.col([float(t_elem) for t_elem in t] ))
 
     # filter everything for X0 and P here:
     # Why??? Nobody promised that id would be integer, it is a 'single word':
@@ -683,14 +683,14 @@ class cif_input(iotbx.pdb.pdb_input_mixin):
         else:
           r = [(self.cif_block.get('_struct_ncs_oper.matrix[%s][%s]' %(x,y)))
             for x,y in ('11', '12', '13', '21', '22', '23', '31','32', '33')]
-        rots.append(matrix.sqr(map(float,r)))
+        rots.append(matrix.sqr([float(r_elem) for r_elem in r]) )
         if len(ncs_oper) > 1:
           t = [(self.cif_block.get('_struct_ncs_oper.vector[%s]' %x)[i])
             for x in '123']
         else:
           t = [(self.cif_block.get('_struct_ncs_oper.vector[%s]' %x))
             for x in '123']
-        trans.append(matrix.col(map(float,t)))
+        trans.append(matrix.col([float(t_elem) for t_elem in t]))
     # sort records by serial number
     serial_number.sort()
     items_order = [i for (_,i) in serial_number]

@@ -67,7 +67,7 @@ def Py_remove_absent_indices(indices, space_group_number):
 def parse_xds_xparm_scan_info(xparm_file):
     '''Read an XDS XPARM file, get the scan information.'''
 
-    values = map(float, open(xparm_file).read().split())
+    values = [float(x) for x in open(xparm_file).read().split()]
 
     assert(len(values) == 42)
 

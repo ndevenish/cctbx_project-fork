@@ -2,6 +2,7 @@ from __future__ import division, print_function
 from cctbx.array_family import flex
 
 import boost.python
+from six.moves import zip
 ext = boost.python.import_ext("iotbx_pdb_ext")
 from iotbx_pdb_ext import *
 
@@ -15,9 +16,9 @@ import scitbx.array_family.shared # import dependency
 import scitbx.stl.set
 from libtbx import smart_open
 from libtbx.str_utils import show_string
-from libtbx.utils import plural_s, hashlib_md5, date_and_time, Sorry
+from libtbx.utils import plural_s, hashlib_md5, date_and_time, to_bytes, Sorry
 from libtbx import Auto
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 import sys
 import calendar
 import six
@@ -572,7 +573,7 @@ class combine_unique_pdb_files(object):
           for s in smart_open.for_reading(
             file_name=file_name).read().splitlines()]
         m = hashlib_md5()
-        m.update("\n".join(r))
+        m.update(to_bytes("\n".join(r), codec='utf8'))
         m = m.hexdigest()
         l = self.md5_registry.get(m)
         if (l is not None):
@@ -909,6 +910,8 @@ class pdb_input_mixin(object):
       sigatm=sigatm,
       anisou=anisou,
       siguij=siguij)
+    if six.PY3:
+      cstringio.write( py3out)
     if (return_cstringio):
       return cstringio
     return cstringio.getvalue()
@@ -1067,7 +1070,10 @@ class pdb_input_mixin(object):
       raise Sorry(str(e))
     return result
 
-class _(boost.python.injector, ext.input, pdb_input_mixin):
+boost.python.inject(ext.input, pdb_input_mixin)
+@boost.python.inject_into(ext.input)
+class _():
+
   """
   This class parses PDB format, including non-ATOM records.  Atom objects will
   be created as part of the parsing, but the full PDB hierarchy object requires
@@ -1079,13 +1085,16 @@ class _(boost.python.injector, ext.input, pdb_input_mixin):
     for section in input_sections[:-2]:
       lines.extend(getattr(self, section)())
     pdb_string = StringIO()
-    self._as_pdb_string_cstringio(
+
+    py3out = self._as_pdb_string_cstringio(  # NOTE py3out is None in python 2
       cstringio=pdb_string,
       append_end=False,
       atom_hetatm=True,
       sigatm=True,
       anisou=True,
       siguij=True)
+    if six.PY3:
+      pdb_string.write(py3out)
     lines.extend(flex.split_lines(pdb_string.getvalue()))
     for section in input_sections[-2:]:
       lines.extend(getattr(self, section)())
@@ -1106,7 +1115,7 @@ class _(boost.python.injector, ext.input, pdb_input_mixin):
         d.setdefault(chid, []).extend(rns)
     result = []
     ott = amino_acid_codes.one_letter_given_three_letter
-    for k, vs in zip(d.keys(), d.values()):
+    for k, vs in zip(d.keys(), d.values()): # FIXME use iteritems?
       result.append(">chain %s"%k)
       result.append("".join([ott.get(v,"?") for v in vs]))
     return "\n".join(result)

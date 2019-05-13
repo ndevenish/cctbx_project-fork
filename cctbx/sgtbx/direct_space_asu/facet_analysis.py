@@ -117,7 +117,8 @@ def face_polygons(asu, i_pivot):
   vertex_dicts = face_vertices(asu=asu, i_pivot=i_pivot)
   result = []
   for vertex_dict,flag in vertex_dicts:
-    vertex_list = vertex_dict.items()
+    # FIXME ordering of lists in items changes in python2/3
+    vertex_list = list(vertex_dict.items())
     vertex,list_of_other_cut_indices = vertex_list[0]
     for other_cut_indices in list_of_other_cut_indices:
       polygon = trace_polygon([(vertex, other_cut_indices)],
@@ -144,7 +145,7 @@ def extract_polygon_vertices(list_of_polygons):
     for polygon,inclusive_flag in polygons:
       for vertex,cut_indices in polygon:
         result[vertex] = 1
-  return result.keys()
+  return list(result.keys())
 
 def shape_vertices(asu):
   return extract_polygon_vertices(asu_polygons(asu.shape_only()))
@@ -195,7 +196,7 @@ def all_cut_points(asu):
         assert point is not None
         if (asu.is_inside(point, shape_only=True)):
           result[point] = 1
-  return result.keys()
+  return list(result.keys())
 
 def get_edge_vertices(list_of_polygons):
   result = {}
@@ -210,7 +211,7 @@ def get_edge_vertices(list_of_polygons):
         if (key not in result):
           key = (v2,v1)
         result[key] = 1
-  return result.keys()
+  return list(result.keys())
 
 def edge_position(edge_end_points, other_point):
   a = edge_end_points[0]
@@ -250,7 +251,7 @@ class edge_with_cut_points(object):
     return [edge_position(self.end_points, point) for point in self.cut_points]
 
   def sorted_cut_points(self):
-    packed = zip(self.cut_points, self.cut_point_positions())
+    packed = list(zip(self.cut_points, self.cut_point_positions()))
     packed.sort(packed_cut_point_sort_function)
     return [p[0] for p in packed]
 

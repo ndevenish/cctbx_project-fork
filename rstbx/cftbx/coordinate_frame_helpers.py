@@ -263,25 +263,25 @@ def import_xds_integrate_hkl(integrate_hkl_file):
 
     for record in header:
         if record.startswith('!ROTATION_AXIS='):
-            axis = map(float, record.split()[-3:])
+            axis = [float(r) for r in record.split()[-3:]]
             continue
         if record.startswith('!INCIDENT_BEAM_DIRECTION='):
-            beam = map(float, record.split()[-3:])
+            beam = [float(r) for r in record.split()[-3:]]
             continue
         if record.startswith('!DIRECTION_OF_DETECTOR_X-AXIS='):
-            x = map(float, record.split()[-3:])
+            x = [float(r) for r in record.split()[-3:]]
             continue
         if record.startswith('!DIRECTION_OF_DETECTOR_Y-AXIS='):
-            y = map(float, record.split()[-3:])
+            y = [float(r) for r in record.split()[-3:]]
             continue
         if record.startswith('!UNIT_CELL_A-AXIS='):
-            a = map(float, record.split()[-3:])
+            a = [float(r) for r in record.split()[-3:]]
             continue
         if record.startswith('!UNIT_CELL_B-AXIS='):
-            b = map(float, record.split()[-3:])
+            b = [float(r) for r in record.split()[-3:]]
             continue
         if record.startswith('!UNIT_CELL_C-AXIS='):
-            c = map(float, record.split()[-3:])
+            c = [float(r) for r in  record.split()[-3:]]
             continue
         if record.startswith('!X-RAY_WAVELENGTH='):
             wavelength = float(record.split()[-1])
@@ -376,25 +376,25 @@ def import_xds_ascii_hkl(xds_ascii_hkl_file):
 
     for record in header:
         if record.startswith('!ROTATION_AXIS='):
-            axis = map(float, record.split()[-3:])
+            axis = [float(r) for r in record.split()[-3:]]
             continue
         if record.startswith('!INCIDENT_BEAM_DIRECTION='):
-            beam = map(float, record.split()[-3:])
+            beam = [float(r) for r in record.split()[-3:]]
             continue
         if record.startswith('!DIRECTION_OF_DETECTOR_X-AXIS='):
-            x = map(float, record.split()[-3:])
+            x = [float(r) for r in record.split()[-3:]]
             continue
         if record.startswith('!DIRECTION_OF_DETECTOR_Y-AXIS='):
-            y = map(float, record.split()[-3:])
+            y = [float(r) for r in record.split()[-3:]]
             continue
         if record.startswith('!UNIT_CELL_A-AXIS='):
-            a = map(float, record.split()[-3:])
+            a = [float(r) for r in record.split()[-3:]]
             continue
         if record.startswith('!UNIT_CELL_B-AXIS='):
-            b = map(float, record.split()[-3:])
+            b = [float(r) for r in record.split()[-3:]]
             continue
         if record.startswith('!UNIT_CELL_C-AXIS='):
-            c = map(float, record.split()[-3:])
+            c = [float(r) for r in record.split()[-3:]]
             continue
         if record.startswith('!X-RAY_WAVELENGTH='):
             wavelength = float(record.split()[-1])

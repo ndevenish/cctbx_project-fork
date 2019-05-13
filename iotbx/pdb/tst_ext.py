@@ -11,7 +11,7 @@ from libtbx.test_utils import Exception_expected, approx_equal, show_diff
 import libtbx.load_env
 from cStringIO import StringIO
 try:
-  import cPickle as pickle
+  from six.moves import cPickle as pickle
 except ImportError:
   import pickle
 import sys, os
@@ -77,6 +77,8 @@ def exercise_base_256_ordinal():
     assert o(s) == po(s)
     assert o("-"+s) == -o(s)
   #
+  from past.builtins import cmp
+  from functools import cmp_to_key
   def o_cmp(a, b): return cmp(o(a), o(b))
   char4s = ["%4s" % i for i in range(-999,9999+1)]
   assert sorted(char4s, o_cmp) == char4s
@@ -774,7 +776,7 @@ def exercise_input_pickling():
       "\n".join(getattr(l, section)()),
       "\n".join(getattr(pdb_inp, section)()))
   s = "\n".join(l.__getinitargs__()[1])
-  d = hashlib.md5(s).hexdigest()
+  d = hashlib.md5(s.encode("ascii")).hexdigest()
   if (pdb.hierarchy.atom.has_siguij()):
     assert d == "bf987c40cc8672e2f2324d91d6de3e2b"
   else:

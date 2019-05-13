@@ -2,6 +2,7 @@ from __future__ import division, print_function
 from cctbx.eltbx.development import itvc_section61_io
 from cctbx.eltbx.gaussian_fit import international_tables_stols
 from libtbx.option_parser import OptionParser
+from six.moves import zip
 
 def show_differences_if_any(label, stols, y0, y1):
   if (not y0.all_eq(y1)):
@@ -18,7 +19,6 @@ def run(file_names):
   all_labels = {}
   for tab in tabs:
     for label in tab.elements: all_labels[label] = 1
-  all_labels = all_labels.keys()
   for label in all_labels:
     e0 = tabs[0].entries.get(label, None)
     e1 = tabs[1].entries.get(label, None)

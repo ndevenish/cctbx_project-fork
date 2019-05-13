@@ -4,6 +4,7 @@ Author      : Uervirojnangkoorn, M.
 Created     : 8/15/2016
 Description : Command line for solving indexing ambiguity
 '''
+from __future__ import absolute_import, division, print_function
 import numpy as np
 from libtbx.easy_mp import parallel_map
 from prime.index_ambiguity.mod_indexing_ambiguity import indamb_handler
@@ -11,6 +12,8 @@ from six.moves import cPickle as pickle
 from prime.index_ambiguity.mod_kmeans import kmeans_handler
 from prime.postrefine.mod_mx import mx_handler
 import random
+from six.moves import range
+from six.moves import zip
 
 def solve_with_mtz_mproc(args):
   frame_no, pickle_filename, iparams, miller_array_ref = args
@@ -45,7 +48,7 @@ class indexing_ambiguity_handler(object):
     #if no indexing ambiguity problem detected and mode is not set to "Forced"
     idah = indamb_handler()
     alt_dict = idah.get_observations(pickle_filename, iparams)
-    if len(alt_dict.keys()) == 1 and iparams.indexing_ambiguity.mode != 'Forced':
+    if len(alt_dict) == 1 and iparams.indexing_ambiguity.mode != 'Forced':
       return True
     if iparams.indexing_ambiguity.mode == 'Forced' and len(iparams.indexing_ambiguity.assigned_basis) == 0:
       return True
@@ -239,4 +242,3 @@ class indexing_ambiguity_handler(object):
       f.write(txt_out)
     print("Indexing Ambiguity Solver Elapsed Time (s) %10.2s"%(time.time()-start))
     return sol_pickle, iparams
-

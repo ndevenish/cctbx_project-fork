@@ -7,7 +7,7 @@ from scitbx import matrix
 from libtbx.utils import format_cpu_times
 from libtbx.test_utils import approx_equal
 import libtbx.load_env
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 import math
 import sys, os
 

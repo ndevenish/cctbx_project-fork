@@ -78,9 +78,9 @@ def read_integrate_hkl(integrate_hkl):
         if '!' in record[:1]:
             continue
         values = record.split()
-        hkl = map(int, values[:3])
-        xyz = map(float, values[5:8])
-        isigma = map(float, values[3:5])
+        hkl = [int(h) for h in values[:3]]
+        xyz = [float(x) for x in  values[5:8]]
+        isigma = [float(x) for x in values[3:5]]
 
         observations.append((hkl, xyz, isigma))
 
@@ -91,7 +91,7 @@ def read_uc1_2(uc1_2):
 
     for record in open(uc1_2):
         values = record.split()
-        hkl = map(int, values[1:4])
+        hkl = [int(h) for h in values[1:4]]
         xyz = float(values[7]), float(values[8]), float(values[5])
         isigma = float(values[10]), float(values[12])
 

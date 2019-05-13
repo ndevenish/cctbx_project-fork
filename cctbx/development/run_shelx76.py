@@ -8,8 +8,9 @@ from iotbx.shelx.write_ins import LATT_SYMM
 from libtbx.test_utils import is_below_limit
 import libtbx.path
 from libtbx import easy_run
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 import sys
+from six.moves import zip
 
 def sfac_unit(lapp, xray_structure):
   reg = xray_structure.scattering_type_registry()

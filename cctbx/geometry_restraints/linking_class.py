@@ -40,7 +40,7 @@ Look for a key in the list below
     return rc
 
   def _get_origin_id_labels(self, internals=None):
-    keys = self.keys()
+    keys = list(self.keys())
     def _sort_on_values(k1, k2):
       if self[k1]<self[k2]: return -1
       return 1
@@ -55,7 +55,8 @@ Look for a key in the list below
       if internals is None: return True
       if ptr in self.data[k1].internals: return True
       return False
-    keys.sort(_sort_on_values)
+    from functools import cmp_to_key
+    keys.sort(key = cmp_to_key(_sort_on_values))
     keys = filter(_filter_on_internals, keys)
     return keys
 

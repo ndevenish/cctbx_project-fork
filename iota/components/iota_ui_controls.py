@@ -1,5 +1,5 @@
-from __future__ import division, print_function, absolute_import
-from past.builtins import range
+from __future__ import absolute_import, division, print_function
+from six.moves import range
 
 '''
 Author      : Lyubimov, A.Y.
@@ -236,7 +236,7 @@ class VirtualInputListCtrl(ulc.UltimateListCtrl, ListCtrlAutoWidthMixin,
   def InitializeDataMap(self, data):
     self.data = data
     self.itemDataMap = self.data
-    self.itemIndexMap = self.data.keys()
+    self.itemIndexMap = list(self.data.keys())
     self.SetItemCount(len(self.data))
 
   def GetListCtrl(self):
@@ -870,7 +870,7 @@ class KnobCtrl(CtrlBase):
 
     self.knob_ctr = kc.KnobCtrl(self, -1, size=knob_size)
     if tags:
-      self.knob_ctr.SetTags(range(tags_start, tags_end, tags_step))
+      self.knob_ctr.SetTags(list(range(tags_start, tags_end, tags_step)))
     self.knob_ctr.SetAngularRange(values_start, values_end)
     self.knob_ctr.SetValue(value)
     self.knob_ctr.SetBoundingColour(wx.BLACK)

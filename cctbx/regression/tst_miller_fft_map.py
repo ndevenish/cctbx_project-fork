@@ -10,10 +10,10 @@ from cctbx.development import structure_factor_utils
 from cctbx.array_family import flex
 from libtbx.test_utils import approx_equal, show_diff
 try:
-  import cPickle as pickle
+  from six.moves import cPickle as pickle
 except ImportError:
   import pickle
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 import random
 import sys
 

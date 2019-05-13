@@ -6,12 +6,14 @@ Created     : 05/01/2016
 Last Changed: 08/31/2018
 Description : PRIME GUI Threading module
 '''
+from __future__ import absolute_import, division, print_function
 
 import os
 import wx
 from threading import Thread
 
 from libtbx import easy_run
+from six.moves import map
 
 # Platform-specific stuff
 # TODO: Will need to test this on Windows at some point

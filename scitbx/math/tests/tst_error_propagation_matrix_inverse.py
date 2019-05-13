@@ -34,10 +34,10 @@ def create_Bmat():
 
   from dxtbx.model import Crystal
 
-  vecs = map(random_vector_close_to,
+  vecs = list(map(random_vector_close_to,
              [(20, 0, 0),
               (0, 20, 0),
-              (0, 0, 20)])
+              (0, 0, 20)]))
 
   return matrix.sqr(Crystal(*vecs, space_group_symbol = "P 1").get_B())
 

@@ -10,7 +10,7 @@ from libtbx.test_utils import approx_equal, show_diff
 from libtbx.utils import format_cpu_times
 import libtbx.load_env
 from libtbx import dict_with_default_0
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 import math
 import sys, os
 
@@ -396,7 +396,7 @@ def exercise_bond_sorted_asu_proxies(
     for proxy in proxies_2.simple:
       assert proxy.i_seqs in ctrl
       ctrl[proxy.i_seqs] += 1
-    assert ctrl.values() == [1]*len(ctrl)
+    assert list(ctrl.values()) == [1]*len(ctrl)
     ctrl = {}
     for proxy in proxies_1.asu:
       key = proxy.i_seq,proxy.j_seq,proxy.j_sym
@@ -406,7 +406,7 @@ def exercise_bond_sorted_asu_proxies(
       key = proxy.i_seq,proxy.j_seq,proxy.j_sym
       assert key in ctrl
       ctrl[key] += 1
-    assert ctrl.values() == [1]*len(ctrl)
+    assert list(ctrl.values()) == [1]*len(ctrl)
   compare_proxies(proxies_1=proxies_fast, proxies_2=proxies_conservative)
   compare_proxies(proxies_1=proxies_fast, proxies_2=proxies_slow)
   sites_cart = structure.sites_cart()

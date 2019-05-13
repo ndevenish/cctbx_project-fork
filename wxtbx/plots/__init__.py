@@ -184,7 +184,8 @@ class histogram(plot_container):
 
 def convert_xyz_value_list(values, null_value=0.0):
   import numpy
-  values = sorted(list(values), cmp=lambda x,y: cmp(x[0], y[0]))
+  cmp_fn = lambda x,y: cmp(x[0], y[0])
+  values = sorted(list(values), key=cmp_to_key(cmp_fn))
   x_rows = [[values[0]]]
   for i, xyz in enumerate(values[1:]):
     if (xyz[0] != x_rows[-1][-1][0]):
@@ -197,7 +198,8 @@ def convert_xyz_value_list(values, null_value=0.0):
   for j in range(len(y_values)):
     z_values.append([])
   for i, x_row in enumerate(x_rows):
-    x_row = sorted(x_row, cmp=lambda x,y: cmp(x[1], y[1]))
+    cmp_fn = lambda x,y: cmp(x[1], y[1])
+    x_row = sorted(x_row, key=cmp_to_key(cmp_fn))
     for j, (x,y,z) in enumerate(x_row):
       assert (y in y_values)
       if (z is not None):

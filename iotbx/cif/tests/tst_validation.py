@@ -5,8 +5,8 @@ from iotbx.cif.validation import smart_load_dictionary
 import libtbx.load_env
 from libtbx.test_utils import Exception_expected
 
-from urllib2 import URLError
-from cStringIO import StringIO
+from six.moves.urllib.error import URLError
+from six.moves import cStringIO as StringIO
 import sys
 
 cif_core_dic_url = "ftp://ftp.iucr.org/pub/cif_core.dic"
@@ -42,8 +42,8 @@ def exercise_validation():
   cd.err.reset()
   s = StringIO()
   cm_valid.validate(cd, out=s)
-  assert len(cd.err.errors.keys()) == 0
-  assert len(cd.err.warnings.keys()) == 0
+  assert len(list(cd.err.errors.keys())) == 0
+  assert len(list(cd.err.warnings.keys())) == 0
   cd2 = validation.smart_load_dictionary(name="cif_mm.dic")
   cm_invalid_2 = cif.reader(input_string=cif_invalid_2).model()
   s = StringIO()

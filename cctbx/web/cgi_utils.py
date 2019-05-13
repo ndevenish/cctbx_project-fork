@@ -1,9 +1,8 @@
 from __future__ import division
 import urlparse
-import exceptions
 import os,cgi
 
-class FormatError(exceptions.Exception): pass
+class FormatError(Exception): pass
 
 class empty: pass
 

@@ -2,6 +2,7 @@ from __future__ import division, print_function
 
 """ Tools to solve non-linear L.S. problems formulated with normal-equations.
 """
+from __future__ import absolute_import, division, print_function
 
 import libtbx
 from scitbx.array_family import flex

@@ -41,13 +41,14 @@ class vdw_radii:
 
   def show(self, log=None):
     if log is None: log = sys.stdout
-    symbols = self.table.keys()
+    symbols = list(self.table.keys())
     symbols.sort()
     print(" ".join("%5s" %symbol for symbol in symbols), file=log)
     print(" ".join("%5.2f" %self.table[symbol] for symbol in symbols), file=log)
 
 
-class _(boost.python.injector, flood_fill):
+@boost.python.inject_into(flood_fill)
+class _():
 
   def eigensystems_frac(self):
     inertia_tensors = self.inertia_tensors_frac()

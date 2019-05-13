@@ -105,7 +105,7 @@ def show_most_common_types(limit=10, f=None):
     Note that classes with the same name but defined in different modules
     will be lumped together.
     """
-    stats = sorted(typestats().items(), key=operator.itemgetter(1),
+    stats = sorted(list(typestats().items()), key=operator.itemgetter(1),
                    reverse=True)
     if limit:
         stats = stats[:limit]
@@ -396,7 +396,8 @@ def edge_label(source, target):
     elif isinstance(source, dict):
         for k, v in source.items():
             if v is target:
-                if isinstance(k, basestring) and k:
+                from six import string_types
+                if isinstance(k, string_types) and k:
                     return ' [label="%s",weight=2]' % quote(k)
                 else:
                     return ' [label="%s"]' % quote(safe_repr(k))

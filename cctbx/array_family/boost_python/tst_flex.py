@@ -4,7 +4,7 @@ from libtbx.test_utils import approx_equal
 from cctbx import uctbx
 from cctbx.array_family import flex
 try:
-  import cPickle as pickle
+  from six.moves import cPickle as pickle
 except ImportError:
   import pickle
 

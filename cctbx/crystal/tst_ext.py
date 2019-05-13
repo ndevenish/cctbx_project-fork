@@ -11,7 +11,7 @@ from libtbx.test_utils import Exception_expected, approx_equal, show_diff
 import hashlib
 from libtbx import adopt_init_args
 from itertools import count
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 import sys
 try:
   import cPickle as pickle
@@ -1413,7 +1413,7 @@ def exercise_coordination_sequences_shell_asu_tables():
   structure.show_distances(pair_asu_table=s1_asu_table, out=s)
   print(file=s)
   s = s.getvalue().replace("-0.0000", " 0.0000")
-  if (hashlib.md5(s).hexdigest() != "f5c02727352d26dc36762de0834199fd"):
+  if (hashlib.md5(s.encode("ascii")).hexdigest() != "f5c02727352d26dc36762de0834199fd"):
     sys.stderr.write(s)
     print("New hexdigest:", hashlib.md5(s).hexdigest())
     raise AssertionError("Unexpected show_distances() output.")
@@ -1476,7 +1476,7 @@ i_seq: 1
     j_syms: [0]
 """
   assert not show_diff(out.getvalue(), expected_out)
-  assert incremental_pairs.cubicle_size_counts().items() == [(0,239), (1,6)]
+  assert list(incremental_pairs.cubicle_size_counts().items()) == [(0,239), (1,6)]
   site_symmetry_table = incremental_pairs.asu_mappings().site_symmetry_table()
   sites_cart = sps.unit_cell().orthogonalize(sites_frac=sites_frac)
   for i_pass in range(4):

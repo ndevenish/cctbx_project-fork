@@ -14,11 +14,6 @@ import os
 import numpy as np
 import math
 
-try:  # for Py3 compatibility
-    import itertools.izip as zip
-except ImportError:
-    pass
-
 import dxtbx
 from scitbx.array_family import flex
 from xfel.cxi.cspad_ana.cspad_tbx import evt_timestamp, dpack
@@ -617,7 +612,7 @@ class Processor(object):
     if self.single_image == True and self.tag == 'integrate':
       hklI_filename = "{}.{}".format(os.path.basename(self.out_img).split('.')[0], 'hkli')
       hklI_file = os.path.join(os.path.dirname(self.out_img), hklI_filename)
-      hklI = zip(obs.indices(), obs.data(), obs.sigmas())
+      hklI = list(zip(obs.indices(), obs.data(), obs.sigmas()))
       for i in hklI:
         with open(hklI_file, 'a') as f:
           entry = '{},{},{},{},{}'.format(i[0][0], i[0][1], i[0][2], i[1], i[2])

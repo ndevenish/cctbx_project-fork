@@ -1,5 +1,6 @@
 from __future__ import division, print_function
 
+from six import string_types
 from wxtbx import phil_controls
 import wx
 

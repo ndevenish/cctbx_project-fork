@@ -3,7 +3,7 @@ from libtbx import easy_pickle
 from libtbx.utils import get_svn_revision, get_build_tag, plural_s
 from operator import itemgetter
 import glob, os, sys
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 
 class analyse(object):
 
@@ -78,11 +78,11 @@ class analyse(object):
       print("SKIPPED: ", s, file=out)
 
   def as_html(self):
-    with open("parsing_errors", "wb") as out:
+    with open("parsing_errors", "w") as out:
       self.show_parsing_errors(out=out)
-    with open("exceptions", "wb") as out:
+    with open("exceptions", "w") as out:
       self.show_exceptions(out=out)
-    with open("skipping", "wb") as out:
+    with open("skipping", "w") as out:
       self.show_skipping(out=out)
     s = StringIO()
     self.show_summary(out=s)

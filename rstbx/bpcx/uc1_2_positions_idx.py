@@ -79,10 +79,10 @@ def read_spot_xds(spot_xds):
         if '!' in record[:1]:
             continue
         values = record.split()
-        hkl = map(int, values[-3:])
-        if hkl == (0, 0, 0):
+        hkl = [int(x) for x in values[-3:]]
+        if hkl == [0, 0, 0]:
             continue
-        xyz = map(float, values[:3])
+        xyz = [float(x) for x in values[:3]]
 
         observations.append((hkl, xyz))
 
@@ -93,8 +93,8 @@ def read_uc1_2(uc1_2):
 
     for record in open(uc1_2):
         values = record.split()
-        hkl = map(int, values[:3])
-        xyz = map(float, values[3:])
+        hkl = [int(h) for h in values[:3]]
+        xyz = [float(x) for x in values[3:]]
 
         predictions.append((hkl, xyz))
 

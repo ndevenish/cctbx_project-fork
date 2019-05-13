@@ -6,9 +6,11 @@ Created     : 6/29/2016
 Description : Scale second mtz to the first (linear scale only) and calculate r-factors.
 Note that all intensity array will be converted to amplitude.
 '''
+from __future__ import absolute_import, division, print_function
 
 from iotbx import reflection_file_reader
 import sys
+from six.moves import range
 
 def read_input(args):
   hkla = None

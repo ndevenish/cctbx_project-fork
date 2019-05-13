@@ -37,7 +37,7 @@ class sample_orientations(object):
     self.max_n    = len(SO3_sequence)
     self.counter  = 0
 
-  def next(self):
+  def __next__(self):
     assert self.counter < self.max_n
     tmp = self.sequence[self.counter]
     self.counter+=1

@@ -59,7 +59,7 @@ the article XML from NCBI, and print a bibliography entry.
     retmode="text")
   def get_node_data(xml_node, node_name):
     child_nodes = xml_node.getElementsByTagName(node_name)
-    return unicode(child_nodes[0].childNodes[0].data)
+    return to_unicode(child_nodes[0].childNodes[0].data)
   xmlrec = parseString(data.read())
   articles = xmlrec.getElementsByTagName("PubmedArticle")
   assert (len(articles) == 1)

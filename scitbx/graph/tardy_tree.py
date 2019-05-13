@@ -242,7 +242,7 @@ class cluster_manager(slots_getstate_setstate):
       if (a[1] > b[1]): return -1
       if (a[1] < b[1]): return 1
       return cmp(a[0], b[0])
-    cii_orcs.sort(cmp_elems)
+    cii_orcs.sort(key=cmp_to_key(cmp_elems))
     return cii_orcs, fixed_vertex_info
 
   def construct_spanning_trees(O, edge_sets):

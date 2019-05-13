@@ -8,7 +8,7 @@ from __future__ import division, print_function
 # symbol is given, all 530 entries in the internal table are listed.
 
 from cctbx import sgtbx
-import urllib
+from six.moves import urllib
 from cctbx.web import cgi_utils
 
 def interpret_form_data(form):

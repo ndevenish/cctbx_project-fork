@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 import time
 from mmtbx.validation import validate_ligands
 from mmtbx.validation.validate_ligands import master_params_str
@@ -6,6 +6,7 @@ import mmtbx.model
 import iotbx.pdb
 from libtbx.utils import null_out
 from libtbx.test_utils import approx_equal
+from six.moves import zip
 
 pdb_str_1 = """
 CRYST1   26.971   23.398   30.626  90.00  90.00  90.00 P 1
@@ -375,6 +376,7 @@ def tst_get_occupancies(vl_manager):
   id_tuple_answer = [('', 'A', '   2'), ('', 'A', '   3'), ('', 'A', '   4'), ('', 'A', '   5')]
   ligand_dict_length_answer = [2, 1, 1, 1]
   occupancy_answer = []
+  # TODO six zip me
   for id_tuple, id_tuple_answer, length_answer in zip(vl_manager.keys(), id_tuple_answer, ligand_dict_length_answer):
     ligand_dict = vl_manager[id_tuple]
     assert (id_tuple == id_tuple_answer)

@@ -237,8 +237,8 @@ def compare_redundancies(a, b):
   return cmp(len(b[1]), len(a[1]))
 
 def sort_redundancies(redundancies):
-  redundancies = redundancies.items()
-  redundancies.sort(compare_redundancies)
+  redundancies = list(redundancies.items())
+  redundancies.sort(key=cmp_to_key(compare_redundancies))
   return redundancies
 
 def str_ev(ev):

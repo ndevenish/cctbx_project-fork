@@ -1,6 +1,6 @@
 from __future__ import division, print_function
 import glob, os, sys
-import urllib2
+from six.moves import urllib
 
 from libtbx.utils import time_log
 import libtbx.load_env

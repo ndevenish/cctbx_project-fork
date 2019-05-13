@@ -3,7 +3,7 @@ from six.moves import range
 from scitbx.array_family import shared
 from libtbx.test_utils import approx_equal
 try:
-  import cPickle as pickle
+  from six.moves import cPickle as pickle
 except ImportError:
   import pickle
 

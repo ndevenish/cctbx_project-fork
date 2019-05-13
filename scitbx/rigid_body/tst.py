@@ -9,7 +9,7 @@ from libtbx.test_utils import \
   approx_equal, is_above_limit, is_below_limit, Exception_expected
 from libtbx.utils import format_cpu_times
 try:
-  import cPickle as pickle
+  from six.moves import cPickle as pickle
 except ImportError:
   import pickle
 import random

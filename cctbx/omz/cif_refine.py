@@ -12,7 +12,7 @@ def report_fraction_of_negative_observations_if_any(id_code, obs):
     pos = d.select(d >= 0)
     from cctbx.array_family import flex
     def hist(data):
-      from cStringIO import StringIO
+      from six.moves import cStringIO as StringIO
       sio = StringIO()
       flex.histogram(data=data, n_slots=10) \
         .show(f=sio, prefix="  ", format_cutoffs="%8.2f")
@@ -88,6 +88,7 @@ class extract_from_cif_files(object):
     O.c_obs.show_comprehensive_summary()
     print("."*79)
     #
+    # TODO verify that this values is not a dictionary call
     O.xray_structure = cctbx.xray.structure.from_cif(
       file_path=model_file).values()[0]
     O.xray_structure = O.xray_structure.customized_copy(

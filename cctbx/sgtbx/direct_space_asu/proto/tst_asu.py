@@ -1,7 +1,7 @@
 from __future__ import division, print_function
 from six.moves import range
 import sys
-import StringIO
+from six.moves import cStringIO as StringIO
 import cctbx
 from boost.rational import int as rint
 from cctbx.sgtbx import space_group_info
@@ -17,7 +17,7 @@ from libtbx.utils import format_cpu_times
 SpaceGroups = ('P 1 1 21',  'P 21 21 21', 'I 1 m 1')
 NSteps = 11 # number of grid points in one dimenssion
 
-cout = StringIO.StringIO()
+cout = StringIO()
 
 def step_v(n, mn, mx):
   step = ()

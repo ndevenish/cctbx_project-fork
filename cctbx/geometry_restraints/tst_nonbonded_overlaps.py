@@ -14,6 +14,7 @@ import mmtbx.model
 import iotbx.pdb
 import unittest
 import os
+from six.moves import map
 
 '''
 Test non-bonded overlaps
@@ -1106,7 +1107,7 @@ def run_selected_tests():
   3) Un-comment unittest.TextTestRunner().run(run_selected_tests())
   """
   tests = ['test_compute']
-  suite = unittest.TestSuite(map(test_nonbonded_overlaps, tests))
+  suite = unittest.TestSuite(list(map(test_nonbonded_overlaps, tests)))
   return suite
 
 if (__name__ == "__main__"):

@@ -5,13 +5,12 @@ from libtbx.utils import Sorry
 import sys
 import string
 import copy
-from cStringIO import StringIO
-from UserDict import DictMixin
-
+from six.moves import cStringIO as StringIO
+from collections import MutableMapping
 from cctbx.array_family import flex
 
 
-class cif(DictMixin):
+class cif(MutableMapping):
   def __init__(self, blocks=None):
     self._errors = None
     if blocks is not None:
@@ -19,6 +18,13 @@ class cif(DictMixin):
     else:
       self.blocks = OrderedDict()
     self.keys_lower = dict([(key.lower(), key) for key in self.blocks.keys()])
+
+  def __len__(self):
+    return len(self.keys())
+
+  def __iter__(self):
+    for k in self.keys():
+      yield k
 
   def __setitem__(self, key, value):
     assert isinstance(value, block)
@@ -44,10 +50,10 @@ class cif(DictMixin):
     del self.keys_lower[key.lower()]
 
   def keys(self):
-    return self.blocks.keys()
+    return list(self.blocks.keys())
 
   def __repr__(self):
-    return repr(OrderedDict(self.iteritems()))
+    return repr(OrderedDict(six.iteritems(self)))
 
   def __copy__(self):
     return cif(self.blocks.copy())
@@ -85,7 +91,7 @@ class cif(DictMixin):
     self._errors = {}
     if error_handler is None:
       error_handler = validation.ErrorHandler()
-    for key, block in self.blocks.iteritems():
+    for key, block in six.iteritems(self.blocks):
       error_handler = error_handler.__class__()
       dictionary.set_error_handler(error_handler)
       block.validate(dictionary)
@@ -103,12 +109,19 @@ class cif(DictMixin):
       for b in self.blocks.values():
         b.sort(recursive=recursive, reverse=reverse)
 
-class block_base(DictMixin):
+class block_base(MutableMapping):
   def __init__(self):
     self._items = {}
     self.loops = {}
     self._set = OrderedSet()
     self.keys_lower = {}
+
+  def __len__(self):
+    return len(self.keys())
+
+  def __iter__(self):
+    for k in self.keys():
+      yield k
 
   def __setitem__(self, key, value):
     if not re.match(tag_re, key):
@@ -118,7 +131,7 @@ class block_base(DictMixin):
       self.keys_lower[key.lower()] = key
       for k in value.keys():
         self.keys_lower[k.lower()] = k
-    elif isinstance(value, basestring):
+    elif isinstance(value, string_types):
       v = str(value)
       if not (re.match(any_print_char_re, v) or
               re.match(quoted_string_re, v) or
@@ -165,7 +178,7 @@ class block_base(DictMixin):
       self._set.discard(key)
     elif key in self.keys():
       # must be a looped item
-      for k, loop in self.loops.iteritems():
+      for k, loop in six.iteritems(self.loops):
         if key in loop:
           if len(loop) == 1:
             # remove the now empty loop
@@ -238,16 +251,16 @@ class block_base(DictMixin):
 
   def item_keys(self):
     '''Returns names of all entries that are not loops'''
-    return self._items.keys()
+    return list(self._items.keys())
 
   def __repr__(self):
-    return repr(OrderedDict(self.iteritems()))
+    return repr(OrderedDict(six.iteritems(self)))
 
   def update(self, other=None, **kwargs):
     if other is None:
       return
     if isinstance(other, OrderedDict) or isinstance(other, dict):
-      for key, value in other.iteritems():
+      for key, value in six.iteritems(other):
         self[key] = value
     else:
       self._items.update(other._items)
@@ -278,7 +291,7 @@ class block_base(DictMixin):
       if ln[-1] != '.':
         ln += '.'
         found_keys = {}
-      for key, value in self.iteritems():
+      for key, value in six.iteritems(self):
         if key.startswith(ln):
           found_keys[key] = flex.std_string([value])
       # constructing the loop
@@ -293,7 +306,7 @@ class block_base(DictMixin):
     if loop_ is None:
       loop_ = loop(header=default_dict.keys())
     n_rows = loop_.n_rows()
-    for key, value in default_dict.iteritems():
+    for key, value in six.iteritems(default_dict):
       if key not in loop_:
         loop_.add_column(key, flex.std_string(n_rows, value))
     return loop_
@@ -325,12 +338,12 @@ class block_base(DictMixin):
     return s.getvalue()
 
   def validate(self, dictionary):
-    for key, value in self._items.iteritems():
+    for key, value in six.iteritems(self._items):
       dictionary.validate_single_item(key, value, self)
     for loop in self.loops.values():
       dictionary.validate_loop(loop, self)
     if isinstance(self, block):
-      for value in self.saves.itervalues():
+      for value in six.itervalues(self.saves):
         value.validate(dictionary)
 
   def sort(self, recursive=False, key=None, reverse=False):
@@ -346,7 +359,7 @@ class block_base(DictMixin):
   def difference(self, other):
     new = self.__class__()
     for items in (self._items, self.loops):
-      for key, value in items.iteritems():
+      for key, value in six.iteritems(items):
         if key in other:
           other_value = other[key]
           if other_value == value: continue
@@ -462,7 +475,7 @@ class block(block_base):
     new.saves = self.saves.copy()
     return new
 
-class loop(DictMixin):
+class loop(MutableMapping):
   def __init__(self, header=None, data=None):
     self._columns = OrderedDict()
     self.keys_lower = {}
@@ -481,6 +494,13 @@ class loop(DictMixin):
       self.add_columns(data)
       self.keys_lower = dict(
         [(key.lower(), key) for key in self._columns.keys()])
+
+  def __len__(self):
+    return len(self.keys())
+
+  def __iter__(self):
+    for k in self.keys():
+      yield k
 
   def __setitem__(self, key, value):
     if not re.match(tag_re, key):
@@ -516,10 +536,10 @@ class loop(DictMixin):
     return self._columns.keys()
 
   def __repr__(self):
-    return repr(OrderedDict(self.iteritems()))
+    return repr(OrderedDict(six.iteritems(self)))
 
   def name(self):
-    return common_substring(self.keys()).rstrip('_').rstrip('.')
+    return common_substring(list(self.keys())).rstrip('_').rstrip('.')
 
   def size(self):
     size = 0
@@ -553,7 +573,7 @@ class loop(DictMixin):
 
   def add_columns(self, columns):
     assert isinstance(columns, dict) or isinstance(columns, OrderedDict)
-    for key, value in columns.iteritems():
+    for key, value in six.iteritems(columns):
       self.add_column(key, value)
 
   def update_column(self, key, values):
@@ -627,7 +647,7 @@ class loop(DictMixin):
         print(fmt_str % tuple([values[j][i] for j in range_len_values]), file=out)
     elif align_columns:
       fmt_str = []
-      for i, (k, v) in enumerate(self.iteritems()):
+      for i, (k, v) in enumerate(six.iteritems(self)):
         for i_v in range(v.size()):
           v[i_v] = format_value(v[i_v])
         # exclude and semicolon text fields from column width calculation
@@ -675,7 +695,7 @@ class loop(DictMixin):
     range_len_self = list(range(len(self)))
     for i in range(self.size()):
       goodrow = True
-      for k, v in kv_dict.iteritems():
+      for k, v in six.iteritems(kv_dict):
         if self[k][i] != v:
           goodrow = False
           break
@@ -705,9 +725,9 @@ class loop(DictMixin):
   def __eq__(self, other):
     if (len(self) != len(other) or
         self.size() != other.size() or
-        self.keys() != other.keys()):
+        list(self.keys()) != list(other.keys())):
       return False
-    for value, other_value in zip(self.values(), other.values()):
+    for value, other_value in zip(list(self.values()), list(other.values())):
       if (value == other_value).count(True) != len(value):
         return False
     return True
@@ -719,6 +739,7 @@ def common_substring(seq):
   #
   #   http://www.iucr.org/resources/cif/spec/ancillary/reserved-prefixes
 
+  seq = list(seq) # indexable list for Py3 compatibility
   if len(seq) == 1: return seq[0]
   substr = seq[0]
   for s in seq:

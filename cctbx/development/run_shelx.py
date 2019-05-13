@@ -10,7 +10,7 @@ from iotbx.shelx.write_ins import LATT_SYMM
 from scitbx.python_utils import dicts
 import libtbx.path
 from libtbx import easy_run
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 import sys, os
 
 def calculate_cell_content(xray_structure):
@@ -25,7 +25,7 @@ def SFAC_DISP_UNIT(xray_structure, short_sfac):
   UNIT = []
   if (short_sfac):
     celcon = calculate_cell_content(xray_structure)
-    l("SFAC " + " ".join(celcon.keys()))
+    l("SFAC " + " ".join(celcon))
     for sf in celcon.keys():
       l("DISP %s 0 0 0" % (sf,))
       UNIT.append(str(max(1, int(celcon[sf] + 0.5))))
@@ -59,7 +59,7 @@ def FIX(x):
 
 def atoms(xray_structure, short_sfac):
   if (short_sfac):
-    celcon = calculate_cell_content(xray_structure).keys()
+    celcon = list(calculate_cell_content(xray_structure).keys())
   lines = []
   l = lines.append
   i = 0

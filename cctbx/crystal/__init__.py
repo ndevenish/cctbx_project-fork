@@ -10,6 +10,7 @@ from cctbx import sgtbx
 from cctbx import uctbx
 from cctbx import covariance, geometry
 from libtbx.containers import OrderedDict
+from libtbx.forward_compatibility import object
 from scitbx.array_family import shared
 from scitbx import stl
 import scitbx.stl.set
@@ -763,7 +764,8 @@ def correct_special_position(
     return site_special_frac
   return unit_cell.orthogonalize(site_special_frac)
 
-class _(boost.python.injector, pair_asu_table):
+@boost.python.inject_into(pair_asu_table)
+class _():
 
   def as_nested_lists(self):
     result = []
@@ -845,7 +847,7 @@ class calculate_distances(object):
   def __iter__(self):
     return next(self)
 
-  def next(self):
+  def __next__(self):
 
     class distance(object):
       def __init__(self,
@@ -1017,7 +1019,7 @@ class calculate_angles(object):
   def __iter__(self):
     return next(self)
 
-  def next(self):
+  def __next__(self):
 
     class angle(object):
       def __init__(self,
@@ -1166,7 +1168,8 @@ class sym_pair(libtbx.slots_getstate_setstate):
   def i_seqs(self):
     return (self.i_seq, self.j_seq)
 
-class _(boost.python.injector, pair_sym_table):
+@boost.python.inject_into(pair_sym_table)
+class _():
 
   def iterator(self):
     for i_seq,pair_sym_dict in enumerate(self):
@@ -1739,3 +1742,6 @@ def unit_crystal_symmetry():
   uc=uctbx.unit_cell((1,1,1,90,90,90))
   from cctbx import crystal
   return crystal.symmetry(unit_cell=uc,space_group_info=sg)
+
+boost.python.inject(ext.neighbors_simple_pair_generator, boost.python.py3_make_iterator)
+boost.python.inject_into(ext.neighbors_fast_pair_generator, boost.python.py3_make_iterator)

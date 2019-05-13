@@ -56,8 +56,8 @@ def import_xds_integrate_hkl(xds_integrate_hkl_file, phi_range):
 
         values = record.split()
 
-        hkl = map(int, values[:3])
-        xyz = map(float, values[5:8])
+        hkl = list(map(int, values[:3]))
+        xyz = list(map(float, values[5:8]))
 
         xyz_mod = (xyz[0] * px, xyz[1] * py,
                    (xyz[2] - frame0) * dphi + phi0)
@@ -161,7 +161,7 @@ def regenerate_predictions_brute(xds_integrate_hkl_file, phi_range):
             continue
 
         xyz = (x, y, angle / d2r)
-        xyz_to_hkl[xyz] = map(int, hkl)
+        xyz_to_hkl[xyz] = list(map(int, hkl))
 
     return xyz_to_hkl
 
@@ -249,7 +249,7 @@ def regenerate_predictions_reeke(xds_integrate_hkl_file, phi_range):
             continue
 
         xyz = (x, y, angle / d2r)
-        xyz_to_hkl[xyz] = map(int, hkl)
+        xyz_to_hkl[xyz] = list(map(int, hkl))
 
     return xyz_to_hkl
 

@@ -8,7 +8,7 @@ import scitbx.math
 from libtbx.test_utils import approx_equal
 from libtbx.utils import format_cpu_times
 try:
-  import cPickle as pickle
+  from six.moves import cPickle as pickle
 except ImportError:
   import pickle
 import random
@@ -199,12 +199,12 @@ def exercise_generator_set():
 
   sgi = sgtbx.space_group_info('P21')
   sg_generator_set = sgtbx.any_generator_set(sgi.group())
-  assert (map(str, sg_generator_set.non_primitive_generators)
+  assert (list(map(str, sg_generator_set.non_primitive_generators))
           == ['-x,y+1/2,-z'])
 
   sgi = sgtbx.space_group_info('Pmmm')
   sg_generator_set = sgtbx.any_generator_set(sgi.group())
-  assert (map(str, sg_generator_set.non_primitive_generators)
+  assert (list(map(str, sg_generator_set.non_primitive_generators))
           == ['-x,-y,-z', 'x,-y,-z', '-x,y,-z'])
 
   for i in range(1, 231):
@@ -321,7 +321,7 @@ def exercise_monoclinic_cell_choices(verbose=0):
     done.update(exercise_monoclinic_cell_choices_core(
       space_group_number=space_group_number, verbose=verbose))
   assert len(done) == 105
-  assert done.values().count(0) == 0
+  assert list(done.values()).count(0) == 0
   n = 0
   for s in sgtbx.space_group_symbol_iterator():
     if (s.number() < 3): continue
@@ -329,7 +329,7 @@ def exercise_monoclinic_cell_choices(verbose=0):
     done[s.universal_hermann_mauguin()] = 0
     n += 1
   assert n == 105
-  assert done.values().count(0) == 105
+  assert list(done.values()).count(0) == 105
 
 def exercise_orthorhombic_hm_qualifier_as_cb_symbol():
   cb_symbols = {
@@ -532,10 +532,11 @@ def exercise_change_of_basis_between_arbitrary_space_groups():
             == h1.as_reference_setting().group())
 
 def exercise_compare_cb_op_as_hkl():
+  from functools import cmp_to_key
   l = ["k,h,l", "h,k,l"]
-  l.sort(sgtbx.compare_cb_op_as_hkl)
+  l.sort(key=cmp_to_key(sgtbx.compare_cb_op_as_hkl))
   assert l == ["h,k,l", "k,h,l"]
-  l.sort(sgtbx.compare_cb_op_as_hkl)
+  l.sort(key=cmp_to_key(sgtbx.compare_cb_op_as_hkl))
   assert l == ["h,k,l", "k,h,l"]
 
 def run(args):

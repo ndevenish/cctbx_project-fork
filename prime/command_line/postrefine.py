@@ -5,6 +5,7 @@ Author      : Uervirojnangkoorn, M.
 Created     : 7/13/2014
 Description : Main commandline for prime.
 '''
+from __future__ import absolute_import, division, print_function
 
 from libtbx.easy_mp import parallel_map
 from cctbx.array_family import flex
@@ -16,6 +17,8 @@ import os, sys, math
 import numpy as np
 from datetime import datetime, time
 from libtbx.utils import Usage
+from six.moves import range
+from six.moves import zip
 
 def determine_mean_I_mproc(args):
   from prime.postrefine import postref_handler
@@ -90,7 +93,7 @@ def merge_frames(pres_set, iparams, avg_mode='average', mtz_out_prefix='mean_sca
         if data:
           if not data[0] in rejections:
             rejections[data[0]] = flex.miller_index()
-          rejections[data[0]].append(tuple(map(int, data[1:4])))
+          rejections[data[0]].append(tuple([int(_d) for _d in data[1:4]]))
 
       if len(rejections) > 0:
         if not iparams.rejections:
@@ -180,7 +183,7 @@ def run(argv):
   txt_merge_postref = ''
   postref_pres_set = [None]*len(frames)
   avg_mode = 'weighted'
-  for i_iter in xrange(iparams.n_postref_cycle):
+  for i_iter in range(iparams.n_postref_cycle):
     if i_iter == (iparams.n_postref_cycle-1): avg_mode = 'final'
     postref_good_pres_set, postref_pres_set, _txt_merge_postref = postrefine_frames(i_iter, frames, frame_files, iparams, postref_pres_set, miller_array_ref, avg_mode)
     if postref_good_pres_set:

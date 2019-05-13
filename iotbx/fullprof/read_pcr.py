@@ -88,7 +88,7 @@ class pcr_parser(object):
                     unit_cell=unit_cell,
                     space_group_symbol=p['SYMB']))
     scatterers = []
-    for k, a in atoms.iteritems():
+    for k, a in six.iteritems(atoms):
       scatterers.append(xray.scatterer(label=a['LABEL'],
                                        scattering_type=a['NTYP'],
                                        site=(a['X'], a['Y'], a['Z']),

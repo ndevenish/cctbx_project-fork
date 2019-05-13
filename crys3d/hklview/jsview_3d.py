@@ -2,7 +2,7 @@
 # TODO:
 #  - cached scenes
 
-from __future__ import division
+from __future__ import absolute_import, division, print_function
 from libtbx.math_utils import roundoff
 from cctbx.miller import display2 as display
 from cctbx.array_family import flex
@@ -16,6 +16,7 @@ import os.path, time
 import libtbx
 import numpy as np
 import webbrowser, tempfile
+from six.moves import range
 
 
 
@@ -49,7 +50,7 @@ class ArrayInfo:
       self.span = ( millarr.index_span().min(), millarr.index_span().max())
       dmin = millarr.d_max_min()[1]
       dmax = millarr.d_max_min()[0]
-    except Exception, e:
+    except Exception as e:
       mprint(to_str(e))
     issymunique = millarr.is_unique_set_under_symmetry()
     self.infotpl = (self.labels, self.desc, millarr.indices().size(), self.span,
@@ -85,7 +86,7 @@ class hklview_3d:
     if kwds.has_key('verbose'):
       self.verbose = kwds['verbose']
     self.mprint = sys.stdout.write
-    if kwds.has_key('mprint'):
+    if 'mprint' in kwds:
       self.mprint = kwds['mprint']
     self.nbin = 0
     self.websockclient = None
@@ -95,13 +96,13 @@ class hklview_3d:
     self.hklfname = os.path.join(tempdir, "hkl.htm" )
     if os.path.isfile(self.hklfname):
       os.remove(self.hklfname)
-    if kwds.has_key('htmlfname'):
+    if 'htmlfname' in kwds:
       self.hklfname = kwds['htmlfname']
     self.hklfname = os.path.abspath( self.hklfname )
     self.jscriptfname = os.path.join(tempdir, "hkljstr.js")
     if os.path.isfile(self.jscriptfname):
       os.remove(self.jscriptfname)
-    if kwds.has_key('jscriptfname'):
+    if 'jscriptfname' in kwds:
       self.jscriptfname = kwds['jscriptfname']
     self.mprint('Output will be written to \"%s\"\n' \
       'including reference to NGL JavaScript \"%s\"' %(self.hklfname, self.jscriptfname))
@@ -126,7 +127,7 @@ class hklview_3d:
     """
     self.colourgradientvalues = []
     self.UseOSBrowser = True
-    if kwds.has_key('UseOSBrowser'):
+    if 'UseOSBrowser' in kwds:
       self.UseOSBrowser = kwds['UseOSBrowser']
     self.viewmtrxelms = None
     self.pendingmessage = None

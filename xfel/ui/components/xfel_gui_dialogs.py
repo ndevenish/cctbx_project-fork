@@ -1,5 +1,6 @@
-from __future__ import division
+from __future__ import absolute_import, division, print_function
 from six.moves import range
+import six
 
 '''
 Author      : Lyubimov, A.Y.
@@ -868,8 +869,8 @@ class CalibrationDialog(BaseDialog):
     os.makedirs(working_dir)
     os.chdir(working_dir)
 
-    print "Submitting metrology refinement. Command:"
-    print command
+    print("Submitting metrology refinement. Command:")
+    print(command)
     try:
       results = easy_run.fully_buffered(command=command)
       results.show_stdout()
@@ -879,7 +880,7 @@ class CalibrationDialog(BaseDialog):
       if not "Warning: job being submitted without an AFS token." in str(exc):
         raise exc
     os.chdir(cwd)
-    print "Output will be in", working_dir
+    print("Output will be in", working_dir)
 
     e.Skip()
 
@@ -952,7 +953,7 @@ class AveragingDialog(BaseDialog):
     from libtbx import easy_run
     raw = self.raw_toggle.raw.GetValue() == 1
     average_command = AveragingCommand(self.run, self.params, raw)()
-    print "executing", average_command
+    print("executing", average_command)
     result = easy_run.fully_buffered(command=average_command)
     result.show_stdout()
     e.Skip()
@@ -1141,7 +1142,7 @@ class MultiRunTagDialog(BaseDialog):
       if r.run in run_numbers_selected:
         self.selected[r.run] = [r]
     for b in self.parent.all_tag_buttons:
-      if b.run.run in self.selected.keys():
+      if b.run.run in self.selected:
         self.selected[b.run.run].append(b)
 
   def onSortDefault(self, e):
@@ -1332,7 +1333,7 @@ class TagDialog(BaseDialog):
             self.db.create_tag(name=item[1].m_text, comment=item[2].m_text)
 
     except Exception as exception:
-      print str(exception)
+      print(str(exception))
 
     e.Skip()
 
@@ -1683,7 +1684,7 @@ class RunBlockDialog(BaseDialog):
       assert first > 0 and first >= self.first_avail
       self.first_run = first
     except (ValueError, AssertionError) as e:
-      print "Please select a run between %d and %d." % (self.first_avail, self.last_avail)
+      print("Please select a run between %d and %d." % (self.first_avail, self.last_avail))
       raise e
     if self.end_type.specify.GetValue() == 1:
       try:
@@ -1691,7 +1692,7 @@ class RunBlockDialog(BaseDialog):
         assert last > 0 and last <= self.last_avail and last >= first
         self.last_run = last
       except (ValueError, AssertionError) as e:
-        print "Please select a run between %d and %d." % (self.first_run, self.last_avail)
+        print("Please select a run between %d and %d." % (self.first_run, self.last_avail))
         raise e
     elif self.end_type.specify.GetValue() == 0:
       self.last_run = None
@@ -1719,7 +1720,7 @@ class RunBlockDialog(BaseDialog):
                    two_theta_low=self.two_thetas.two_theta_low.GetValue(),
                    two_theta_high=self.two_thetas.two_theta_high.GetValue(),
                    comment=self.comment.ctr.GetValue())
-    for key, value in rg_dict.iteritems():
+    for key, value in six.iteritems(rg_dict):
       if str(value) == 'None' or str(value) == '':
         rg_dict[key] = None
       elif type(value) == bool:

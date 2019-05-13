@@ -8,7 +8,7 @@ from scitbx import matrix
 from libtbx.test_utils import approx_equal
 import random
 import math
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 import sys
 
 random.seed(0)
@@ -43,7 +43,7 @@ def exercise_constraint_matrix():
   from cctbx.sgtbx.bravais_types import acentric
   for symbol in acentric:
     def check(sgi):
-      expected = [float(_) for _ in expected_matrices.next().split(",")]
+      expected = [float(_) for _ in next(expected_matrices).split(",")]
       gr = sgi.group()
       assert approx_equal(
         gr.adp_constraints().gradient_sum_matrix(),

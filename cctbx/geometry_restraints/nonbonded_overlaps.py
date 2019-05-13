@@ -317,8 +317,8 @@ class compute(object):
           for j in range(i+1,n_overlaps):
             vec_i = overlap_atoms_dict[key][i][1]
             vec_j = overlap_atoms_dict[key][j][1]
-            u = map(float,vec_i.split(','))
-            v = map(float,vec_j.split(','))
+            u = [float(_v) for _v in vec_i.split(',')]
+            v = [float(_v) for _v in vec_j.split(',')]
             cos_angle = 0
             # test inline only if the two atoms, overlapping with the
             # common atom, are connected
@@ -349,7 +349,7 @@ class compute(object):
               temp_nbo_list.append(overlap_atoms_dict[key][j])
               temp_nbo_list.append(overlap_atoms_dict[key][i])
         overlap_atoms_dict[key] = temp_nbo_list
-    for (key,val) in overlaps_dict.iteritems():
+    for (key,val) in six.iteritems(overlaps_dict):
       if key.split('::')[2] != '':
         # not to symmetry operation
         Overlapping_atoms_list[0].append(val[2])

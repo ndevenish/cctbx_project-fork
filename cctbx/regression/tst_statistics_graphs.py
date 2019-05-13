@@ -82,7 +82,7 @@ class cumulative_intensity_distribution_python(object):
     n_reflections = 0
     self.n_bins = f_obs_sq.binner().n_bins_all()
     self.mean_f_obs_sq = f_obs_sq.mean(use_binning=True)
-    for intensity, d_spacing, indices in itertools.izip(
+    for intensity, d_spacing, indices in zip(
       f_obs_sq.data(), f_obs_sq.d_spacings().data(), f_obs_sq.indices()):
       n_reflections += 1
       i_over_mean_i = intensity/self._get_mean_f_obs_sq(d_spacing)
@@ -96,7 +96,7 @@ class cumulative_intensity_distribution_python(object):
         else:
           continue
 
-    xy_data = data.items()
+    xy_data = list(data.items())
     xy_data.sort()
     self.x = [float(x) for x, y in xy_data]
     self.y = [y/n_reflections for x, y in xy_data]

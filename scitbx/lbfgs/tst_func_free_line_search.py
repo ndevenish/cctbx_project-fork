@@ -45,3 +45,4 @@ if(__name__ == "__main__"):
   assert approx_equal(t.x, [2, -5, 500])
   t=lbfgs(False)
   assert approx_equal(t.x, [2, -5, 500])
+  print("OK")

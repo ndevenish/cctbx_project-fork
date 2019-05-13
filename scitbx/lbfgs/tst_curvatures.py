@@ -8,6 +8,8 @@ This implementation is based on code from Ralf Grosse-Kunstleve
 in the module scitbx/lbfgs/dev/twisted_gaussian.py.
 Here, the re-usable part of the code is abstracted to a mix-in class
 that can be used by any other application wishing to use curvatures."""
+from __future__ import absolute_import, division, print_function
+from six.moves import range
 
 def lbfgs_run(target_evaluator,
               min_iterations=0,

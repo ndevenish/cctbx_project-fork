@@ -25,11 +25,10 @@ from libtbx.str_utils import show_string
 from libtbx.utils import Sorry, Keep, plural_s
 from libtbx import group_args, Auto
 import libtbx.table_utils
-from itertools import count, izip
+from itertools import count
 import warnings
 import random
 import math
-import types
 import time
 import sys
 from scitbx import matrix
@@ -1675,7 +1674,8 @@ class set(crystal.symmetry):
                                   d_star_sq_step=None):
     assert auto_binning or ( d_min is not None )
     assert auto_binning or ( d_max is not None )
-    assert d_star_sq_step > 0 or (d_star_sq_step is None)
+    if d_star_sq_step:
+      assert d_star_sq_step > 0 or (d_star_sq_step is None)
     if auto_binning:
       d_spacings = self.d_spacings().data()
       d_max=flex.min(d_spacings)
@@ -1699,7 +1699,10 @@ class set(crystal.symmetry):
     assert d_max >= 0
     assert d_min >= 0
     assert isinstance(reflections_per_bin, int) or isinstance(n_bins, int)
-    assert reflections_per_bin > 0 or n_bins > 0
+    if reflections_per_bin is not None:
+      assert reflections_per_bin > 0
+    if n_bins is not None:
+      assert n_bins > 0
     assert d_tolerance > 0
     assert d_tolerance < 0.5
     d_star_sq = self.d_star_sq().data()
@@ -2022,10 +2025,10 @@ class array(set):
 
   def __iter__(self):
     if self.sigmas() is not None:
-      for item in izip(self.indices(), self.data(), self.sigmas()):
+      for item in zip(self.indices(), self.data(), self.sigmas()):
         yield item
     else:
-      for item in izip(self.indices(), self.data()):
+      for item in zip(self.indices(), self.data()):
         yield item
 
   def info(self):

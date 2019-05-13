@@ -1,7 +1,8 @@
-from __future__ import division
+from __future__ import absolute_import, division, print_function
 import glob, os
 from dxtbx.model.experiment_list import ExperimentListFactory
 from dials.array_family import flex
+from six.moves import range
 
 try:
   import resource

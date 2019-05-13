@@ -293,8 +293,8 @@ class get_r_free_flags_scores(object):
         try: counts = data.counts(max_keys=200)
         except RuntimeError: pass
         else:
-          c_keys = counts.keys()
-          c_values = counts.values()
+          c_keys = list(counts.keys())
+          c_values = list(counts.values())
           if (   test_flag_value is None
               or test_flag_value in c_keys):
             if (counts.size() == 2):
@@ -396,7 +396,9 @@ def sort_arrays_by_score(miller_arrays, array_scores, minimum_score):
   for array in miller_arrays :
     scored_arrays.append( (array, array_scores[i]) )
     i += 1
-  scored_arrays.sort(lambda x, y: y[1] - x[1])
+  def cmp_fn(x,y):
+    return y[1] - x[1]
+  scored_arrays.sort(key=cmp_to_key(cmp_fn))
   valid_arrays = []
   for (array, score) in scored_arrays :
     if score >= minimum_score :
@@ -716,7 +718,9 @@ class reflection_file_server(object):
       scored_arrays = []
       for i, array in enumerate(miller_arrays):
         scored_arrays.append( (array, test_flag_values[i], data_scores[i]) )
-      scored_arrays.sort(lambda x, y: y[2] - x[2])
+      def cmp_fn(x,y):
+        return y[2] - x[2]
+      scored_arrays.sort(key=cmp_to_key(cmp_fn))
       valid_arrays_and_flags = []
       for (array, flag_value, score) in scored_arrays :
         if score >= minimum_score :

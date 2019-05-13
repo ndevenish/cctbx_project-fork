@@ -6,7 +6,7 @@ from cctbx import adptbx
 from cctbx.array_family import flex
 from libtbx.str_utils import show_string
 import boost.python
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 import sys
 
 class scatterer(ext.scatterer):
@@ -28,7 +28,8 @@ class scatterer(ext.scatterer):
     ext.scatterer.__init__(
       self, label, site, u, occupancy, scattering_type, fp, fdp)
 
-class _(boost.python.injector, ext.scatterer):
+@boost.python.inject_into(ext.scatterer)
+class _():
 
   def customized_copy(self,
         label=None,

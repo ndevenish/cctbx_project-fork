@@ -2,7 +2,7 @@ from __future__ import division, print_function
 from six.moves import range
 from math import pi, sin, cos, asin, sqrt
 try:
-  import cPickle as pickle
+  from six.moves import cPickle as pickle
 except ImportError:
   import pickle
 from cctbx.array_family import flex

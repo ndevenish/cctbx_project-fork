@@ -7,7 +7,7 @@ from cctbx.sgtbx import lattice_symmetry
 from cctbx.sgtbx import bravais_types
 from cctbx.array_family import flex
 from libtbx.utils import format_cpu_times
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 import sys
 
 def exercise_quick():

@@ -5,6 +5,7 @@ Author      : Uervirojnangkoorn, M.
 Created     : 11/1/2015
 Description : read integration pickles and view systemetic absences and beam X, Y position
 """
+from __future__ import absolute_import, division, print_function
 
 from six.moves import cPickle as pickle
 from cctbx.array_family import flex
@@ -18,6 +19,8 @@ from prime.postrefine.mod_partiality import partiality_handler
 from prime.postrefine.mod_mx import mx_handler
 from prime.postrefine.mod_leastsqr import good_unit_cell
 from prime.postrefine.mod_input import read_frame, read_pickles
+from six.moves import range
+from six.moves import zip
 
 def read_input(args):
   if len(args) == 0:

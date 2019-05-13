@@ -1931,9 +1931,8 @@ def exercise_twin_components():
   assert twin_a.grad == True
   twin_a.grad = False
   assert twin_a.grad == False
-  import cPickle
-  pickled_twin_a = cPickle.dumps(twin_a, cPickle.HIGHEST_PROTOCOL)
-  unpickled_twin_a = cPickle.loads(pickled_twin_a)
+  pickled_twin_a = pickle.dumps(twin_a, pickle.HIGHEST_PROTOCOL)
+  unpickled_twin_a = pickle.loads(pickled_twin_a)
   assert twin_a.value == unpickled_twin_a.value
   assert twin_a.twin_law == unpickled_twin_a.twin_law
   assert twin_a.grad == unpickled_twin_a.grad

@@ -5,7 +5,7 @@ from cctbx.array_family import flex
 from libtbx.test_utils import approx_equal, Exception_expected
 from libtbx.utils import Sorry
 import libtbx.load_env
-from cStringIO import StringIO
+from six.moves import cStringIO as StringIO
 import os
 import sys
 
@@ -68,7 +68,7 @@ def exercise(debug=False):
   with open("merging_stats.json", "rb") as f:
     import json
     d = json.load(f)
-    d.keys()
+    list(d.keys())  #FIXME why am I here?
     expected_keys = [
       'n_obs', 'd_star_sq_max', 'i_over_sigma_mean', 'completeness',
       'cc_one_half', 'r_meas', 'd_star_sq_min', 'cc_anom', 'r_pim',

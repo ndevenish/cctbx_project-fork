@@ -113,15 +113,15 @@ class crystal_symmetry_builder(builder_base):
     sym_op_ids = self.get_cif_item('_space_group_symop_id')
     space_group = None
     if sym_ops is not None:
-      if isinstance(sym_ops, basestring):
+      if isinstance(sym_ops, string_types):
         sym_ops = flex.std_string([sym_ops])
       if sym_op_ids is not None:
-        if isinstance(sym_op_ids, basestring):
+        if isinstance(sym_op_ids, string_types):
           sym_op_ids = flex.std_string([sym_op_ids])
         assert len(sym_op_ids) == len(sym_ops)
       self.sym_ops = {}
       space_group = sgtbx.space_group()
-      if isinstance(sym_ops, basestring): sym_ops = [sym_ops]
+      if isinstance(sym_ops, string_types): sym_ops = [sym_ops]
       for i, op in enumerate(sym_ops):
         try:
           s = sgtbx.rt_mx(op)
@@ -214,10 +214,11 @@ class crystal_structure_builder(crystal_symmetry_builder):
   def __init__(self, cif_block):
     # XXX To do: interpret _atom_site_refinement_flags
     crystal_symmetry_builder.__init__(self, cif_block, strict=True)
-    atom_sites_frac = [as_double_or_none_if_all_question_marks(
-      _, column_name='_atom_site_fract_%s' %axis)
-                       for _ in [cif_block.get('_atom_site_fract_%s' %axis)
-                                 for axis in ('x','y','z')]]
+    atom_sites_frac = [
+      as_double_or_none_if_all_question_marks(
+        _, column_name='_atom_site_fract_%s' %axis)
+      for _, axis in [(cif_block.get('_atom_site_fract_%s' %axis), axis)
+                      for axis in ('x','y','z')]]
     if atom_sites_frac.count(None) == 3:
       atom_sites_cart = [as_double_or_none_if_all_question_marks(
         _, column_name='_atom_site_Cartn_%s' %axis)
@@ -330,7 +331,7 @@ class miller_array_builder(crystal_symmetry_builder):
       wavelength_ids = [None]
       crystal_ids = [None]
       scale_groups = [None]
-      for key, value in refln_loop.iteritems():
+      for key, value in six.iteritems(refln_loop):
         # need to get these arrays first
         if (key.endswith('wavelength_id') or
             key.endswith('crystal_id') or
@@ -340,19 +341,19 @@ class miller_array_builder(crystal_symmetry_builder):
             continue
           counts = data.counts()
           if key.endswith('wavelength_id'):
-            wavelength_ids = counts.keys()
+            wavelength_ids = list(counts.keys())
           if len(counts) == 1: continue
           array = miller.array(
             miller.set(self.crystal_symmetry, self.indices).auto_anomalous(), data)
           if key.endswith('wavelength_id'):
             self.wavelength_id_array = array
-            wavelength_ids = counts.keys()
+            wavelength_ids = list(counts.keys())
           elif key.endswith('crystal_id'):
             self.crystal_id_array = array
-            crystal_ids = counts.keys()
+            crystal_ids = list(counts.keys())
           elif key.endswith('scale_group_code'):
             self.scale_group_array = array
-            scale_groups = counts.keys()
+            scale_groups = list(counts.keys())
       for label, value in sorted(refln_loop.items()):
         for w_id in wavelength_ids:
           for crys_id in crystal_ids:
@@ -521,7 +522,7 @@ class miller_array_builder(crystal_symmetry_builder):
                 info = array.info()
                 array.set_info(info.customized_copy(wavelength=wavelength))
               self._arrays.setdefault(key, array)
-    for key, array in self._arrays.copy().iteritems():
+    for key, array in six.iteritems(self._arrays.copy()):
       if (   key.endswith('_minus') or '_minus_' in key
           or key.endswith('_plus') or '_plus_' in key):
         if '_minus' in key:

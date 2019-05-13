@@ -2,8 +2,8 @@ from __future__ import division, print_function
 # LIBTBX_SET_DISPATCHER_NAME iotbx.cif.validate
 
 import glob, os, sys
-import urllib2
-from cStringIO import StringIO
+from six.moves import urllib
+from six.moves import cStringIO as StringIO
 
 from iotbx import cif
 from iotbx.cif import validation

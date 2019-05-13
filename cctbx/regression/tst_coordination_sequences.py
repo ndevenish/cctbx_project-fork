@@ -5,6 +5,7 @@ import cctbx.crystal.coordination_sequences
 from iotbx.option_parser import iotbx_option_parser
 import libtbx.load_env
 import sys, os
+from six.moves import zip
 
 def exercise_simple(structure, distance_cutoff, max_shell, verbose):
   asu_mappings = structure.asu_mappings(
@@ -65,7 +66,7 @@ def exercise_shell_asu_tables(structure, verbose):
   have_redundancies = False
   for o_pst,t_pst in zip(shell_sym_tables_orig[1:], shell_sym_tables[1:]):
     for o_pair_sym_dict,t_pair_sym_dict in zip(o_pst, t_pst):
-      assert o_pair_sym_dict.keys() == t_pair_sym_dict.keys()
+      assert list(o_pair_sym_dict.keys()) == list(t_pair_sym_dict.keys())
       if (verbose and not have_redundancies):
         for j_seq,o_sym_ops in o_pair_sym_dict.items():
           t_sym_ops = t_pair_sym_dict[j_seq]
@@ -101,7 +102,7 @@ def exercise_shell_asu_tables(structure, verbose):
     assert asu_table == shell_asu_table
     shell_sym_from_asu_table = shell_asu_table.extract_pair_sym_table() \
       .tidy(site_symmetry_table=site_symmetry_table)
-    from cStringIO import StringIO
+    from six.moves import cStringIO as StringIO
     sio_sym = StringIO()
     shell_sym_table.show(f=sio_sym)
     sio_asu = StringIO()

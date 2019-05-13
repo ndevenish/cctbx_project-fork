@@ -5,6 +5,7 @@ Author      : Uervirojnangkoorn, M.
 Created     : 6/25/2016
 Description : Given list of log files, compare completeness, n_obs, rmerge, and cc12.
 '''
+from __future__ import absolute_import, division, print_function
 import matplotlib.pyplot as plt
 import sys
 
