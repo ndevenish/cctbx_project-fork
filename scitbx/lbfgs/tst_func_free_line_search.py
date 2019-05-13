@@ -1,5 +1,5 @@
 from __future__ import division, print_function
-from cctbx.array_family import flex
+from scitbx.array_family import flex
 import scitbx.lbfgs
 from libtbx import adopt_init_args
 from libtbx.test_utils import approx_equal
@@ -45,3 +45,4 @@ if(__name__ == "__main__"):
   assert approx_equal(t.x, [2, -5, 500])
   t=lbfgs(False)
   assert approx_equal(t.x, [2, -5, 500])
+  print("OK")
