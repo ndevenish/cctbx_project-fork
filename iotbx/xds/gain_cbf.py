@@ -9,7 +9,7 @@
 from __future__ import division
 from __future__ import absolute_import
 
-from . import xds_cbf
+from iotbx.xds import xds_cbf
 from six.moves import range
 
 class reader(xds_cbf.reader):

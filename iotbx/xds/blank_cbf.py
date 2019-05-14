@@ -9,7 +9,7 @@
 from __future__ import division
 from __future__ import absolute_import
 
-from . import xds_cbf
+from iotbx.xds import xds_cbf
 
 class reader(xds_cbf.reader):
   """A class to read the BLANK.CBF files used in XDS"""

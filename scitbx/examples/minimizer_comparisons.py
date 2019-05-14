@@ -1,6 +1,6 @@
 from __future__ import division, print_function
 from __future__ import absolute_import
-from functions import Function
+from scitbx.examples.functions import Function
 
 from scitbx import simplex
 from scitbx import direct_search_simulated_annealing

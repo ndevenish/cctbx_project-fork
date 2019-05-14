@@ -10,7 +10,7 @@ if (scitbx is not None):
   from scitbx import matrix
   from libtbx.test_utils import approx_equal
 else:
-  from . import featherstone as fs
+  from scitbx.rigid_body.proto import featherstone as fs
   import scitbx_matrix as matrix
   def approx_equal(a1, a2): return True
   print("libtbx.test_utils not available: approx_equal() disabled")

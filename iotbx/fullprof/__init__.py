@@ -32,7 +32,7 @@ def rietveld_refine_structure(crystalstructure,
   if [I_obs, Profile, ProfileFile].count(None) != 2:
     raise ValueError("You may only pass one of I_obs, Profile and ProfileFile")
   # start work
-  from .write_pcr import write_pcr
+  from iotbx.write_pcr import write_pcr
   import tempfile
   import shutil
   import os
@@ -86,7 +86,7 @@ def simulate_powder_pattern(crystalstructure,
 
   XXX Todo: implement extraction of calculated profile
   """
-  from .write_pcr import write_pcr
+  from iotbx.write_pcr import write_pcr
   from iotbx.reflection_file_reader import any_reflection_file
   import tempfile
   import os
