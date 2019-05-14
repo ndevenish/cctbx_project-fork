@@ -923,14 +923,14 @@ def sum(iterable):
     result += m
   return result
 
-def cross_product_matrix(xxx_todo_changeme):
+def cross_product_matrix(vvv):
   """\
 Matrix associated with vector cross product:
   a.cross(b) is equivalent to cross_product_matrix(a) * b
 Useful for simplification of equations. Used frequently in
 robotics and classical mechanics literature.
 """
-  (v0, v1, v2) = xxx_todo_changeme
+  (v0, v1, v2) = vvv
   return sqr((
       0, -v2,  v1,
      v2,   0, -v0,

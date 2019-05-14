@@ -13,7 +13,6 @@ import scitbx.math
 from scitbx import matrix
 import math
 from itertools import count
-import types
 import sys
 import random
 from libtbx.utils import count_max, Sorry, Keep

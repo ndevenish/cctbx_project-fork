@@ -29,7 +29,6 @@ from itertools import count, izip
 import warnings
 import random
 import math
-import types
 import time
 import sys
 from scitbx import matrix
