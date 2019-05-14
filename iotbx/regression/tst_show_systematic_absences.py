@@ -1,5 +1,5 @@
 
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 from iotbx.command_line import show_systematic_absences
 from cctbx.development import random_structure
 from cctbx import sgtbx

@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 import math,os
 from libtbx.path import norm_join
 from libtbx.test_utils import approx_equal

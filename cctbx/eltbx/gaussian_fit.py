@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 from cctbx.eltbx import xray_scattering
 from cctbx.array_family import flex
 import scitbx.math.gaussian

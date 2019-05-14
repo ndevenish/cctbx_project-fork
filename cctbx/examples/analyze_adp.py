@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 # Simple example for the use of the adptbx.
 
 from cctbx import crystal

@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 from cctbx.examples import phase_o_phrenia
 from iotbx.cns import sdb_reader
 from cctbx import uctbx

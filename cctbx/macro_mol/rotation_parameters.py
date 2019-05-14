@@ -26,7 +26,7 @@ based on the FORTRAN program CONVROT:
 Revision history:
   2002 Jan: Created (Ralf W. Grosse-Kunstleve)
 """
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 
 import math, types
 from six.moves import range

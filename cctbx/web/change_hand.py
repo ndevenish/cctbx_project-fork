@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 # Change the hand of a set of coordinates (useful in heavy atom location).
 
 from cctbx import crystal

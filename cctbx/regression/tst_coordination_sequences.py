@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 from iotbx.kriber import strudat
 from cctbx import crystal
 import cctbx.crystal.coordination_sequences

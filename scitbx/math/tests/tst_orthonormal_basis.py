@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 from scitbx.math import orthonormal_basis
 from scitbx import matrix
 from libtbx.test_utils import approx_equal

@@ -17,7 +17,7 @@ Shabana (2005):
   Cambridge University Press, 3 edition, 2005
   ISBN-10: 0521850118
 """
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 from six.moves import range
 
 try:

@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 from cctbx import geometry_restraints
 import cctbx.geometry_restraints.flags
 import cctbx.geometry_restraints.manager

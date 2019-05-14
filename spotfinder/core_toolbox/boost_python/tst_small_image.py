@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 def compute_image(work_params):
   dpx,dpy = work_params.detector.pixels
   from scitbx.array_family import flex

@@ -1,11 +1,10 @@
-from __future__ import division, print_function
-
 '''
 Author      : Lyubimov, A.Y.
 Created     : 05/01/2016
 Last Changed: 10/21/2018
 Description : PRIME GUI frames module
 '''
+from __future__ import absolute_import, division, print_function
 
 import os
 import wx

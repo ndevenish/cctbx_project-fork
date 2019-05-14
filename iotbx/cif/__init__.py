@@ -9,7 +9,7 @@ https://doi.org/10.1107/S0021889811041161
 http://cctbx.sourceforge.net/iotbx_cif
 
 """
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 
 import boost.python
 from six.moves import range

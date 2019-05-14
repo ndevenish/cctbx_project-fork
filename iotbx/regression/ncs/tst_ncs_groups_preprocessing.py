@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 from iotbx.ncs import format_80
 from libtbx.utils import null_out
 from datetime import datetime

@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 from six.moves import range
 
 def exercise_real_to_complex_3d(benchmark=True):

@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 from scitbx.graph.utils import \
   construct_edge_sets, extract_edge_list, sub_edge_list, tree_marking
 from libtbx import slots_getstate_setstate

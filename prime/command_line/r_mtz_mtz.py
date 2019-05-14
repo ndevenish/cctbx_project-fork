@@ -1,4 +1,3 @@
-from __future__ import division, print_function
 # LIBTBX_SET_DISPATCHER_NAME prime.r_mtz_mtz
 '''
 Author      : Uervirojnangkoorn, M.
@@ -6,6 +5,7 @@ Created     : 6/29/2016
 Description : Scale second mtz to the first (linear scale only) and calculate r-factors.
 Note that all intensity array will be converted to amplitude.
 '''
+from __future__ import absolute_import, division, print_function
 
 from iotbx import reflection_file_reader
 import sys

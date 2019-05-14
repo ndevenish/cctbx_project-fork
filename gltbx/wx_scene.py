@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 
 # This file found at:
 #   http://lists.wxwidgets.org/archive/wxPython-users/msg11078.html

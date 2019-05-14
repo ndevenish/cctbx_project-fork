@@ -4,7 +4,7 @@ Routines for calculating common metrics of data quality based on merging of
 redundant observations.
 """
 
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 from iotbx import data_plots
 from libtbx.str_utils import make_sub_header, format_value
 from libtbx.utils import Sorry, null_out

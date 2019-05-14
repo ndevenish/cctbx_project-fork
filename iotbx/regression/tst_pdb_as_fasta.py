@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 from libtbx.test_utils import show_diff
 
 def exercise():

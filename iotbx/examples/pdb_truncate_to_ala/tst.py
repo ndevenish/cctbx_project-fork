@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 import v0_getting_started
 import v1_loop_over_atoms
 import v2_simple

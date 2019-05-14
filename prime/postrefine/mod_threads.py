@@ -1,11 +1,10 @@
-from __future__ import division, print_function
-
 '''
 Author      : Lyubimov, A.Y.
 Created     : 05/01/2016
 Last Changed: 08/31/2018
 Description : PRIME GUI Threading module
 '''
+from __future__ import absolute_import, division, print_function
 
 import os
 import wx

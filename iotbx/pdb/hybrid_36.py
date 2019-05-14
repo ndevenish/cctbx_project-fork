@@ -82,7 +82,7 @@ See also:
 
 Ralf W. Grosse-Kunstleve, Feb 2007.
 """
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 from six.moves import range
 
 digits_upper = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"

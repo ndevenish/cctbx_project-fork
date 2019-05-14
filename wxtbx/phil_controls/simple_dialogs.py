@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 
 from wxtbx.phil_controls import intctrl, floatctrl, symop, strctrl, ints, choice
 from wxtbx.utils import std_sizer_flags, add_ok_cancel_buttons

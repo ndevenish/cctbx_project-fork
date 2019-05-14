@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 import sys, os, time, string
 
 def run_string(cmd_and_args):

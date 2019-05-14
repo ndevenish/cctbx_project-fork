@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 phil_str = """\
 base36_timestamp = None
   .type = str

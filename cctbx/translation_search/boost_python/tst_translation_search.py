@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 from cctbx import translation_search
 from cctbx import sgtbx
 from cctbx.array_family import flex

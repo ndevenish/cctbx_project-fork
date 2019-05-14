@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 # This script generates a list of non-standard space group settings.
 # The settings are used for testing.
 #

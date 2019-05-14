@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 import copy
 from iotbx.detectors.adsc import ADSCImage
 from scitbx.array_family import flex

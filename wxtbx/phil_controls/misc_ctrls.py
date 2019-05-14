@@ -1,5 +1,5 @@
 
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 from wxtbx.phil_controls import strings
 from wxtbx.phil_controls import strctrl
 from wxtbx import phil_controls

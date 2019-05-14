@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 from scitbx.array_family import shared
 from libtbx.test_utils import approx_equal
 from six.moves import range

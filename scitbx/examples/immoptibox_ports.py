@@ -2,7 +2,7 @@
 http://www2.imm.dtu.dk/~hbn/immoptibox/
 """
 
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 import scitbx.math
 import scitbx.linalg
 from scitbx import matrix

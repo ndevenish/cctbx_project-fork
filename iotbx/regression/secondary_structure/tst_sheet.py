@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 import sys
 from iotbx.pdb import secondary_structure as ss
 import StringIO

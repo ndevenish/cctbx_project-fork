@@ -1,4 +1,4 @@
-from __future__ import division, print_function
+from __future__ import absolute_import, division, print_function
 #
 # Implemented based on PDB v3.2 specification at:
 #   http://www.wwpdb.org/documentation/format32/sect5.html
