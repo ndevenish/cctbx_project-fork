@@ -2,6 +2,7 @@ from __future__ import absolute_import, division, print_function
 
 from builtins import object, range
 from collections import deque
+from six.moves import range
 
 class single_pooler(object):
   """

@@ -16,6 +16,7 @@ import os.path, time
 import libtbx
 import numpy as np
 import webbrowser, tempfile
+from six.moves import range
 
 
 
