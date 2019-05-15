@@ -2284,7 +2284,7 @@ def exercise_randomize_amplitude_and_phase(space_group_info,
     return (r, fc.mean_phase_error(phase_source=fc_))
   #
   assert approx_equal(run(0,0), (0,0))
-  for v in list(range(0,91, 10)):
+  for v in range(0,91, 10):
     r = run(v/100.,v)
     assert approx_equal(r[0], v/100., 0.05)
     assert approx_equal(r[1], v, 5)

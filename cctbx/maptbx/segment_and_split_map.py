@@ -5950,7 +5950,7 @@ def run_get_duplicates_and_ncs(
   complete=True
   missing=[]
   for i in range(1,max_regions_to_consider+1):
-    if not i in region_centroid_dict:
+    if not i in region_centroid_dict.keys():
       if (regions_left is None) or (i in regions_left):
          complete=False
          missing.append(i)

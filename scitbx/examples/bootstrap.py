@@ -121,7 +121,7 @@ class fake_data(object):
 
     ## Make a permuation reference, this allows one to
     ## do non parametric resampling of multidimensional data
-    self.permutation_reference = flex.double( list(range( x_data.size())) )
+    self.permutation_reference = flex.double( range(x_data.size()) )
 
     self.non_para_bootstrap = scitbx.math.non_parametric_bootstrap(
       self.permutation_reference, 0 )

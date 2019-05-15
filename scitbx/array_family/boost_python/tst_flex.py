@@ -5,12 +5,9 @@ from scitbx import matrix
 from libtbx.test_utils import Exception_expected, approx_equal, \
   not_approx_equal, show_diff
 import libtbx.math_utils
-from cStringIO import StringIO
-try:
-  import cPickle as pickle
-except ImportError:
-  import pickle
+from io import BytesIO
 from six.moves import range
+from six.moves import cPickle as pickle
 import math
 import random
 import time
@@ -237,7 +234,8 @@ def exercise_flex_constructors():
           except TypeError as e:
             assert str(e) in [
               "bad argument type for built-in operation",
-              "a float is required"]
+              "a float is required",
+              "must be real number, not str"]
           else: raise Exception_expected
   for arg in [[[0],""], ([0],"",)]:
     try: flex.double(arg)
@@ -1393,7 +1391,7 @@ def exercise_functions():
     assert values.format_min(format=format) == "None"
     assert values.format_max(format=format) == "None"
     assert values.format_mean(format=format) == "None"
-    s = StringIO()
+    s = BytesIO()
     stats.show(out=s, prefix="values ", format=format)
     assert not show_diff(s.getvalue(), """\
 values n: 0
@@ -1401,7 +1399,7 @@ values min:  None
 values max:  None
 values mean: None
 """)
-  s = StringIO()
+  s = BytesIO()
   stats.show(out=s, format="%6.2f")
   assert not show_diff(s.getvalue(), """\
 n: 0
@@ -1420,7 +1418,7 @@ mean:   None
     assert values.format_min(format=format) == "-7"+p0
     assert values.format_max(format=format) == "14"+p0
     assert values.format_mean(format=format) == "2"+p0
-    s = StringIO()
+    s = BytesIO()
     stats.show(out=s, format=format)
     assert not show_diff(s.getvalue(), """\
 n: 6
@@ -1428,7 +1426,7 @@ min:  -7%s
 max:  14%s
 mean: 2%s
 """ % (p0,p0,p0))
-  s = StringIO()
+  s = BytesIO()
   stats.show(out=s, format="%6.2f")
   assert not show_diff(s.getvalue(), """\
 n: 6
@@ -2074,7 +2072,7 @@ def exercise_histogram():
 *15.2 - 19: 7"""
   hy = flex.histogram(
     data=y, data_min=2, data_max=10, n_slots=4, relative_tolerance=1.e-4)
-  s = StringIO()
+  s = BytesIO()
   hy.show(f=s, prefix="&")
   assert s.getvalue() == """\
 &2 - 4: 2
@@ -2087,7 +2085,7 @@ def exercise_histogram():
   assert approx_equal(centers, [3,5,7,9])
   p = pickle.dumps(hy)
   l = pickle.loads(p)
-  t = StringIO()
+  t = BytesIO()
   l.show(f=t, prefix="&")
   assert not show_diff(t.getvalue(), s.getvalue())
   assert l.n_out_of_slot_range() == 17
@@ -2144,7 +2142,7 @@ def exercise_weighted_histogram():
   hy = flex.weighted_histogram(other=h, data=y, relative_tolerance=1)
   assert tuple(hy.slots()) == (7,4,4,4,7)
   assert hy.n_out_of_slot_range() == 0
-  s = StringIO()
+  s = BytesIO()
   hy.show(f=s, prefix="*")
   assert s.getvalue() == """\
 *0 - 3.8: 7
@@ -2155,7 +2153,7 @@ def exercise_weighted_histogram():
 """
   hy = flex.weighted_histogram(
     data=y, data_min=2, data_max=10, n_slots=4, relative_tolerance=1.e-4)
-  s = StringIO()
+  s = BytesIO()
   hy.show(f=s, prefix="&")
   assert s.getvalue() == """\
 &2 - 4: 2
@@ -2168,14 +2166,14 @@ def exercise_weighted_histogram():
   assert approx_equal(centers, [3,5,7,9])
   p = pickle.dumps(hy)
   l = pickle.loads(p)
-  t = StringIO()
+  t = BytesIO()
   l.show(f=t, prefix="&")
   assert not show_diff(t.getvalue(), s.getvalue())
   assert l.n_out_of_slot_range() == 17
 
 def exercise_show_count_stats():
   def check(counts, prefix="", group_size=10, expected=None):
-    sio = StringIO()
+    sio = BytesIO()
     flex.show_count_stats(
       counts=flex.size_t(counts),
       group_size=group_size,
@@ -2279,7 +2277,7 @@ def exercise_linear_regression():
   assert approx_equal(r.slope(), 0)
   r = flex.linear_regression(y, y)
   assert not r.is_well_defined()
-  s = StringIO()
+  s = BytesIO()
   r.show_summary(f=s, prefix="/:")
   assert s.getvalue() == """\
 /:is_well_defined: %s
@@ -2331,7 +2329,7 @@ def exercise_linear_correlation():
   assert c.is_well_defined()
   c = flex.linear_correlation(flex.double(), flex.double())
   assert not c.is_well_defined()
-  s = StringIO()
+  s = BytesIO()
   c.show_summary(f=s)
   assert s.getvalue() == """\
 is_well_defined: %s
