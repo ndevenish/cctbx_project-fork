@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 import math
 from iotbx.detectors import Bruker_base
 from iotbx.detectors.detectorbase import DetectorImageBase

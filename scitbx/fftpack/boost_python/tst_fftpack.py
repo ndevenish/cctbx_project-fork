@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from scitbx import fftpack
 from scitbx.array_family import flex
 import omptbx # initializes OpenMP environment
@@ -7,7 +8,6 @@ import libtbx.utils
 import random
 import math
 import sys
-from six.moves import range
 
 def fmtfloat(f):
   s = "%.1f" % (f,)

@@ -1,6 +1,6 @@
-from __future__ import absolute_import, division, print_function
-import os.path
+from __future__ import division, print_function
 from six.moves import range
+import os.path
 
 def encode(data):
   edata = ""

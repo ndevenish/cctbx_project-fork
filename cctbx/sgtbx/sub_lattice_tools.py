@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx import sgtbx
 from cctbx import uctbx
 from cctbx import crystal
@@ -12,7 +13,6 @@ from libtbx.utils import format_cpu_times
 from boost import rational
 from libtbx.math_utils import ifloor
 from cStringIO import StringIO
-from six.moves import range
 
 def divisor(n, pairs=False):
   """ find all divisors """

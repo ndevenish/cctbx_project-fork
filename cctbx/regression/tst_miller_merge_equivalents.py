@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx import miller
 from cctbx.development import random_structure
 from cctbx.development import debug_utils
@@ -8,7 +9,6 @@ from libtbx.utils import Sorry
 from cStringIO import StringIO
 import random
 import sys
-from six.moves import range
 
 def exercise(space_group_info, anomalous_flag,
              n_scatterers=8, d_min=2, verbose=0):

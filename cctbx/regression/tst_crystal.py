@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division
+from six.moves import range
 from cctbx import crystal
 from cctbx import sgtbx
 from cctbx import uctbx
@@ -10,7 +11,6 @@ from libtbx.test_utils import Exception_expected, approx_equal, show_diff
 from libtbx.utils import Sorry
 from cStringIO import StringIO
 import sys
-from six.moves import range
 
 def exercise_symmetry():
   xs = crystal.symmetry()

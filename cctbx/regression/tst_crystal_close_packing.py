@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from iotbx.pdb.tst_pdb import dump_pdb
 from cctbx.crystal import close_packing
 from cctbx import crystal
@@ -13,7 +14,6 @@ from libtbx.test_utils import approx_equal
 import time
 import math
 import sys
-from six.moves import range
 
 def hexagonal_sampling_cell(point_distance):
   return uctbx.unit_cell((

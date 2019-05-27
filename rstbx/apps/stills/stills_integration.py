@@ -1,5 +1,5 @@
 """Specialization code for 2011 JCSG pilot experiment; not general use"""
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 from six.moves import range
 from six.moves import cPickle as pickle
 

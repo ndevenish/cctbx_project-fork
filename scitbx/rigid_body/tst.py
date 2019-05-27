@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 import scitbx.rigid_body.essence
 from scitbx.rigid_body.essence import tst_tardy
 from scitbx.graph import test_cases_tardy_pdb
@@ -7,7 +8,6 @@ from scitbx import matrix
 from libtbx.test_utils import \
   approx_equal, is_above_limit, is_below_limit, Exception_expected
 from libtbx.utils import format_cpu_times
-from six.moves import range
 try:
   import cPickle as pickle
 except ImportError:

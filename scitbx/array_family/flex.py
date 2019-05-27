@@ -1,5 +1,6 @@
 from __future__ import absolute_import, division, print_function
 
+from six.moves import range
 import hashlib
 import six
 import sys
@@ -7,7 +8,6 @@ import sys
 import boost.optional # import dependency
 import boost.std_pair # import dependency
 import boost.python
-from six.moves import range
 boost.python.import_ext("scitbx_array_family_flex_ext")
 from scitbx_array_family_flex_ext import *
 import scitbx_array_family_flex_ext as ext

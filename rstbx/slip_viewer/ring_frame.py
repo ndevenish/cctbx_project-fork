@@ -1,10 +1,11 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division
+from __future__ import print_function
 # -*- Mode: Python; c-basic-offset: 2; indent-tabs-mode: nil; tab-width: 8 -*-
 #
 # $Id$
 
-import wx
 from six.moves import range
+import wx
 
 
 class RingSettingsFrame(wx.MiniFrame):

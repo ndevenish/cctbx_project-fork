@@ -1,5 +1,6 @@
 from __future__ import absolute_import, division, print_function
 
+from six.moves import range
 from cctbx import uctbx, xray, crystal
 from cctbx.array_family import flex
 import math
@@ -9,7 +10,6 @@ from scitbx import sparse
 from scitbx.matrix import col
 from smtbx.refinement import constraints
 from smtbx.refinement.constraints import rigid
-from six.moves import range
 
 def test_rigid_site_proxy(n=5):
   uc = uctbx.unit_cell((1, 2, 3))

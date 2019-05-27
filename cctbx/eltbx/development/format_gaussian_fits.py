@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx.eltbx import xray_scattering
 from cctbx.eltbx.development import itvc_section61_io
 from cctbx.eltbx.development import kissel_io
@@ -10,7 +11,6 @@ from libtbx.option_parser import OptionParser
 from libtbx import adopt_init_args
 from libtbx import easy_pickle
 import os
-from six.moves import range
 
 class labeled_fit(object):
 

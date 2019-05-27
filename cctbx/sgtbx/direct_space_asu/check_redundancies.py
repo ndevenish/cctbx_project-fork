@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx.sgtbx.direct_space_asu import reference_table
 from cctbx.web.asu_gallery import jv_asu
 from cctbx import sgtbx
@@ -8,7 +9,6 @@ from scitbx.python_utils import command_line
 from libtbx import easy_run
 from boost import rational
 import sys, os
-from six.moves import range
 
 class colored_grid_point(object):
 

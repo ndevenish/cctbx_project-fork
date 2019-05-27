@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from libtbx.utils import Abort
 from libtbx import group_args
 import cStringIO
@@ -7,7 +8,6 @@ import operator
 import os.path
 import sys
 from functools import reduce
-from six.moves import range
 
 # Wrap lines that are longer than 'width'
 def wrap(text, width):

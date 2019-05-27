@@ -4,12 +4,12 @@
    - Computes fft map
    - Determines skewness of map
 """
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 
+from six.moves import range
 from cctbx import sgtbx
 from cctbx.development import random_structure
 from cctbx.array_family import flex
-from six.moves import range
 
 def randomize_phases(f_calc, fudge_factor):
   assert 0 <= fudge_factor <= 1

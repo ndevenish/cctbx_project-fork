@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx import crystal
 import cctbx.crystal.coordination_sequences
 from cctbx import sgtbx, xray
@@ -12,7 +13,6 @@ from libtbx import adopt_init_args
 from itertools import count
 from cStringIO import StringIO
 import sys
-from six.moves import range
 try:
   import cPickle as pickle
 except ImportError:

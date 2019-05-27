@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx.eltbx.neutron import neutron_news_1992_table
 from cctbx import miller
 from cctbx import crystal
@@ -7,7 +8,6 @@ from cctbx import adptbx
 from scitbx.array_family import flex
 import math
 import sys
-from six.moves import range
 
 class scatterer(object):
 

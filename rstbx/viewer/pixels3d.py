@@ -1,5 +1,6 @@
 
-from __future__ import absolute_import, division, print_function
+from __future__ import division
+from six.moves import range
 from gltbx import wx_viewer
 from gltbx.gl import *
 from gltbx.glu import *
@@ -8,7 +9,6 @@ from scitbx.math import minimum_covering_sphere
 from scitbx.array_family import flex
 from math import log
 import wx
-from six.moves import range
 
 def glbox(xyz1, xyz2):
   x1 = min(xyz1[0], xyz2[0])

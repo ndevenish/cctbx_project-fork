@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 from six.moves import range
 def LATT_SYMM(s, space_group, decimal=False):
   Z = space_group.conventional_centring_type_symbol()

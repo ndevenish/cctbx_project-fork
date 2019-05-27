@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 from libtbx import complex_math
 from cctbx.web import io_utils
 from cctbx.web import cgi_utils

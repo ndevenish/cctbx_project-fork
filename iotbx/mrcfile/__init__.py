@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 import cctbx.array_family.flex as flex# import dependency
 import os,time
 from libtbx.utils import Sorry
@@ -8,7 +9,6 @@ import warnings
 from scitbx.array_family.flex import grid
 from cctbx import maptbx
 import numpy as np
-from six.moves import range
 
 #  mrcfile
 

@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx import miller
 from cctbx import adptbx
 from cctbx.development import debug_utils
@@ -9,7 +10,6 @@ import random
 import math
 from cStringIO import StringIO
 import sys
-from six.moves import range
 
 random.seed(0)
 flex.set_random_seed(0)

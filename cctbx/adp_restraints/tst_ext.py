@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from libtbx.test_utils import approx_equal, show_diff
 from cctbx.array_family import flex
 from cctbx import adptbx
@@ -12,7 +13,6 @@ import math, os, sys
 from cStringIO import StringIO
 import cctbx.xray
 from libtbx.test_utils import approx_equal
-from six.moves import range
 
 def finite_difference_gradients(restraint_type,
                                 proxy,

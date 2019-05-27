@@ -1,5 +1,8 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division
+from __future__ import print_function
+from __future__ import absolute_import
 
+from six.moves import range
 import sys
 import random
 
@@ -16,7 +19,6 @@ import scitbx.matrix as mat
 from cStringIO import StringIO
 
 from smtbx.ab_initio import charge_flipping
-from six.moves import range
 
 def randomly_exercise(flipping_type,
                       space_group_info, elements,

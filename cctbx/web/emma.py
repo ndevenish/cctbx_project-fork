@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 from cctbx import euclidean_model_matching as emma
 from cctbx import crystal
 from cctbx import sgtbx

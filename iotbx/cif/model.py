@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from libtbx.containers import OrderedDict, OrderedSet
 from libtbx.utils import Sorry
 import sys
@@ -8,7 +9,6 @@ from cStringIO import StringIO
 from UserDict import DictMixin
 
 from cctbx.array_family import flex
-from six.moves import range
 
 
 class cif(DictMixin):

@@ -5,8 +5,9 @@ mmtbx.monomer_library.pdb_interpretation).  Currently only bonds and angles
 are supported.  The parameters are specific to phenix.refine right now but
 they could theoretically be used in other programs.
 """
-from __future__ import absolute_import, division, print_function
+from __future__ import division
 
+from six.moves import range
 import wxtbx.bitmaps
 from wxtbx import metallicbutton
 from wxtbx.phil_controls import simple_dialogs
@@ -14,7 +15,6 @@ from wx.lib.agw import flatnotebook
 import wx
 from libtbx import str_utils
 import sys
-from six.moves import range
 
 ATOM_SELECTION_BUTTONS = 1
 

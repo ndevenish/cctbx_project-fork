@@ -1,6 +1,6 @@
-from __future__ import absolute_import, division, print_function
-import sys
+from __future__ import division, print_function
 from six.moves import range
+import sys
 
 def head(f=None):
   if (f is None): f = sys.stdout

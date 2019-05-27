@@ -82,9 +82,9 @@ See also:
 
 Ralf W. Grosse-Kunstleve, Feb 2007.
 """
-from __future__ import absolute_import, division, print_function
-from six.moves import range
+from __future__ import division, print_function
 
+from six.moves import range
 digits_upper = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 digits_lower = digits_upper.lower()
 digits_upper_values = dict([pair for pair in zip(digits_upper, range(36))])

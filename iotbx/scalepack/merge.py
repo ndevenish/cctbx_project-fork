@@ -1,5 +1,5 @@
 "Reading and writing of scalepack merge reflection files."
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 
 # Sample scalepack OUTPUT FILE
 #    1
@@ -10,6 +10,7 @@ from __future__ import absolute_import, division, print_function
 #
 # Format: (3I4, 4F8.1)
 
+from six.moves import range
 from cctbx import uctbx
 from cctbx import sgtbx
 from cctbx import crystal
@@ -20,7 +21,6 @@ from libtbx import easy_pickle
 import exceptions
 import os
 import sys
-from six.moves import range
 
 class FormatError(exceptions.Exception): pass
 

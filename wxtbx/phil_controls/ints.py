@@ -1,9 +1,9 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 
+from six.moves import range
 from wxtbx.phil_controls.numbers import NumbersCtrlBase, NumbersValidator
 from libtbx import Auto
 import wx
-from six.moves import range
 
 class IntsCtrl(NumbersCtrlBase):
   def CheckType(self, value):

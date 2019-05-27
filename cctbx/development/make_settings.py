@@ -1,11 +1,11 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 # This script generates a list of non-standard space group settings.
 # The settings are used for testing.
 #
 # usage: python make_settings.py > settings.py
 
-from cctbx import sgtbx
 from six.moves import range
+from cctbx import sgtbx
 
 def run():
   settings = [0]

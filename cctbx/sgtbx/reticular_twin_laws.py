@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, generators, print_function
 from cctbx import sgtbx
 from cctbx import uctbx
 from cctbx import crystal

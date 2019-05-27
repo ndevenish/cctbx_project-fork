@@ -1,4 +1,5 @@
 from __future__ import absolute_import, division, print_function
+from six.moves import range
 from libtbx.option_parser import option_parser
 from libtbx.utils import Sorry
 from libtbx.str_utils import show_string
@@ -13,7 +14,6 @@ import time
 import types
 
 import six
-from six.moves import range
 try:
   import threading
 except ImportError:

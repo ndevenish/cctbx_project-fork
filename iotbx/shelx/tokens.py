@@ -1,6 +1,6 @@
-from __future__ import absolute_import, division, print_function
-from six.moves import range
+from __future__ import division
 
+from six.moves import range
 (atom_tok,
  element_tok,
  forward_range_tok,

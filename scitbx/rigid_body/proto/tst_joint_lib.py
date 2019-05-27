@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from scitbx.rigid_body.proto import featherstone
 from scitbx.rigid_body.proto import joint_lib
 from scitbx.rigid_body.proto.utils import \
@@ -13,7 +14,6 @@ from libtbx.test_utils import approx_equal
 from libtbx.utils import null_out, show_times_at_exit
 import math
 import sys
-from six.moves import range
 
 class random_revolute(object):
 

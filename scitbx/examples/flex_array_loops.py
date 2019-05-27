@@ -1,6 +1,6 @@
-from __future__ import absolute_import, division, print_function
-from scitbx.array_family import flex
+from __future__ import division, print_function
 from six.moves import range
+from scitbx.array_family import flex
 
 def demo():
   # toy array

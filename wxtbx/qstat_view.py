@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division
 
 import wxtbx.bitmaps
 from libtbx.queuing_system_utils import sge_utils

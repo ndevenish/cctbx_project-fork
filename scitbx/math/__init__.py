@@ -1,5 +1,6 @@
 from __future__ import absolute_import, division, print_function
 
+from six.moves import range
 import functools
 import math
 import operator
@@ -10,7 +11,6 @@ import scitbx.math.gaussian # implicit import
 from scitbx import matrix
 from scitbx.array_family import flex
 from boost import rational # implicit import
-from six.moves import range
 
 gaussian_fit_1d_analytical.__doc__ = """
 Fits a gaussian function to a list of points.

@@ -3,8 +3,9 @@ Example:
   - use results from a function with callback (motion() in this example)
   - return from callback only after an event in the GUI (Tab-key)
 """
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 
+from six.moves import range
 from gltbx import wx_viewer
 from libtbx.thread_utils import thread_with_callback_and_wait
 from scitbx.rigid_body.proto.free_motion_reference_impl import \
@@ -14,7 +15,6 @@ from scitbx.array_family import flex
 from scitbx import matrix
 import wx
 import sys
-from six.moves import range
 
 class viewer(wx_viewer.show_points_and_lines_mixin):
 

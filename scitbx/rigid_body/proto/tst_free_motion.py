@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from scitbx.rigid_body.proto import free_motion_reference_impl as fmri
 from scitbx.rigid_body.proto import featherstone
 import scitbx.math
@@ -7,7 +8,6 @@ from scitbx import matrix
 from libtbx.test_utils import approx_equal
 from libtbx.utils import format_cpu_times, null_out
 import sys
-from six.moves import range
 
 def exercise_reference_impl_quick():
   sites_cart = fmri.create_triangle_with_center_of_mass_at_origin()

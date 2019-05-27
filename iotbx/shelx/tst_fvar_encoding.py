@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 # Note: some related tests are in
 #       cctbx/regression/tst_sgtbx_special_op_simplifier.py
 

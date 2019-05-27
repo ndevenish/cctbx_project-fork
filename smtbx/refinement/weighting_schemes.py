@@ -10,9 +10,10 @@ They all feature:
 """
 
 
-from __future__ import absolute_import, division, print_function
-import boost.python
+from __future__ import division
+from __future__ import absolute_import, print_function
 from six.moves import range
+import boost.python
 ext = boost.python.import_ext("smtbx_refinement_least_squares_ext")
 
 

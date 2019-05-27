@@ -1,5 +1,6 @@
 
-from __future__ import absolute_import, division, print_function
+from __future__ import division
+from six.moves import range
 from mmtbx.validation import ramalyze
 from mmtbx.validation import rotalyze
 from mmtbx.validation import graphics
@@ -8,7 +9,6 @@ from wxtbx import utils
 import wxtbx.plots
 import wx
 from math import sqrt, floor
-from six.moves import range
 
 class rotarama_plot(wxtbx.plots.plot_container):
   hit_test_radius = 3.0

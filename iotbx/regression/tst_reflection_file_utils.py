@@ -1,6 +1,6 @@
-from __future__ import absolute_import, division, print_function
-import libtbx.load_env
+from __future__ import division, print_function
 from six.moves import range
+import libtbx.load_env
 if (libtbx.env.has_module("ccp4io")):
   from iotbx import reflection_file_reader
   from iotbx.reflection_file_utils import reflection_file_server, \

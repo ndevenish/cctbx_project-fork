@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx import crystal
 from cctbx import sgtbx
 from cctbx.array_family import flex
@@ -9,7 +10,6 @@ from libtbx import adopt_init_args
 import sys, math
 
 import boost.python
-from six.moves import range
 ext = boost.python.import_ext("cctbx_emma_ext")
 
 def sgtbx_rt_mx_as_matrix_rt(s):

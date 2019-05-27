@@ -1,4 +1,6 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from __future__ import absolute_import
+from six.moves import range
 from cctbx import omz
 import cctbx.omz.dev
 from cctbx.array_family import flex
@@ -11,7 +13,6 @@ from libtbx import Auto
 from cStringIO import StringIO
 import traceback
 import sys, os
-from six.moves import range
 op = os.path
 
 def get_master_phil(

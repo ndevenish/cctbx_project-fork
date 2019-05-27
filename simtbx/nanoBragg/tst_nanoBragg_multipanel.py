@@ -2,7 +2,8 @@
 Simple test of multi-panel
 detector simulation
 """
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 import numpy as np
 import copy
 
@@ -11,7 +12,6 @@ from scitbx.matrix import sqr
 from dxtbx.model.beam import BeamFactory
 from dxtbx.model.crystal import CrystalFactory
 from dxtbx.model.detector import DetectorFactory, Detector, Panel
-from six.moves import range
 
 
 # dxtbx beam model description

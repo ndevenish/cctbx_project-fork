@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from scitbx.rigid_body.essence import tardy
 from scitbx.graph import tardy_tree
 from scitbx.graph import test_cases_tardy_pdb
@@ -8,7 +9,6 @@ from libtbx.utils import null_out, show_times_at_exit
 from libtbx.test_utils import approx_equal, is_above_limit
 import random
 import sys
-from six.moves import range
 
 if (1):
   random.seed(0)

@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division
 from six.moves import range
 def form_rational(m, t=None):
   free_vars = []

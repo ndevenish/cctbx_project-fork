@@ -1,4 +1,7 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division
+from __future__ import print_function
+from __future__ import absolute_import
+from six.moves import range
 import math
 import os
 
@@ -15,7 +18,6 @@ from smtbx.refinement import least_squares
 from smtbx.refinement import constraints
 import smtbx.utils
 from smtbx.refinement.constraints.tests import tst_constrained_structure
-from six.moves import range
 
 
 class lbfgs(object):

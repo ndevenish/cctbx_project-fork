@@ -1,5 +1,7 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division
+from __future__ import absolute_import, print_function
 
+from six.moves import range
 from scitbx.lstbx import normal_eqns_solving
 from cctbx import miller
 from cctbx import euclidean_model_matching as emma
@@ -11,7 +13,6 @@ from smtbx import masks
 from smtbx.refinement import constraints
 import smtbx.utils
 import cStringIO
-from six.moves import range
 
 def exercise_masks():
   mt = flex.mersenne_twister(seed=0)

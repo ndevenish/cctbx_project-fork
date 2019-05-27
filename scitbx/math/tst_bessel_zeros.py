@@ -1,6 +1,6 @@
-from __future__ import absolute_import, division, print_function
-from scitbx import math
+from __future__ import division, print_function
 from six.moves import range
+from scitbx import math
 
 def tst_sph_zeroes(l,n):
   z = math.sph_bessel_j_zeroes(l,n)

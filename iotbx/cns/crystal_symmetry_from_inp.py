@@ -16,10 +16,10 @@ crystal.symmetry(
   unit_cell=(76.4, 76.4, 180.94, 90, 90, 120),
   space_group_symbol="P3(2)21")
 """
-from __future__ import absolute_import, division, print_function
+from __future__ import division
 
-from cctbx import crystal
 from six.moves import range
+from cctbx import crystal
 
 def extract_from(file_name=None, file=None, max_characters=1000000):
   assert [file_name, file].count(None) == 1

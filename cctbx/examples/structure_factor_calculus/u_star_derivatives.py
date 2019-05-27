@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from scitbx import matrix
 from scitbx.array_family import flex
 from scitbx.math import tensor_rank_2_gradient_transform_matrix
@@ -6,7 +7,6 @@ from libtbx.test_utils import approx_equal
 import math
 from cStringIO import StringIO
 import sys
-from six.moves import range
 
 flex.set_random_seed(0)
 

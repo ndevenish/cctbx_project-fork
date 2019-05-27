@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from iotbx.pdb.tst_pdb import dump_pdb
 from iotbx.pymol import pml_stick, pml_write
 from cctbx import geometry_restraints
@@ -16,7 +17,6 @@ from libtbx.test_utils import approx_equal, is_below_limit, show_diff
 from itertools import count
 from cStringIO import StringIO
 import sys
-from six.moves import range
 
 def exercise(verbose=0):
   distance_ideal = 1.8
@@ -233,7 +233,7 @@ def exercise(verbose=0):
 >,   3.414 3.600
 >,... (remaining 134 not shown)
 """,
-    selections=[range(6), range(-5,0)])
+    selections=[list(range(6)), list(range(-5,0))])
   vdw_1_sticks = []
   vdw_2_sticks = []
   for proxy in pair_proxies.nonbonded_proxies.simple:

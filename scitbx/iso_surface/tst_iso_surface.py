@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from scitbx.array_family import flex
 from scitbx import iso_surface
 from libtbx.test_utils import approx_equal
@@ -7,7 +8,6 @@ from math import sin
 from scitbx import matrix
 import sys
 import time
-from six.moves import range
 
 
 class triangulation_test_case(object):

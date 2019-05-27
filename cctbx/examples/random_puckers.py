@@ -4,7 +4,8 @@ RNA sugar ring, performing geometry minimization starting with
 random coordinates, how many configurations are found?
 """
 
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 import cctbx.geometry_restraints.manager
 import cctbx.geometry_restraints.lbfgs
 from cctbx.array_family import flex
@@ -15,7 +16,6 @@ from libtbx.utils import null_out
 import libtbx.load_env
 import math
 import sys
-from six.moves import range
 
 def pentagon_sites_cart(start_vector=(0,1.5,0), normal=(0,0,1)):
   result = flex.vec3_double([(0,0,0)])

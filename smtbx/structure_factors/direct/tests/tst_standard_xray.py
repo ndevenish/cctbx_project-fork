@@ -1,5 +1,8 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division
+from __future__ import print_function
+from __future__ import absolute_import
 
+from six.moves import range
 from cctbx.array_family import flex
 from cctbx import sgtbx, xray, crystal, miller, eltbx
 import cctbx.eltbx.wavelengths
@@ -14,7 +17,6 @@ import random
 from itertools import islice, izip
 from scitbx import matrix
 from scitbx.math import median_statistics
-from six.moves import range
 
 
 class test_case(object):

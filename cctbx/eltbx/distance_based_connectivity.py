@@ -1,6 +1,6 @@
 from __future__ import absolute_import, division, print_function
-import math
 from six.moves import range
+import math
 
 expected_bond_lengths_by_element_pair = {
   # based on elbow/chemistry/BondLengths.py rev. 42

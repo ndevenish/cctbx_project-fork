@@ -1,5 +1,6 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 
+from six.moves import range
 '''
 Author      : Lyubimov, A.Y.
 Created     : 12/12/2017
@@ -21,7 +22,6 @@ from simtbx.nanoBragg import nanoBragg_gui_dialogs as dlg
 from simtbx.nanoBragg import nanoBragg_threads as thr
 from iota.components import iota_ui_controls as ct
 from iota.components.iota_utils import InputFinder, WxFlags, noneset
-from six.moves import range
 
 ginp = InputFinder()
 import time

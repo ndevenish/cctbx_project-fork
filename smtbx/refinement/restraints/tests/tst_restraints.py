@@ -1,4 +1,7 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division
+from __future__ import print_function
+from __future__ import absolute_import
+from six.moves import range
 from scitbx.lstbx import normal_eqns_solving
 from cctbx import geometry_restraints, adp_restraints, sgtbx, adptbx
 from cctbx.array_family import flex
@@ -17,7 +20,6 @@ from libtbx.test_utils import approx_equal
 from libtbx.utils import wall_clock_time
 import libtbx
 from scitbx import matrix
-from six.moves import range
 
 geom = geometry_restraints
 adp = adp_restraints

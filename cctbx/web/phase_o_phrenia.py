@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx.examples import phase_o_phrenia
 from iotbx.cns import sdb_reader
 from cctbx import uctbx
@@ -6,7 +7,6 @@ from cctbx import sgtbx
 from cctbx.array_family import flex
 from cctbx.web import io_utils
 from cctbx.web import cgi_utils
-from six.moves import range
 
 def interpret_form_data(form):
   inp = cgi_utils.inp_from_form(form,

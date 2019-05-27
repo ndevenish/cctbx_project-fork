@@ -27,15 +27,15 @@ That is:
 ...-9999
 ...map average and standard deviation
 """
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 
+from six.moves import range
 import iotbx.xplor.ext as ext
 from cctbx import miller
 from cctbx import maptbx
 from cctbx import uctbx
 from cctbx.array_family import flex
 import sys
-from six.moves import range
 
 class gridding(object):
 

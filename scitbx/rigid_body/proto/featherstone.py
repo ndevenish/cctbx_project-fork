@@ -17,9 +17,9 @@ See also:
   Springer, New York, 2007.
   ISBN-10: 0387743146
 """
-from __future__ import absolute_import, division, print_function
-from six.moves import range
+from __future__ import division
 
+from six.moves import range
 try:
   import scitbx
 except ImportError:

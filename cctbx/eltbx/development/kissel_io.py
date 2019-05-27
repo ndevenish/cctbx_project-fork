@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx.eltbx import xray_scattering
 from cctbx.eltbx import tiny_pse
 from cctbx.array_family import flex
@@ -7,7 +8,6 @@ import scitbx.math.gaussian
 from libtbx.str_utils import line_feeder
 from libtbx.option_parser import OptionParser
 from libtbx import adopt_init_args
-from six.moves import range
 
 class table(object):
 

@@ -1,5 +1,6 @@
 from __future__ import absolute_import, division, print_function
 
+from six.moves import range
 import collections
 import errno
 import glob
@@ -7,7 +8,6 @@ import os
 import shutil
 import sys
 from optparse import SUPPRESS_HELP, OptionParser
-from six.moves import range
 
 try:
   import procrunner

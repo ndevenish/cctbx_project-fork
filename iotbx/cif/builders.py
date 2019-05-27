@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division
+from six.moves import range
 from cctbx import adptbx, crystal, miller, sgtbx, uctbx, xray
 from cctbx.array_family import flex
 import iotbx.cif
@@ -6,7 +7,6 @@ from iotbx.cif import model
 from libtbx.utils import Sorry
 from libtbx.containers import OrderedDict, OrderedSet
 import warnings
-from six.moves import range
 
 class CifBuilderError(Sorry):
   __module__ = Exception.__module__

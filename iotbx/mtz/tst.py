@@ -1,6 +1,6 @@
-from __future__ import absolute_import, division, print_function
-import libtbx.load_env
+from __future__ import division, print_function
 from six.moves import range
+import libtbx.load_env
 if (libtbx.env.has_module("ccp4io")):
   from iotbx import mtz
 else:

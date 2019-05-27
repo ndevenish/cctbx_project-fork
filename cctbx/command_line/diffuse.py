@@ -1,7 +1,8 @@
 # LIBTBX_SET_DISPATCHER_NAME cctbx.diffuse
 # LIBTBX_SET_DISPATCHER_NAME phenix.diffuse
 
-from __future__ import absolute_import, division, print_function
+from __future__ import division
+from six.moves import range
 import sys
 import iotbx.pdb
 import math
@@ -9,7 +10,6 @@ from cctbx.array_family import flex
 from cctbx import miller
 from libtbx.utils import Sorry
 from libtbx import adopt_init_args
-from six.moves import range
 
 msg="""
 Description

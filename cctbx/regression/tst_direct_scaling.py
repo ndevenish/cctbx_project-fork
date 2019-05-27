@@ -1,6 +1,6 @@
-from __future__ import absolute_import, division, print_function
-import random
+from __future__ import division, print_function
 from six.moves import range
+import random
 random.seed(0)
 from scitbx.array_family import flex
 flex.set_random_seed(0)

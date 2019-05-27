@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx import maptbx
 from cctbx import uctbx
 from cctbx import sgtbx
@@ -13,7 +14,6 @@ import time
 import sys
 import random
 import math
-from six.moves import range
 
 def flex_types():
   return (flex.float, flex.double)

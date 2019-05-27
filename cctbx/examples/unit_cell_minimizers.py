@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx import uctbx
 from cctbx.eltbx import wavelengths
 from cctbx.array_family import flex
@@ -8,7 +9,6 @@ import scitbx.minimizers
 import libtbx.utils
 import platform
 import sys
-from six.moves import range
 
 def residual(
       two_thetas_obs, miller_indices, wavelength, unit_cell):

@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 #
 # Command to run this example:
 #   iotbx.python pdbx_mmcif_tutorial.py
@@ -6,8 +6,8 @@ from __future__ import absolute_import, division, print_function
 # See also:
 #   http://cctbx.sourceforge.net/iotbx_cif
 #
-import os
 from six.moves import range
+import os
 
 
 def run(args):

@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 '''
 Author      : Uervirojnangkoorn, M.
 Created     : 8/15/2016

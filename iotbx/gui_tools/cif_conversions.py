@@ -2,7 +2,7 @@
 # bkpoon (09/27/2016) changed to use cif_as_pdb and pdb_as_cif for more
 # functionality
 
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 import iotbx.cif
 import iotbx.phil
 from iotbx.cli_parser import run_program

@@ -1,6 +1,7 @@
-from __future__ import absolute_import, division, print_function
-import smtbx.refinement.constraints as _
+from __future__ import division
+from __future__ import absolute_import, print_function
 from six.moves import range
+import smtbx.refinement.constraints as _
 
 class shared_site(object):
   """ a site shared by two or more scatterers

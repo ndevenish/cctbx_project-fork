@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 from six.moves import range
 def exercise_impl(svd_impl_name, use_fortran):
   import scitbx.linalg
@@ -73,7 +73,7 @@ def compare_times(
         samples.append((m, n))
   else:
     if comprehensive == "timing-1":
-      dims = range(100, 600, 100)
+      dims = list(range(100, 600, 100))
       for m in dims:
         for n in dims:
           samples.append((m, n))

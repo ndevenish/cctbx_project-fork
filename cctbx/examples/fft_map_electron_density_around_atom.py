@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx import xray
 from cctbx import miller
 from cctbx import crystal
@@ -8,7 +9,6 @@ from cctbx.array_family import flex
 from scitbx import matrix
 from libtbx.math_utils import ifloor
 from libtbx.test_utils import approx_equal
-from six.moves import range
 
 def rho_stats(
       xray_structure,

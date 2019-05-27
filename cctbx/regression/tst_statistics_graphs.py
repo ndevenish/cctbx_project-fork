@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx import statistics
 from cctbx import miller
 from cctbx import crystal
@@ -8,7 +9,6 @@ from cctbx import adptbx
 from cctbx.development import debug_utils
 from cctbx.development import random_structure
 import sys
-from six.moves import range
 
 def exercise_sys_absent_intensity_distribution():
   xs = crystal.symmetry((3,4,5), "F222")

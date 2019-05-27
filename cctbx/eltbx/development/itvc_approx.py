@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx.eltbx.development import itvc_section61_io
 from cctbx.eltbx import xray_scattering
 import scitbx.math.gaussian_fit
@@ -6,7 +7,6 @@ import cctbx.eltbx.gaussian_fit
 from cctbx.array_family import flex
 from libtbx.option_parser import OptionParser
 import sys, os
-from six.moves import range
 
 def run(file_name, table_of_gaussians, cutoff,
         low_resolution_only=False,

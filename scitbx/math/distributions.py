@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division
+from __future__ import absolute_import
 from scitbx.math import ext
 from .ext import normal_distribution
 if (hasattr(ext, "students_t_distribution")):

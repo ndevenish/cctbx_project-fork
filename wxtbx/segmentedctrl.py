@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 
 # Copyright 2010 University of California
 # All rights reserved
@@ -12,8 +12,8 @@ from __future__ import absolute_import, division, print_function
 #   - Windows bugs
 #   - additional styles?
 
-import wx
 from six.moves import range
+import wx
 
 SEGBTN_ROUNDED_CORNERS = 1
 SEGBTN_VERTICAL = 2

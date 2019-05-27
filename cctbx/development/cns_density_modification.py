@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 from libtbx import easy_run, group_args
 from iotbx.cns.space_group_symbols import cns_format
 import os, shutil, time

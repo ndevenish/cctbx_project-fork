@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 
 # This file found at:
 #   http://lists.wxwidgets.org/archive/wxPython-users/msg11078.html
@@ -8,6 +8,7 @@ from __future__ import absolute_import, division, print_function
 # ported to wxPython by greg Landrum
 # modified by Y. Wong
 
+from six.moves import range
 from wxPython.wx import *
 from wxPython.glcanvas import *
 import gltbx.util
@@ -16,7 +17,6 @@ from gltbx.glu import *
 import math
 import sys
 import atexit
-from six.moves import range
 
 
 def v3distsq(a,b):

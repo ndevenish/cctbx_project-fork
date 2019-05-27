@@ -1,4 +1,6 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from __future__ import absolute_import
+from six.moves import range
 from functions import Function
 
 from scitbx import simplex
@@ -11,7 +13,6 @@ from scitbx import lbfgs
 from scitbx.array_family import flex
 
 import libtbx.load_env
-from six.moves import range
 
 dim=2
 start = flex.double( [4,4] )

@@ -1,6 +1,6 @@
-from __future__ import absolute_import, division, print_function
-from cctbx import sgtbx
+from __future__ import division, print_function
 from six.moves import range
+from cctbx import sgtbx
 
 def anomalous_reflection_intensity_primitive_cell(space_group):
   assert space_group.n_ltr() == 1

@@ -54,6 +54,7 @@ from __future__ import absolute_import, division, print_function
 # OF THIS SOFTWARE.
 # --------------------------------------------------------------------
 
+from six.moves import range
 from libtbx import adopt_init_args
 from libtbx.utils import to_str
 import xmlrpclib
@@ -66,7 +67,6 @@ import string
 import random
 import os
 import sys
-from six.moves import range
 
 # http://stackoverflow.com/questions/372365/set-timeout-for-xmlrpclib-serverproxy
 class TimeoutTransport(xmlrpclib.Transport):

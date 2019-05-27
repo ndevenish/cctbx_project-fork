@@ -33,8 +33,11 @@ flipping method has converged.
 Cryst. A64:123-134, 2008
 """
 
-from __future__ import absolute_import, division, print_function
+from __future__ import division, generators
+from __future__ import print_function
+from __future__ import absolute_import
 
+from six.moves import range
 from libtbx import object_oriented_patterns as oop
 from libtbx import adopt_optional_init_args
 
@@ -53,7 +56,6 @@ import scitbx.math
 import itertools
 import sys
 import math
-from six.moves import range
 
 class _array_extension(oop.injector, miller.array):
 

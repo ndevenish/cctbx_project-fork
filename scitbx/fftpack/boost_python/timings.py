@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from scitbx import fftpack
 from scitbx.array_family import flex
 import omptbx # initializes OpenMP environment
@@ -6,7 +7,6 @@ import libtbx.utils
 from libtbx.utils import time_log
 import random
 import sys
-from six.moves import range
 
 def one_series(num_threads, n_iterations, quick=False):
   if (num_threads > 0):

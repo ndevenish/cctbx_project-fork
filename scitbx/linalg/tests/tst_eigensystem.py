@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 import scitbx.linalg
 from scitbx.linalg import eigensystem, time_eigensystem_real_symmetric
 from scitbx.array_family import flex
@@ -6,7 +7,6 @@ from libtbx.test_utils import approx_equal
 from scitbx.math.tests.tst_math import matrix_mul
 import random
 import time
-from six.moves import range
 
 def exercise_eigensystem():
   s = eigensystem.real_symmetric(

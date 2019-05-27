@@ -1,7 +1,7 @@
 
-from __future__ import absolute_import, division, print_function
-import cPickle
+from __future__ import division
 from six.moves import range
+import cPickle
 try :
   import gobject
 except ImportError :

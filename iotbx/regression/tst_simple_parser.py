@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 from iotbx import simple_parser
 from libtbx.phil import tokenizer
 import sys

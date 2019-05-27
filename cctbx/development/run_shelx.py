@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx import adptbx
 from cctbx import eltbx
 import cctbx.eltbx.xray_scattering
@@ -11,7 +12,6 @@ import libtbx.path
 from libtbx import easy_run
 from cStringIO import StringIO
 import sys, os
-from six.moves import range
 
 def calculate_cell_content(xray_structure):
   result = dicts.with_default_value(0)

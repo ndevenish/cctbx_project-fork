@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 # Example by Kevin Cowtan, 2001. Public Domain.
 # Converted to Python by Ralf W. Grosse-Kunstleve.
 # This little program reads the CCP4 symmetry library file, and interprets
@@ -8,9 +8,9 @@ from __future__ import absolute_import, division, print_function
 #
 # usage: convert_ccp4_symop_lib < symop.lib
 
+from six.moves import range
 from cctbx import sgtbx
 import sys
-from six.moves import range
 
 def run():
   while 1:

@@ -1,5 +1,6 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 
+from six.moves import range
 import sys,os
 from libtbx.utils import Sorry
 from cctbx.array_family import flex
@@ -9,7 +10,6 @@ from cctbx.array_family import flex
 import scitbx.lbfgs
 import math
 from cctbx.maptbx.segment_and_split_map import map_and_b_object
-from six.moves import range
 
 def write_mtz(ma=None,phases=None,file_name=None):
   mtz_dataset=ma.as_mtz_dataset(column_root_label="FWT")

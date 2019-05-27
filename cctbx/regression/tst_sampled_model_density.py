@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx import xray
 from cctbx import maptbx
 from cctbx import crystal
@@ -16,7 +17,6 @@ import libtbx.utils
 import libtbx.introspection
 import random
 import sys
-from six.moves import range
 
 if (1):
   random.seed(0)

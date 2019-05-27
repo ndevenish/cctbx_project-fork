@@ -1,5 +1,6 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 #!/usr/bin/env python
+from six.moves import range
 import math
 
 from cctbx.uctbx import unit_cell
@@ -7,7 +8,6 @@ from scitbx import matrix
 from rstbx.diffraction import rotation_angles, reflection_prediction
 from rstbx.bpcx import sensor
 from libtbx.test_utils import approx_equal
-from six.moves import range
 
 # This script (provided by Graeme Winter) will take the quartz structure and
 # simulate a rotation around the 0 0 1 reflection and  1 0 1 reflection.

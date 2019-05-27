@@ -1,6 +1,6 @@
 # LIBTBX_SET_DISPATCHER_NAME iotbx.pdb.get_citation
 
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 from libtbx.utils import Sorry, Usage
 from xml.dom.minidom import parseString
 import sys

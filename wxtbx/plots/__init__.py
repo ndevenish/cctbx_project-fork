@@ -1,5 +1,6 @@
 
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from wxtbx import bitmaps
 import wxtbx
 import wx
@@ -8,7 +9,6 @@ from libtbx.math_utils import ifloor
 from libtbx import adopt_init_args
 import math
 import sys
-from six.moves import range
 if (sys.version_info[2] >= 6):
   import warnings
   warnings.simplefilter('ignore', DeprecationWarning)

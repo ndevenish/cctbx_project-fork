@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx import euclidean_model_matching as emma
 from iotbx.command_line.emma import get_emma_model_from_pdb
 from cctbx import xray
@@ -12,7 +13,6 @@ from libtbx.test_utils import approx_equal, show_diff
 from cStringIO import StringIO
 import random
 import sys
-from six.moves import range
 
 target_p1="""
 CRYST1  144.039  144.039  178.924  90.00  90.00  90.00 P 1

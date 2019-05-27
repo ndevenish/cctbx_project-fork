@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 from scitbx import matrix
 from rstbx.bpcx import sensor
 

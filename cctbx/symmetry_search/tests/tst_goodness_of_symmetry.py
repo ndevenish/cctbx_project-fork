@@ -1,5 +1,6 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 
+from six.moves import range
 from cctbx import miller
 from cctbx.development import debug_utils, random_structure
 from cctbx import translation_search
@@ -11,7 +12,6 @@ import random
 import sys
 
 from cctbx.symmetry_search import symmetrised_shifted_structure_factors
-from six.moves import range
 
 
 def exercise_value(f_c_in_p1, f_o, flags, n_sampled):

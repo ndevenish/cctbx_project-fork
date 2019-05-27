@@ -1,4 +1,5 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
+from six.moves import range
 from cctbx import miller
 from cctbx import crystal
 from cctbx import sgtbx
@@ -8,7 +9,6 @@ import warnings
 import sys, os
 
 import boost.python
-from six.moves import range
 scalepack_ext = boost.python.import_ext("iotbx_scalepack_ext")
 
 # scalepack manual, edition 5, page 132

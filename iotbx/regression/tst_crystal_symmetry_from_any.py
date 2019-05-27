@@ -1,4 +1,4 @@
-from __future__ import absolute_import, division, print_function
+from __future__ import division, print_function
 from iotbx import crystal_symmetry_from_any
 
 def exercise():
