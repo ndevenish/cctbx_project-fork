@@ -490,10 +490,10 @@ def create_output_labels(
   # any specific limitations
   if limitations:
     for limitation in limitations:
-      if not limitation in STANDARD_LIMITATIONS_DICT.keys():
+      if not limitation in STANDARD_LIMITATIONS_DICT:
         print("The limitation '%s' is not in STANDARD_LIMITATIONS_DICT: '%s'" %(
-       limitation,str(STANDARD_LIMITATIONS_DICT.keys())))
-      assert limitation in STANDARD_LIMITATIONS_DICT.keys()
+       limitation,str(list(STANDARD_LIMITATIONS_DICT))))
+      assert limitation in STANDARD_LIMITATIONS_DICT
       output_map_labels.append(limitation)
 
   # any specific labels given

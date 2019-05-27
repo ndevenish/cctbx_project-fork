@@ -386,7 +386,7 @@ class symmetry(object):
     if self.space_group() is not None:
       sym_loop = model.loop(data=OrderedDict((
         ('_space_group_symop'+separator+'id',
-         list(range(1, len(self.space_group())+1))),
+         range(1, len(self.space_group())+1)),
         ('_space_group_symop'+separator+'operation_xyz',
          [s.as_xyz() for s in self.space_group()]))))
       cif_block.add_loop(sym_loop)

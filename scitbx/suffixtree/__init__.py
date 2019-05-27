@@ -15,7 +15,7 @@ def dump(root, word):
 def label(edge, word, separator = ""):
 
   return separator.join(
-    str( word[ index ] ) for index in list(range( edge.start, edge.stop))
+    str( word[ index ] ) for index in range( edge.start, edge.stop )
     )
 
 

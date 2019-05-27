@@ -57,10 +57,10 @@ class weighted_choice(object):
 
 if (__name__ == "__main__"):
   seed()
-  print(random_subset(list(range(5)), 0))
-  print(random_subset(list(range(5)), 5))
-  print(random_subset(list(range(5)), 2))
-  print(random_subset(list(range(5)), 3))
+  print(random_subset(range(5), 0))
+  print(random_subset(range(5), 5))
+  print(random_subset(range(5), 2))
+  print(random_subset(range(5), 3))
   for i in range(10):
     assert random_selection(0, 0).size() == 0
     assert random_selection(5, 0).size() == 5

@@ -765,8 +765,8 @@ class rec(object):
   def extract_block(self, stop, start=(0,0), step=(1,1)):
     assert 0 <= stop[0] <= self.n[0]
     assert 0 <= stop[1] <= self.n[1]
-    i_rows = list(range(start[0], stop[0], step[0]))
-    i_colums = list(range(start[1], stop[1], step[1]))
+    i_rows = range(start[0], stop[0], step[0])
+    i_colums = range(start[1], stop[1], step[1])
     result = []
     for ir in i_rows:
       for ic in i_colums:
@@ -923,14 +923,14 @@ def sum(iterable):
     result += m
   return result
 
-def cross_product_matrix(xxx_todo_changeme):
+def cross_product_matrix(vvv):
   """\
 Matrix associated with vector cross product:
   a.cross(b) is equivalent to cross_product_matrix(a) * b
 Useful for simplification of equations. Used frequently in
 robotics and classical mechanics literature.
 """
-  (v0, v1, v2) = xxx_todo_changeme
+  (v0, v1, v2) = vvv
   return sqr((
       0, -v2,  v1,
      v2,   0, -v0,

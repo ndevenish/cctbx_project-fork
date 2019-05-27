@@ -623,8 +623,8 @@ class loop(MutableMapping):
     print("loop_", file=out)
     for k in self.keys():
       print(indent + k, file=out)
-    values = self._columns.values()
-    range_len_values = list(range(len(values)))
+    values = list(self._columns.values())
+    range_len_values = range(len(values))
     if fmt_str is not None:
       # Pretty printing:
       #   The user is responsible for providing a valid format string.
@@ -679,9 +679,8 @@ class loop(MutableMapping):
   def iterrows(self):
     """ Warning! Still super-slow! """
     keys = self.keys()
-    s_values = self.values()
-    range_len_self = list(range(len(self)))
-    # range is 1% faster than xrange in this particular place.
+    s_values = list(self.values())
+    range_len_self = range(len(self))
     # tuple (s_values...) is slightly faster than list
     for j in range(self.size()):
       yield OrderedDict(zip(keys, (s_values[i][j] for i in range_len_self)))
@@ -691,8 +690,8 @@ class loop(MutableMapping):
     for k in kv_dict.keys():
       assert k in self_keys
     result = []
-    s_values = self.values()
-    range_len_self = list(range(len(self)))
+    s_values = list(self.values())
+    range_len_self = range(len(self))
     for i in range(self.size()):
       goodrow = True
       for k, v in six.iteritems(kv_dict):

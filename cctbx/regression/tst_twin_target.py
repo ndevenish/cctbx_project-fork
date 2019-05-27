@@ -520,7 +520,7 @@ def tst_detwin():
     diff = flex.sum( flex.abs(diff) ) # / flex.sum( sfs.data() )
     assert approx_equal( diff, 0, eps=1e-5 )
     permut = tmp_detwin.obs_to_twin_obs()
-    ind = list(range( permut.size()))
+    ind = range( permut.size() )
     for ii, jj, kk, pp, mm  in zip( sfs.data(), i, dti, ind, permut ):
       no = (1-t)*sfs.data()[pp] + t*sfs.data()[mm]
       assert approx_equal( jj-no, 0, eps=1e-5)

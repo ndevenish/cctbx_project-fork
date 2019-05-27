@@ -86,7 +86,7 @@ class _():
     comfortable increasing this parameter if needed to index a difficult case"""
     nc = self.n_candidates()
     MAXINDEX=basis
-    bases = list(range(min(MAXINDEX,nc)))
+    bases = range(min(MAXINDEX,nc))
     comb=[]
     for pp in range(len(bases)-2):
       for qq in range(pp+1,len(bases)-1):

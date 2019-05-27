@@ -15,13 +15,13 @@ def process(file_name, out=None):
   print("Number of blocks:", n_blocks, file=out)
   for i_block in range(n_blocks):
     object.select_datablock(i_block)
-    print("  Block name:", object.datablock_name(), file=out)
+    print("  Block name:", object.datablock_name().decode(), file=out)
     object.rewind_category()
     n_categories = object.count_categories()
     print("  Number of categories:", n_categories, file=out)
     for i_category in range(n_categories):
       object.select_category(i_category)
-      print("    Category name:", object.category_name(), file=out)
+      print("    Category name:", object.category_name().decode(), file=out)
   print(file=out)
 
 def run(args):

@@ -270,7 +270,7 @@ class urlopener(object):
     try:
       stream = urllib.request.urlopen( request )
 
-    except urllib2.HTTPError as e:
+    except urllib.error.HTTPError as e:
       raise http_error_to_exception( error = e )
 
     used = stream.info().get( "Content-Encoding" )

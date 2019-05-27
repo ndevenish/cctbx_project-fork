@@ -371,7 +371,7 @@ class process_arrays(object):
                 file_wavelengths[info.source] = float(info.wavelength)
               except ValueError as e :
                 print("Warning: bad wavelength '%s'" % info.wavelength, file=log)
-      all_wavelengths = set([ w for f, w in file_wavelengths.iteritems() ])
+      all_wavelengths = set([ w for f, w in six.iteritems(file_wavelengths) ])
       if (len(all_wavelengths) == 1):
         self.wavelength = all_wavelengths.pop()
       elif (len(all_wavelengths) > 1):

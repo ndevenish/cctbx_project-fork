@@ -333,8 +333,8 @@ class inm_refine(object):
     self.n = self.ndim
     self.domain =[(-1.0,1.0)]*self.ndim
     self.target_data=flex.double()
-    self.n_list=list(range(self.m,nmax+1,2))
-    self.n_indx_list=list(range(self.ndim))
+    self.n_list=range(self.m,nmax+1,2)
+    self.n_indx_list=range(self.ndim)
     for nn in self.n_list:
       self.target_data.append( self.Cnm.get_coef(nn,self.m) )
 #    self.solution=flex.random_double(self.n)*2-1

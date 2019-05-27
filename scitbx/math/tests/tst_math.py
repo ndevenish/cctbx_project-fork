@@ -360,7 +360,7 @@ def exercise_bessel():
     x+=0.01
 
 def exercise_eix():
-  x = flex.double( list(range(4000)) )/20.0
+  x = flex.double( range(4000) )/20.0
   expx = flex.exp( -x )
   for xx, ex in zip(x,expx):
     tmp_i0  = bessel_i0(xx)

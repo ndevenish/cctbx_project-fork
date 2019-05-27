@@ -299,7 +299,8 @@ def analyze_redundancies(asu, n, redundancies, verbose=1):
         print(cut, end=' ')
         show_amp = True
       print("#points: %d:" % len(points), end=' ')
-      print(str(points.keys()[:4]).replace(" ", ""))
+      # FIXME : ordering of keys in py2/3 is different
+      print(str(list(points.keys())[:4]).replace(" ", ""))
     if (verbose):
       print("    Pairs:")
       for pair in pairs:

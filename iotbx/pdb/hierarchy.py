@@ -636,7 +636,7 @@ class _():
         crystal_symmetry=crystal_symmetry,
         cryst1_z=cryst1_z,
         write_scale_records=write_scale_records), file=cstringio)
-    self._as_pdb_string_cstringio(
+    py3out = self._as_pdb_string_cstringio(
       cstringio=cstringio,
       append_end=append_end,
       interleaved_conf=interleaved_conf,
@@ -782,7 +782,7 @@ class _():
     l = abs(min(sites_frac.min()))
     r = abs(max(sites_frac.max()))
     rl = max(l, r)+2
-    rr= list(range(int(-rl), int(rl)))
+    rr= range(int(-rl), int(rl))
     shift_best = None
     for x in rr:
       for y in rr:
@@ -854,14 +854,14 @@ class _():
         link_records=None,
         ):
     if link_records:
-      if (open_append): mode = "ab"
-      else:             mode = "wb"
+      if (open_append): mode = "a"
+      else:             mode = "w"
       print(link_records, file=open(file_name, mode))
       open_append = True
     if (crystal_symmetry is not None or cryst1_z is not None):
       from iotbx.pdb import format_cryst1_and_scale_records
-      if (open_append): mode = "ab"
-      else:             mode = "wb"
+      if (open_append): mode = "a"
+      else:             mode = "w"
       print(format_cryst1_and_scale_records(
         crystal_symmetry=crystal_symmetry,
         cryst1_z=cryst1_z,
@@ -1117,7 +1117,7 @@ class _():
       data_block_name = "phenix"
     cif_object[data_block_name] = self.as_cif_block(
       crystal_symmetry=crystal_symmetry)
-    f = open(file_name, "wb")
+    f = open(file_name, "w")
     print(cif_object, file=f)
     f.close()
 

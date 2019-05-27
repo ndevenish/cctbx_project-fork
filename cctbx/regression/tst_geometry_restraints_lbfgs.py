@@ -233,7 +233,7 @@ def exercise(verbose=0):
 >,   3.414 3.600
 >,... (remaining 134 not shown)
 """,
-    selections=[list(range(6)), list(range(-5,0))])
+    selections=[range(6), range(-5,0)])
   vdw_1_sticks = []
   vdw_2_sticks = []
   for proxy in pair_proxies.nonbonded_proxies.simple:

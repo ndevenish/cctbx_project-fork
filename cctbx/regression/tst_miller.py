@@ -278,7 +278,7 @@ def exercise_generate_r_free_flags(verbose=0, use_lattice_symmetry=False):
         assert accu.reflection_counts.size() == accu.free_fractions.size()
         if (verbose):
           print("r_free_flags_accumulation:", \
-            zip(accu.reflection_counts, accu.free_fractions))
+            list(zip(accu.reflection_counts, accu.free_fractions)))
       if (not anomalous_flag):
         if (i_trial < 5):
           assert flags.indices().size() == 145
@@ -1736,8 +1736,8 @@ def exercise_phased_translation_coeff(d_min = 1.0,
     expected_shift = [1.-(0.7/5), 1.-(1.2/5), 1.-(1.4/5)]
     assert approx_equal(expected_shift, cluster_analysis.sites()[0], eps=1e-2)
 
-def exercise_common_set(xxx_todo_changeme, permutation_only):
-  (a, b) = xxx_todo_changeme
+def exercise_common_set(arrays, permutation_only):
+  (a, b) = arrays
   ab = a.common_set(b)
   ba = b.common_set(a)
   if (permutation_only):
@@ -2284,7 +2284,7 @@ def exercise_randomize_amplitude_and_phase(space_group_info,
     return (r, fc.mean_phase_error(phase_source=fc_))
   #
   assert approx_equal(run(0,0), (0,0))
-  for v in list(range(0,91, 10)):
+  for v in range(0,91, 10):
     r = run(v/100.,v)
     assert approx_equal(r[0], v/100., 0.05)
     assert approx_equal(r[1], v, 5)

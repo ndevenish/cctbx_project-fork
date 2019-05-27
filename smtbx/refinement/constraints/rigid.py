@@ -197,7 +197,7 @@ class idealised_fragment(object):
     coordinates. returns coordinates of the trasformed fragment
     """
     if not control_point_indices:
-      control_point_indices = list(range(0, len(fragment)))
+      control_point_indices = range(0, len(fragment))
     to_fit = [
       (fragment[i].x, fragment[i].y, 0) for i in control_point_indices]
     lsf = superpose.least_squares_fit(

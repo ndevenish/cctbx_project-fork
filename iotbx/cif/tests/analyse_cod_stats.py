@@ -86,7 +86,7 @@ class analyse(object):
       self.show_skipping(out=out)
     s = StringIO()
     self.show_summary(out=s)
-    with open("summary.html", "wb") as out:
+    with open("summary.html", "w") as out:
       print(html % s.getvalue(), file=out)
 
 html = """\

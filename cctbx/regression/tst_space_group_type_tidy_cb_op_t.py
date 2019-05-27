@@ -16,7 +16,7 @@ special = {
 
 def run(args):
   if ("--full" in args):
-    to_do = list(range(1,230+1))
+    to_do = range(1,230+1)
   elif ("--special" in args):
     to_do = sorted(special.keys())
   else:

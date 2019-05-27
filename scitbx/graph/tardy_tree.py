@@ -146,7 +146,7 @@ class cluster_manager(slots_getstate_setstate):
       if (len(a) < len(b)): return 1
       if (len(a) != 0): return cmp(a[0], b[0])
       return 0
-    O.clusters.sort(cmp_clusters)
+    O.clusters.sort(key=cmp_to_key(cmp_clusters))
     for ic in range(len(O.clusters)-1,-1,-1):
       if (len(O.clusters[ic]) != 0):
         del O.clusters[ic+1:]

@@ -16,7 +16,7 @@ import sys, os
 
 def exercise_read_corrupt():
   for i_trial in range(5):
-    f = open("tmp_iotbx_mtz_ext.mtz", "wb")
+    f = open("tmp_iotbx_mtz_ext.mtz", "w")
     if (i_trial > 0):
       f.write("\0"*(40*i_trial))
     f.close()
@@ -213,7 +213,7 @@ def exercise_basic():
     assert v.size() == 165
     assert s.count(True) == 163
     assert approx_equal(v.select(~s), [-97]*2)
-    expected_dataset_ids = iter(list(range(4)))
+    expected_dataset_ids = iter(range(4))
     expected_dataset_names = iter([
       "HKL_base",
       "unknown230103:23:14:49",

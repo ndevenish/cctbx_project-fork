@@ -1121,8 +1121,8 @@ Number of scattering types: 4
     xs1.scattering_type_registry(custom_dict = custom_gaussians)
     xs.concatenate_inplace(other = xs1)
     xs.scattering_type_registry().show()
-  except Exception as e: pass
-  assert str(e) == "Cannot concatenate: conflicting scatterers"
+  except Exception as e:
+    assert str(e) == "Cannot concatenate: conflicting scatterers"
   sys.stdout = out
   #
   assert set([(r.scattering_type, r.count, "%.1f" % r.occupancy_sum)

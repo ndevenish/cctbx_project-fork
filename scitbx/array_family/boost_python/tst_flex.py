@@ -1371,7 +1371,7 @@ def exercise_functions():
                       keep_ends=keep_ends,
                       count_lines_first=count_lines_first)) \
             == multi_line_string.splitlines(keep_ends)
-  #
+  # 2to3 migration comment: must use list(range); do not wrap items() in list, a.counts() is not dict
   a = flex.int(list(range(-2,2)) + list(range(2,4)) + list(range(1,3)))
   assert a.counts().items() == [(-2,1),(-1,1),(0,1),(1,2),(2,2),(3,1)]
   assert a.counts(max_keys=6).items() == a.counts().items()
@@ -2222,14 +2222,14 @@ def exercise_show_count_stats():
 >=   10:  2  0.66667
    None:  1  0.33333
 """)
-  check(list(range(34)), prefix=":|", expected="""\
+  check(range(34), prefix=":|", expected="""\
 :|>=   30:   4  0.11765
 :|>=   20:  14  0.41176
 :|>=   10:  24  0.70588
 :|>=    1:  33  0.97059
 :|   None:   1  0.02941
 """)
-  check(list(range(23,74)), group_size=12, expected="""\
+  check(range(23,74), group_size=12, expected="""\
 >=   72:   2  0.03922
 >=   60:  14  0.27451
 >=   48:  26  0.50980
@@ -2656,7 +2656,7 @@ def exercise_matrix():
       assert approx_equal(flex.real(ps).matrix_diagonal(), flex.real(pd))
       assert approx_equal(flex.imag(ps).matrix_diagonal(), flex.imag(pd))
   #
-  a = flex.polar(flex.double(list(range(1,6+1))), flex.double(list(range(2,7+1))))
+  a = flex.polar(flex.double(range(1,6+1)), flex.double(range(2,7+1)))
   a.resize(flex.grid(2,3))
   b = a.deep_copy()
   b.resize(flex.grid(3,2))

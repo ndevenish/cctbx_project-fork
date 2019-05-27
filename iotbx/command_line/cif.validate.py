@@ -60,8 +60,8 @@ def run(args, out=sys.stdout):
     cm.validate(cif_dic, show_warnings=show_warnings)
   else:
     try:
-      file_object = urllib2.urlopen(filepath)
-    except urllib2.URLError as e:
+      file_object = urllib.request.urlopen(filepath)
+    except urllib.error.URLError as e:
       pass
     else:
       cm = cif.reader(file_object=file_object, strict=strict).model()

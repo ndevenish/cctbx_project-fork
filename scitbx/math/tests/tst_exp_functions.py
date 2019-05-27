@@ -43,7 +43,7 @@ def run(args):
   else:
     n_arguments = 300000
     n_iterations = 20
-    exponents = list(range(-127, 7))
+    exponents = range(-127, 7)
     mantissa_step_size = 1
     j_sample = 300000
   exercise_with_random_arguments(

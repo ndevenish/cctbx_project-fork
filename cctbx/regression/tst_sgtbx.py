@@ -311,7 +311,7 @@ def exercise_monoclinic_cell_choices_core(space_group_number, verbose):
         done.setdefault(hm, 0)
         done[hm] += 1
   assert len(done) in [3, 9, 18]
-  assert done.values() == [18/len(done)]*len(done)
+  assert list(done.values()) == [18/len(done)]*len(done)
   if (0 or verbose): print()
   return done
 

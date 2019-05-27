@@ -6593,7 +6593,7 @@ def get_closest_neighbor_rms(ncs_group_obj=None,selected_regions=None,
      selected_regions=selected_regions)
   if verbose:
     print("Inter-region distance dict:", file=out)
-    keys=inter_region_dist_dict.keys()
+    keys=list(inter_region_dist_dict.keys())
     keys.sort()
     for key in keys:
       for key2 in inter_region_dist_dict[key].keys():
@@ -6606,7 +6606,7 @@ def get_closest_neighbor_rms(ncs_group_obj=None,selected_regions=None,
 
   if verbose:
     print("Distance-to-first dict:", file=out)
-    keys=dist_to_first_dict.keys()
+    keys=list(dist_to_first_dict.keys())
     keys.sort()
     for key in keys: print("\n %s:  %.1f " %(key,dist_to_first_dict[key]), file=out)
 
